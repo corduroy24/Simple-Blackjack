@@ -13,6 +13,7 @@ public class DeckTest extends TestCase{
 
 	//console input deck test
 		//random deck 
+
 	public void consoleInputDeckTest(){
 		//boolean [] deckIsShuffled = new boolean[52]; 
 		boolean isShuffled = false; 
@@ -62,7 +63,7 @@ public class DeckTest extends TestCase{
 	}
 	
 	//file input deck test 
-		//read from a file 
+
 	public void fileInputDeckTest() {
 		
 	}
