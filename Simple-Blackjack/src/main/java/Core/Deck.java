@@ -36,9 +36,13 @@ public class Deck {
         return this.deck.size();
     }
 
-    public Boolean Empty() //return 1 if empty = true , 0 if it has cards = false 
+    public boolean Empty() //return 1 if empty = true , 0 if it has cards = false 
     {
             return deck.isEmpty(); 
+    }
+    
+    public Card topCard(int index) {
+    	return deck.get(index); 
     }
 
 }

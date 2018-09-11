@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 
 public class GameTest extends TestCase {
 	
-	public void drawCardTest() {
+	/*public void drawCardTest() {
 		
 		
 	}
@@ -35,12 +35,12 @@ public class GameTest extends TestCase {
 		//random deck 
 	
 	public void consoleInputDeckTest(){
-		//boolean [] deckIsShuffled = new boolean[52]; 
+		/*//boolean [] deckIsShuffled = new boolean[52]; 
 		boolean isShuffled = false; 
 		
-		/*for(int i = 0; i < deckIsShuffled.length;i++) {
+		Sfor(int i = 0; i < deckIsShuffled.length;i++) {
 			deckIsShuffled[i] = false; 
-		}*/
+		}
 		
 	    List<Integer> deck = new ArrayList<Integer>();
 	    List<Integer> deckCopy = new ArrayList<Integer>();
@@ -87,5 +87,5 @@ public class GameTest extends TestCase {
 	public void fileInputDeckTest() {
 		
 	}
-	
+	*/
 }
