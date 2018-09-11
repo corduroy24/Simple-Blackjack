@@ -10,6 +10,18 @@ public class Deck {
 	
     private List<Card> deck = new ArrayList<Card>();
     
+    
+    public void AddCard(Card cardToAdd)
+    {
+        deck.add((cardToAdd)); //we are going to add each card with a loop, in another class 
+    }
+
+    public void AddCards(List<Card> cardsToAdd) //adds a list of cards to the deck i.e, game setup, 8 weapons cards
+    {
+        deck.addAll((cardsToAdd)); 
+        //for (int i = 0; i < cardsToAdd.Count; i++) ;
+    }
+    
     public Card DrawCard() //removes the card from the story deck, and returns the top of the deck (last card in the list)
     {
         Card playCard = deck.get(deck.size()-1);
