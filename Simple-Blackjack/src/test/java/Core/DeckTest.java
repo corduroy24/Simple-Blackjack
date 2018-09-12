@@ -95,6 +95,7 @@ public class DeckTest extends TestCase{
 	        
 	}
     
+	//check that all cards are added to deck...
 
 
 }

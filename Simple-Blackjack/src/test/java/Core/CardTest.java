@@ -26,13 +26,15 @@ public class CardTest extends TestCase{
 		
 		Card CA = new Card("CA"); 
 		Card D2 = new Card("D2"); 
+		Card D10 = new Card("D10"); 
 		Card H7 = new Card("H7"); 
 		Card SQ = new Card("SQ"); 
 
 		assertEquals(1,CA.getValue());
 		assertEquals(2,D2.getValue());
-		assertEquals(1,H7.getValue());
-		assertEquals(1,SQ.getValue());
+		assertEquals(10,D10.getValue());
+		assertEquals(7,H7.getValue());
+		assertEquals(10,SQ.getValue());
 		
 		aceIsSoft = true; 
 		
