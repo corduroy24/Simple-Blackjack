@@ -6,7 +6,7 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
-public class GameTest extends TestCase {
+public class GameTest {
 	
 	/*public void drawCardTest() {
 		

@@ -12,7 +12,8 @@ public class CardTest extends TestCase{
 	//visible card test
 	
 	//card value test
-	public void CardValueTest() {
+
+	public void testCardValue() {
 		//String [] input = new String [15]; 
 		
 		/*String [] input = {"CA", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "CJ", "CQ", "CK",
@@ -35,15 +36,13 @@ public class CardTest extends TestCase{
 		
 		aceIsSoft = true; 
 		
-		CA.setValue(CA, aceIsSoft); 
+		CA.ChangeValue(CA, aceIsSoft); 
 		
 		assertEquals(11, CA.getValue()); 
-
-
 		
 	}
 	
-		public void CardVisibility () {
+		public void testCardVisibility () {
 			
 		}
 }

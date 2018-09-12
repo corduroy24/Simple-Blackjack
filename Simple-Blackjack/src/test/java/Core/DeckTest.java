@@ -11,15 +11,17 @@ import junit.framework.TestCase;
 public class DeckTest extends TestCase{
 	
 	static int deckSize = 4; 
+	boolean aceIsSoft = false; 
+
 	
-	public void AddCardTest() {
+	public void testAddCard() {
 	    // List<Card> deck = new ArrayList<Card>();
 	     Deck deck = new Deck(); 
 
-	     Card card_1 = new Card("1","Spades"); 
-	     Card card_2 = new Card("1","Spades"); 
-	     Card card_3 = new Card("1","Spades"); 
-	     Card card_4 = new Card("1","Spades"); 
+	     Card card_1 = new Card("S1"); 
+	     Card card_2 = new Card("S1"); 
+	     Card card_3 = new Card("S1"); 
+	     Card card_4 = new Card("S1"); 
 	     
 	     deck.AddCard(card_1); 
 	     deck.AddCard(card_2); 
@@ -33,15 +35,15 @@ public class DeckTest extends TestCase{
 
 	}
 	
-	public void AddCardsTest() {
+	public void testAddCards() {
 	     //List<Card> deck = new ArrayList<Card>();
 	     List <Card> cardsToAdd = new ArrayList<Card>();
 	     Deck deck = new Deck(); 
 	     
-	     Card card_1 = new Card("1","Spades"); 
-	     Card card_2 = new Card("1","Spades"); 
-	     Card card_3 = new Card("1","Spades"); 
-	     Card card_4 = new Card("1","Spades"); 
+	     Card card_1 = new Card("S1"); 
+	     Card card_2 = new Card("S1"); 
+	     Card card_3 = new Card("S1"); 
+	     Card card_4 = new Card("S1"); 
 	     
 	     cardsToAdd.add(card_1); 
 	     cardsToAdd.add(card_2); 
@@ -56,7 +58,7 @@ public class DeckTest extends TestCase{
 
 	}
 	
-	public void DrawCardTest() {
+	public void testDrawCard() {
 	     //List<Card> deck = new ArrayList<Card>();
 	     
 	     Deck deck = new Deck(); 
@@ -67,10 +69,10 @@ public class DeckTest extends TestCase{
 	     
 	     List <Card> cardsToAdd = new ArrayList<Card>();
 	     
-	     Card card_1 = new Card("1","Spades"); 
-	     Card card_2 = new Card("1","Spades"); 
-	     Card card_3 = new Card("1","Spades"); 
-	     Card card_4 = new Card("1","Spades"); 
+	     Card card_1 = new Card("S1"); 
+	     Card card_2 = new Card("S1"); 
+	     Card card_3 = new Card("S1"); 
+	     Card card_4 = new Card("S1");  
 	     
 	     cardsToAdd.add(card_1); 
 	     cardsToAdd.add(card_2); 

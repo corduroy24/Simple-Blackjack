@@ -4,11 +4,13 @@ public class Card {
 
 	private int value; 
 	private String input; 
-	private boolean aceIsSoft; 
+	private boolean aceIsSoft = false; 
+	private boolean cardIsVisible = true;
 	
 	public Card(String input) {
 		this.input = input; 
-		this.value = determineCardValue(input); 
+		//this.aceIsSoft = aceIsSoft; 
+		this.value = SetValue(input); 
 	}
 	
 	public int getValue() {
@@ -16,8 +18,18 @@ public class Card {
 		return this.value; 
 	}
 	
-	private int determineCardValue(String input) {
+	private int SetValue(String input) {
 		
 		return value; 
 	}
+	
+	public int ChangeValue(Card card, boolean aceIsSoft) {
+		
+		return value; 
+	}
+	
+	public boolean SetVisibility(boolean isVisible) {
+		return this.cardIsVisible = isVisible; 
+	}
+	
 }
