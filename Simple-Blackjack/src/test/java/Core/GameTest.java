@@ -35,7 +35,7 @@ public class GameTest extends TestCase {
 		//random deck 
 	
 	public void consoleInputDeckTest(){
-		/*//boolean [] deckIsShuffled = new boolean[52]; 
+		//boolean [] deckIsShuffled = new boolean[52]; 
 		boolean isShuffled = false; 
 		
 		Sfor(int i = 0; i < deckIsShuffled.length;i++) {
@@ -78,7 +78,7 @@ public class GameTest extends TestCase {
 		        else
 		        	isShuffled = true; 
 	        }
-	    }*/
+	    }
 	    
 	}
 	

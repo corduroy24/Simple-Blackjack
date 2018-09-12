@@ -3,22 +3,20 @@ package Core;
 public class Card {
 
 	private int value; 
-	private String name; 
-	private String suite; 
-	private boolean ace; 
+	private String input; 
+	private boolean aceIsSoft; 
 	
-	public Card(String name, String suite) {
-		this.name = name; 
-		this.suite = suite; 
-		this.value = determineCardValue(name); 
+	public Card(String input) {
+		this.input = input; 
+		this.value = determineCardValue(input); 
 	}
 	
-	public int getValue(int playerTotal) {
+	public int getValue() {
 		
 		return this.value; 
 	}
 	
-	private int determineCardValue(String name) {
+	private int determineCardValue(String input) {
 		
 		return value; 
 	}

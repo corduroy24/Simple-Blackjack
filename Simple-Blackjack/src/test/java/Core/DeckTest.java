@@ -12,7 +12,7 @@ public class DeckTest extends TestCase{
 	
 	static int deckSize = 4; 
 	
-	public void addCardTest() {
+	public void AddCardTest() {
 	    // List<Card> deck = new ArrayList<Card>();
 	     Deck deck = new Deck(); 
 
@@ -33,7 +33,7 @@ public class DeckTest extends TestCase{
 
 	}
 	
-	public void addCardsTest() {
+	public void AddCardsTest() {
 	     //List<Card> deck = new ArrayList<Card>();
 	     List <Card> cardsToAdd = new ArrayList<Card>();
 	     Deck deck = new Deck(); 
@@ -56,7 +56,7 @@ public class DeckTest extends TestCase{
 
 	}
 	
-	public void drawCardTest() {
+	public void DrawCardTest() {
 	     //List<Card> deck = new ArrayList<Card>();
 	     
 	     Deck deck = new Deck(); 
