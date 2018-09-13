@@ -31,7 +31,7 @@ public class DeckTest extends TestCase{
 	     assertFalse(deck.Empty()); 
 	     
 
-	     assertEquals(2,deck.topCard(1).getValue()); 
+	     assertEquals(2,deck.getCard(1).getValue()); 
 
 	}
 	
@@ -54,7 +54,7 @@ public class DeckTest extends TestCase{
 	     
 	     assertFalse(deck.Empty()); 
 
-	     assertEquals(2,deck.topCard(1).getValue()); 
+	     assertEquals(2,deck.getCard(1).getValue()); 
 
 	}
 	
@@ -81,7 +81,7 @@ public class DeckTest extends TestCase{
 	     
 	     deck.AddCards(cardsToAdd); 
 	     
-	     Card cardToRemove = deck.topCard(deckSize-1);  
+	     Card cardToRemove = deck.getCard(deckSize-1);  
 	     
 	     deckSizeBefore = deck.SizeOfDeck(); 
 	     

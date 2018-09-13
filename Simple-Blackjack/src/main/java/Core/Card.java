@@ -1,6 +1,5 @@
 package Core;
 
-import java.io.*; 
 public class Card {
 
 	private int value; 

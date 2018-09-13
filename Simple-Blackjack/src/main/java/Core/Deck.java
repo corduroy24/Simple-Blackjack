@@ -41,7 +41,7 @@ public class Deck {
             return deck.isEmpty(); 
     }
     
-    public Card topCard(int index) {
+    public Card getCard(int index) {
     	return deck.get(index); 
     }
 
