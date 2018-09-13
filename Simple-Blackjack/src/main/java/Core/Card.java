@@ -55,7 +55,11 @@ public class Card {
 	public int ChangeValue(Card card, boolean aceIsSoft) {
 		
 		card.aceIsSoft = aceIsSoft;
-		card.value = 11;
+		
+		if(aceIsSoft = true)
+			card.value = 11;
+		else
+			card.value = 1; 
 		
 		return card.value; 
 	}

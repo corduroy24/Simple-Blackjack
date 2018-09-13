@@ -44,5 +44,6 @@ public class Deck {
     public Card getCard(int index) {
     	return deck.get(index); 
     }
+    //do tests for correct number of each card and total number in deck 
 
 }
