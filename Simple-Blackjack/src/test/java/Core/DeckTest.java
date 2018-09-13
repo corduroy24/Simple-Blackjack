@@ -18,10 +18,10 @@ public class DeckTest extends TestCase{
 	    // List<Card> deck = new ArrayList<Card>();
 	     Deck deck = new Deck(); 
 
-	     Card card_1 = new Card("S1"); 
-	     Card card_2 = new Card("S1"); 
-	     Card card_3 = new Card("S1"); 
-	     Card card_4 = new Card("S1"); 
+	     Card card_1 = new Card("S2"); 
+	     Card card_2 = new Card("S2"); 
+	     Card card_3 = new Card("S2"); 
+	     Card card_4 = new Card("S2"); 
 	     
 	     deck.AddCard(card_1); 
 	     deck.AddCard(card_2); 
@@ -31,7 +31,7 @@ public class DeckTest extends TestCase{
 	     assertFalse(deck.Empty()); 
 	     
 
-	     assertEquals(card_1,deck.topCard(1)); 
+	     assertEquals(2,deck.topCard(1).getValue()); 
 
 	}
 	
@@ -40,10 +40,10 @@ public class DeckTest extends TestCase{
 	     List <Card> cardsToAdd = new ArrayList<Card>();
 	     Deck deck = new Deck(); 
 	     
-	     Card card_1 = new Card("S1"); 
-	     Card card_2 = new Card("S1"); 
-	     Card card_3 = new Card("S1"); 
-	     Card card_4 = new Card("S1"); 
+	     Card card_1 = new Card("S2"); 
+	     Card card_2 = new Card("S2"); 
+	     Card card_3 = new Card("S2"); 
+	     Card card_4 = new Card("S2"); 
 	     
 	     cardsToAdd.add(card_1); 
 	     cardsToAdd.add(card_2); 
@@ -54,7 +54,7 @@ public class DeckTest extends TestCase{
 	     
 	     assertFalse(deck.Empty()); 
 
-	     assertEquals(card_1,deck.topCard(1)); 
+	     assertEquals(2,deck.topCard(1).getValue()); 
 
 	}
 	
@@ -69,10 +69,10 @@ public class DeckTest extends TestCase{
 	     
 	     List <Card> cardsToAdd = new ArrayList<Card>();
 	     
-	     Card card_1 = new Card("S1"); 
-	     Card card_2 = new Card("S1"); 
-	     Card card_3 = new Card("S1"); 
-	     Card card_4 = new Card("S1");  
+	     Card card_1 = new Card("S2"); 
+	     Card card_2 = new Card("S2"); 
+	     Card card_3 = new Card("S2"); 
+	     Card card_4 = new Card("S2");  
 	     
 	     cardsToAdd.add(card_1); 
 	     cardsToAdd.add(card_2); 
@@ -86,6 +86,7 @@ public class DeckTest extends TestCase{
 	     deckSizeBefore = deck.SizeOfDeck(); 
 	     
 	     deck.DrawCard(); 
+	     removedCard = true;
 	     
 	     deckSizeAfter = deck.SizeOfDeck(); 
 	     
