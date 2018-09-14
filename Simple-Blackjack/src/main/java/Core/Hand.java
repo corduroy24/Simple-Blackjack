@@ -19,6 +19,11 @@ public class Hand {
     public Card GetCard(int index) {
     	return hand.get(index); 
     }
+
+    public int GetSize() {
+    	return hand.size(); 
+    }
+    
     
     
     public int CountTotal() {

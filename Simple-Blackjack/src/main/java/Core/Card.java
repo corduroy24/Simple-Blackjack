@@ -20,6 +20,11 @@ public class Card {
 		return this.value; 
 	}
 	
+	public String getInput() {
+		
+		return this.input; 
+	}
+	
 	private int SetValue(String input) {
 	
 	      
