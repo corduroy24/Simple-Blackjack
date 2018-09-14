@@ -9,7 +9,9 @@ import java.util.Collections;
 public class Deck {
 	
     private List<Card> deck = new ArrayList<Card>();
-    
+
+	
+	static int deckSize = 52; 
     
     public void AddCard(Card cardToAdd)
     {
@@ -45,5 +47,12 @@ public class Deck {
     	return deck.get(index); 
     }
     //do tests for correct number of each card and total number in deck 
-
+    /*public void defaultDeck() {
+		for(int i = 0; i < deckSize; i++) {
+			AddCard(input[i]);
+    }*/
+    
+    public void ShuffleDeck() {
+    	Collections.shuffle(deck);
+    }
 }

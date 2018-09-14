@@ -9,6 +9,7 @@ import java.util.Collections;
 public class Hand {
     private List<Card> hand = new ArrayList<Card>();
     private boolean isSoft; 
+    public int numAces = 0; 
     
     public void AddCard(Card cardToAdd)
     {
@@ -19,9 +20,11 @@ public class Hand {
     	return hand.get(index); 
     }
     
+    
     public int CountTotal() {
     	int total  = 0; 
     	for(int i = 0; i < hand.size(); i++) {
+    		
     		total += hand.get(i).getValue();
     	}
     	
@@ -31,6 +34,44 @@ public class Hand {
     public boolean Empty() //return 1 if empty = true , 0 if it has cards = false 
     {
             return hand.isEmpty(); 
+    }
+    
+    public int CountAces () {
+    	int numAces = 0; 
+    	for(int i = 0; i < hand.size(); i++) {
+    		if(this.hand.get(i).getValue() == 11)
+    			numAces++; 
+    	}
+    	return numAces; 
+    }
+    
+    public boolean IsBust() {
+		int numAces ; 
+		int numPoints; 
+		
+		numAces = CountAces(); 
+		numPoints = CountTotal();
+		
+		if(numPoints > 21)
+		{
+			numPoints = numPoints - (numAces*10); 
+			return true; 
+		}
+		return false;
+    }
+    
+    public boolean IsBlackJack() {
+//		int numAces ; 
+		int numPoints; 
+		
+	//	numAces = CountAces(); 
+		numPoints = CountTotal();
+		
+		if(numPoints == 21)
+		{
+			return true; 
+		}
+		return false;
     }
     
     /*public boolean isSoft() {

@@ -5,12 +5,14 @@ public class Card {
 	private int value; 
 	private String input; 
 	private boolean aceIsSoft = false; 
-	private boolean cardIsVisible = true;
+	private boolean cardIsVisible;
 	
 	public Card(String input) {
 		this.input = input; 
 		//this.aceIsSoft = aceIsSoft; 
 		this.value = SetValue(input); 
+		this.cardIsVisible = false;
+
 	}
 	
 	public int getValue() {
@@ -31,7 +33,7 @@ public class Card {
 		//value = char.parseInt((String.valueOf(input)));
 		
 		
-		
+		//System.out.println(extractValueS);
 		switch(extractValueS) {
 			case "A": value = 1; break; 
 			case "2": value = 2; break; 
