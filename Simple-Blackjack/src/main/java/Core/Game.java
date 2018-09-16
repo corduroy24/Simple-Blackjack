@@ -4,8 +4,7 @@ import java.util.Scanner;
 
 public class Game {
 
-	
-	static int deckSize = 20; 
+	static int deckSize = 52; 
 
 	private static Card[] card = new Card[deckSize];
 	
@@ -29,19 +28,12 @@ public class Game {
 	private static boolean dealerIsWinner; 
 	
 	
-	
 	public static void main(String[] arg)	{
 		//Deck deck = new Deck();
 		//launch(arg);
 		PromptUser();
-			
-
 	}
 	
-
-
-	
-
 	public static void PromptUser () {
 		System.out.println("Which input method are you using? (File = f or Console = c)");
 		Scanner console = new Scanner(System.in); 
@@ -53,8 +45,6 @@ public class Game {
 		else if (input == 'f')
 			FileInput();
 		console.close();
-
-	
 	}
 	
 	//turn into class 
@@ -70,17 +60,29 @@ public class Game {
 		playerHand.AddCard(deck.DrawCard());
 		playerHand.GetCard(0).SetVisibility(true);
 		playerHand.GetCard(1).SetVisibility(true);
-
-		//System.out.println("Your hand is: ");
 		
 		dealerHand.AddCard(deck.DrawCard());
 		dealerHand.AddCard(deck.DrawCard());
 		dealerHand.GetCard(0).SetVisibility(true);
 		
 		//put display hand method in hand class... 
+		String printPlayersHand = "";
+		String printDealersHand = ""; 
 		for(int i = 0; i < playerHand.GetSize(); i++) {
-			System.out.println(playerHand.GetCard(i).getInput());
+			printPlayersHand += playerHand.GetCard(i).getInput() + " "; 
+			//System.out.println(playerHand.GetCard(i).getInput());
 		}
+		System.out.println("Players Hand: "+ printPlayersHand);
+		printPlayersHand = ""; 
+		
+		for(int i = 0; i < dealerHand.GetSize(); i++) {
+			//System.out.println(dealerHand.GetCard(i).getVisibility());
+			if(dealerHand.GetCard(i).getVisibility())
+				printDealersHand += dealerHand.GetCard(i).getInput() + " "; 
+			//System.out.println(playerHand.GetCard(i).getInput());
+		}
+		System.out.println("Dealers Hand: "+printDealersHand);
+		printDealersHand = ""; 
 
 		
 		//natural blackJack (only 2 cards)
@@ -105,8 +107,6 @@ public class Game {
 			System.out.println("Dealer is the winner(blackjack)");
 		}
 		
-
-		
 		while(playerIsWinner == false & dealerIsWinner == false) {
 			System.out.println("Hit (H) or Stand (S) ?");
 			Scanner console = new Scanner(System.in); 
@@ -117,26 +117,23 @@ public class Game {
 			
 			if(input == 'H') {
 				Hit(playerHand);
-		H		for(int i = 0; i < playerHand.GetSize(); i++) {
-					System.out.println(playerHand.GetCard(i).getInput());
+				for(int i = 0; i < playerHand.GetSize(); i++) {
+					printPlayersHand += playerHand.GetCard(i).getInput() + " "; 
 				}
+				System.out.println("Players Hand: "+ printPlayersHand);
+				printPlayersHand = ""; 
 				if(CheckBust() ==true)break;
-
-				//if(playerHand.IsBust())break; 
 			}
 			else if(input == 'S') {
-				for(int i = 0; i < dealerHand.GetSize(); i++) {
-					System.out.println(dealerHand.GetCard(i).getInput());
-				}
 				HitOrStand(); 
-
+				for(int i = 0; i < dealerHand.GetSize(); i++) {
+					printDealersHand += dealerHand.GetCard(i).getInput() + " "; 
+				}
+				System.out.println("Dealers Hand: "+printDealersHand);
+				printDealersHand = ""; 
 			}						
-			
 		}
 		CheckWinner();
-
-		
-
 	}
 	
 	private static void HitOrStand() {
@@ -149,14 +146,8 @@ public class Game {
 				System.out.println(dealerHand.GetCard(i).getInput());
 			}
 		}
-
-		 //have to stop the prompt for hit or stand when the game is basically done.. .
-			return;
-			//Stand(); 	
+		return;
 	}
-
-
-
 
 
 	private static boolean CheckBust() {
@@ -180,9 +171,6 @@ public class Game {
 	}
 
 
-
-
-
 	private static void Stand() {
 		// TODO Auto-generated method stub
 		//Hit(dealerHand); 
@@ -190,18 +178,11 @@ public class Game {
 	}
 
 
-
-
-
 	private static void Hit(Hand hand) {
 		// TODO Auto-generated method stub
 		hand.AddCard(deck.DrawCard());
 
 	}
-
-
-
-
 
 	public static void FileInput() {
 		System.out.println("FileInput");

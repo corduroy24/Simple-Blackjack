@@ -5,7 +5,7 @@ public class Card {
 	private int value; 
 	private String input; 
 	private boolean aceIsSoft = false; 
-	private boolean cardIsVisible;
+	private boolean cardIsVisible = false;
 	
 	public Card(String input) {
 		this.input = input; 
@@ -71,8 +71,11 @@ public class Card {
 		return this.value; 
 	}
 	
-	public boolean SetVisibility(boolean isVisible) {
-		return this.cardIsVisible = isVisible; 
+	public void SetVisibility(boolean isVisible) {
+		 this.cardIsVisible = isVisible; 
 	}
 	
+	public boolean getVisibility() {
+		return cardIsVisible; 
+	}
 }
