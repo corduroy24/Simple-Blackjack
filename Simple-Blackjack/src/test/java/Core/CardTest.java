@@ -38,9 +38,9 @@ public class CardTest extends TestCase{
 		
 		aceIsSoft = true; 
 		
-		CA.ChangeValue(CA, aceIsSoft); 
+		//CA.ChangeValue(CA, aceIsSoft); 
 		
-		assertEquals(11, CA.getValue()); 
+		//assertEquals(11, CA.getValue()); 
 		
 	}
 	

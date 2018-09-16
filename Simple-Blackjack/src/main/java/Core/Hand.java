@@ -56,11 +56,24 @@ public class Hand {
 		
 		numAces = CountAces(); 
 		numPoints = CountTotal();
+		int temp=0; 
 		
 		if(numPoints > 21)
 		{
-			numPoints = numPoints - (numAces*10); 
-			return true; 
+			if(numAces > 0)
+			{
+		    	for(int i = 0; i < hand.size(); i++) {
+		    		if(this.hand.get(i).getValue() == 11)
+		    			temp = hand.get(i).ChangeValue(true);
+		    		System.out.println("Ace is now: " + temp);
+		    	}
+				numPoints = CountTotal();
+				System.out.println(numPoints +" recount");
+
+			}
+			
+			if(numPoints > 21)
+				return true; 
 		}
 		return false;
     }
@@ -72,12 +85,25 @@ public class Hand {
 	//	numAces = CountAces(); 
 		numPoints = CountTotal();
 		
+		//System.out.println(CountTotal() +" ctotal");
 		if(numPoints == 21)
 		{
 			return true; 
 		}
 		return false;
     }
+
+	public boolean isSoft() {
+		// TODO Auto-generated method stub
+		int numPoints = CountTotal();
+		int numAces = CountAces(); 
+		
+		if(numPoints == 17 & numAces > 0)
+		{
+			return true; 
+		}
+		return false; 
+	}
     
     /*public boolean isSoft() {
     	if ((CountTotal() + 10) == 17)

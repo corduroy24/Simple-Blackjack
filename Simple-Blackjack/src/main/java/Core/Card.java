@@ -40,7 +40,7 @@ public class Card {
 		
 		//System.out.println(extractValueS);
 		switch(extractValueS) {
-			case "A": value = 1; break; 
+			case "A": value = 11; break; 
 			case "2": value = 2; break; 
 			case "3": value = 3; break; 
 			case "4": value = 4; break; 
@@ -59,16 +59,16 @@ public class Card {
 		return value; 
 	}
 	
-	public int ChangeValue(Card card, boolean aceIsSoft) {
+	public int ChangeValue(boolean aceIsSoft) {
 		
-		card.aceIsSoft = aceIsSoft;
+		this.aceIsSoft = aceIsSoft;
 		
-		if(aceIsSoft = true)
-			card.value = 11;
+		if(aceIsSoft == true)
+			value = 1;
 		else
-			card.value = 1; 
+			value = 11; 
 		
-		return card.value; 
+		return this.value; 
 	}
 	
 	public boolean SetVisibility(boolean isVisible) {
