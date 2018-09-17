@@ -43,6 +43,10 @@ public class Deck {
             return deck.isEmpty(); 
     }
     
+    public void reverseDeck() {
+    	Collections.reverse(deck);
+    }
+    
     public Card getCard(int index) {
     	return deck.get(index); 
     }

@@ -56,16 +56,17 @@ public class Hand {
 		
 		numAces = CountAces(); 
 		numPoints = CountTotal();
-		int temp=0; 
+		int temp = 0; 
 		
 		if(numPoints > 21)
 		{
 			if(numAces > 0)
 			{
 		    	for(int i = 0; i < hand.size(); i++) {
-		    		if(this.hand.get(i).getValue() == 11)
+		    		if(this.hand.get(i).getValue() == 11) {
 		    			temp = hand.get(i).ChangeValue(true);
-		    		System.out.println("Ace is now: " + temp);
+			    		//System.out.println("Ace is now: " + temp);
+		    		}
 		    	}
 				numPoints = CountTotal();
 				System.out.println(numPoints +" recount");
