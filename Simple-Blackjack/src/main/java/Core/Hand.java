@@ -78,6 +78,14 @@ public class Hand {
 		}
 		return false;
     }
+   /* public boolean isSplit() {
+    	
+    	return false;
+    }*/
+    
+   /* public void split() {
+    	
+    }*/
     
     public boolean IsBlackJack() {
 //		int numAces ; 

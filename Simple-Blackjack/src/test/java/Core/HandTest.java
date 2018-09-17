@@ -43,6 +43,37 @@ public class HandTest extends TestCase{
 		
 	}*/
 	
+	public void testSplit() {
+		Deck deck = new Deck(); 
+		Hand[] playerHand = new Hand[2]; 
+		
+	    Card card_1 = new Card("SA"); 
+	    Card card_2 = new Card("SA"); 
+	    /*Card card_3 = new Card("S2"); 
+	    Card card_4 = new Card("S2"); */
+	    
+	    deck.AddCard(card_1);
+	    deck.AddCard(card_2);
+	    /*deck.AddCard(card_3);
+	    deck.AddCard(card_4);*/
+	    
+	    assertTrue(playerHand[0].Empty());
+	    assertTrue(playerHand[1].Empty());
+
+	    
+		Card cardToAdd1 = deck.DrawCard(); 
+		Card cardToAdd2 = deck.DrawCard(); 
+		
+		
+		AssertTrue(playerHand[0].isSplit()); 
+		
+		playerHand[0].Split();
+		
+		assertEquals(cardToAdd1.getValue(), playerHand[0].GetCard(0));
+		
+		assertEquals(cardToAdd1.getValue(), playerHand[1].GetCard(0));
+
+	}
 	
 	public void testCountPoints() {
 		Deck deck = new Deck(); 
