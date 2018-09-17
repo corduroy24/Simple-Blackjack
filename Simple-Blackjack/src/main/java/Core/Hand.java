@@ -78,14 +78,16 @@ public class Hand {
 		}
 		return false;
     }
-   /* public boolean isSplit() {
+    public boolean isSplit() {
+    	if(this.GetCard(0).getValue() == this.GetCard(1).getValue())
+    		return true;
     	
     	return false;
-    }*/
+    }
     
-   /* public void split() {
-    	
-    }*/
+    public Card split() {
+    	return hand.remove(1);
+    }
     
     public boolean IsBlackJack() {
 //		int numAces ; 

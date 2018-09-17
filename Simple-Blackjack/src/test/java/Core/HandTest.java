@@ -45,7 +45,7 @@ public class HandTest extends TestCase{
 	
 	public void testSplit() {
 		Deck deck = new Deck(); 
-		Hand[] playerHand = new Hand[2]; 
+		Hand playerHand = new Hand(); 
 		
 	    Card card_1 = new Card("SA"); 
 	    Card card_2 = new Card("SA"); 
@@ -57,21 +57,24 @@ public class HandTest extends TestCase{
 	    /*deck.AddCard(card_3);
 	    deck.AddCard(card_4);*/
 	    
-	    assertTrue(playerHand[0].Empty());
-	    assertTrue(playerHand[1].Empty());
+	   assertTrue(playerHand.Empty());
+	   //assertTrue(playerHand.get(1).Empty());
 
-	    
 		Card cardToAdd1 = deck.DrawCard(); 
 		Card cardToAdd2 = deck.DrawCard(); 
 		
+		playerHand.AddCard(cardToAdd1); 
+		playerHand.AddCard(cardToAdd2); 
 		
-		AssertTrue(playerHand[0].isSplit()); 
+		assertTrue(playerHand.isSplit()); 
 		
-		playerHand[0].Split();
+		Hand splitPlayer = new Hand();
 		
-		assertEquals(cardToAdd1.getValue(), playerHand[0].GetCard(0));
+		splitPlayer.AddCard(playerHand.split());
 		
-		assertEquals(cardToAdd1.getValue(), playerHand[1].GetCard(0));
+		assertEquals(cardToAdd1.getValue(), playerHand.GetCard(0).getValue());
+		
+		assertEquals(cardToAdd2.getValue(), splitPlayer.GetCard(0).getValue());
 
 	}
 	

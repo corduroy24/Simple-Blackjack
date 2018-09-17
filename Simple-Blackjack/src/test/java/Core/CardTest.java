@@ -30,7 +30,7 @@ public class CardTest extends TestCase{
 		Card H7 = new Card("H7"); 
 		Card SQ = new Card("SQ"); 
 
-		assertEquals(1,CA.getValue());
+		assertEquals(11,CA.getValue());
 		assertEquals(2,D2.getValue());
 		assertEquals(10,D10.getValue());
 		assertEquals(7,H7.getValue());
