@@ -10,6 +10,7 @@ public class Hand {
     private List<Card> hand = new ArrayList<Card>();
     private boolean isSoft; 
     public int numAces = 0; 
+    public boolean turn; 
     
     public void AddCard(Card cardToAdd)
     {
