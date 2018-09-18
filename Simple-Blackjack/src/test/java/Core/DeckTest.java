@@ -99,16 +99,20 @@ public class DeckTest extends TestCase{
 	public void test52Cards() {
 		String [] input = { "CA", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "CJ", "CQ", "CK",
 				"DA", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10", "DJ", "DQ", "DK",
-				"HA", "H2", "H3", "H4", "H5", "H6", "H7", "H8", "H9", "H10", "HJ", "CH", "HK",
+				"HA", "H2", "H3", "H4", "H5", "H6", "H7", "H8", "H9", "H10", "HJ", "HQ", "HK",
 				"SA", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10", "SJ", "SQ", "SK"};
 		
 		Deck deck = new Deck(); 
-		assertTrue(deck.empty());
+		int deckSize = 52; 
+		Card[] cards = new Card[deckSize]; 
 		
-		deck.createCards(input);
+		assertTrue(deck.empty());
+		deck.createDefaultDeck(input);
 		assertFalse(deck.empty()); 
 		
 		assertEquals(52, deck.sizeOfDeck()); 
+		
+		assertEquals(11, deck.getCard(0).getValue());
 		
 	}
    

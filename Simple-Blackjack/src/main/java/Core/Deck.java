@@ -60,9 +60,26 @@ public class Deck {
     	Collections.shuffle(deck);
     }
     
-    public void createCards() {
-    	
+    public void createDefaultDeck(String[] input) {
+    	//Card [] Card = new Card[deckSize];
+    	Card card; 
+    	for(int i = 0; i < input.length; i++) {
+			card = new Card (input[i]);
+			addCard(card);
+    	}
     }
     
+    /*public Card[] createCards(String[] input, Card[] cards) {
+		for(int i = 0; i < deckSize; i++) {
+			cards[i] = new Card (input[i]);
+		}
+		return cards;
+    }*/
+    
+    public Card createCard(String input, Card card) {
+			card = new Card (input);
+
+		return card;
+    }
 
 }

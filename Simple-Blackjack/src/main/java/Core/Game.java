@@ -68,8 +68,9 @@ public class Game {
 	public static void ConsoleInput() {
 		System.out.println("ConsoleInput");
 		
-		CreateCards(input);
-		DefaultDeck(deck);
+	//	CreateCards(input);
+		//DefaultDeck(deck);
+		deck.createDefaultDeck(input);
 		deck.shuffleDeck();
 		
 		Card tempCard;
@@ -638,7 +639,7 @@ public class Game {
 		return hand;
 	}
 
-	public static void CreateCards (String[] input) {
+	/*public static void CreateCards (String[] input) {
 		for(int i = 0; i < card.length; i++) {
 			card[i] = new Card (input[i]);
 		}
@@ -648,7 +649,7 @@ public class Game {
 		for(int i = 0;i < deckSize; i++) {
 			deckToMake.addCard(card[i]);
 		}
-	}
+	}*/
 
 
 }
