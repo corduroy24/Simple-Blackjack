@@ -86,6 +86,8 @@ public class Game {
 
 		playerHand.showHand();
 		dealerHand.showHand();
+		dealerHand.getCard(1).SetVisibility(true);
+
 		
 			if(playerHand.IsBlackJack() && dealerHand.IsBlackJack()) {
 				playerIsWinner  = true; 
@@ -118,11 +120,11 @@ public class Game {
 					System.out.println("isSplit == true");
 					splitPlayer.addCard(playerHand.split());
 					
-					playerHand.addCard(tempCard = deck.drawCard());
+					/*playerHand.addCard(tempCard = deck.drawCard());
 					System.out.println("Player Receives " + tempCard.getName());
 						
 					splitPlayer.addCard(tempCard = deck.drawCard()); 
-					System.out.println("Player Split Receives " + tempCard.getName());
+					System.out.println("Player Split Receives " + tempCard.getName());*/
 					
 					playerHand.showHand();
 					splitPlayer.showHand();
@@ -136,11 +138,11 @@ public class Game {
 					System.out.println("isSplitDealer == true");
 					splitDealer.addCard(dealerHand.split());
 					
-					dealerHand.addCard(tempCard = deck.drawCard());
+					/*dealerHand.addCard(tempCard = deck.drawCard());
 					System.out.println("Dealer Receives " + tempCard.getName());
 					
 					splitDealer.addCard(tempCard = deck.drawCard()); 
-					System.out.println("Dealer Split Receives " + tempCard.getName());
+					System.out.println("Dealer Split Receives " + tempCard.getName());*/
 					
 					dealerHand.showHand();
 					splitDealer.showHand();
@@ -302,7 +304,7 @@ public class Game {
 		BufferedReader reader = null; 
 		String[] parseCommands = new String[deckSize]; 
 		String delims = "[ ]+";
-		String filename = "File1.txt"; 
+		String filename = "File4.txt"; 
 	
 
 		try {
@@ -362,8 +364,10 @@ public class Game {
 
 				playerHand.showHand();
 				
-				dealerHand.getCard(0).SetVisibility(false);
+				dealerHand.getCard(1).SetVisibility(false);
 				dealerHand.showHand();
+				dealerHand.getCard(0).SetVisibility(true);
+
 
 				dealCards1=false;
 				

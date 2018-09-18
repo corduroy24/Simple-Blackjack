@@ -59,4 +59,10 @@ public class Deck {
     public void shuffleDeck() {
     	Collections.shuffle(deck);
     }
+    
+    public void createCards() {
+    	
+    }
+    
+
 }
