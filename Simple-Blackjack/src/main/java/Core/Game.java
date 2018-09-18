@@ -64,7 +64,6 @@ public class Game {
 		console.close();
 	}
 	
-	//turn into class 
 	public static void ConsoleInput() {
 		System.out.println("ConsoleInput");
 		
@@ -75,12 +74,16 @@ public class Game {
 		Card tempCard;
 		
 		//turn into function = deal cards 
-		playerHand.addCard(deck.drawCard());
+		Hit(playerHand, deck); 
+		Hit(playerHand, deck);
+		Hit(dealerHand, deck); 
+		Hit(dealerHand, deck);
+		/*playerHand.addCard(deck.drawCard());
 		playerHand.addCard(deck.drawCard());
 
 		
 		dealerHand.addCard(deck.drawCard());
-		dealerHand.addCard(deck.drawCard());
+		dealerHand.addCard(deck.drawCard());*/
 		dealerHand.getCard(1).SetVisibility(false);
 		
 
@@ -140,7 +143,7 @@ public class Game {
 				//keep asking until its the correct input
 				//lower case vs upper case 
 				if(input == 'H' && playerHand.turn == true) {
-					Hit(playerHand);
+					Hit(playerHand, deck);
 					playerHand.showHand();
 
 					if(CheckBust() ==true)break;
@@ -149,7 +152,7 @@ public class Game {
 					if(splitting) {				
 						System.out.println("splitting");
 
-						Hit(splitPlayer);
+						Hit(splitPlayer, deck);
 						splitPlayer.showHand();
 
 						if(CheckBust() ==true)break;
@@ -229,7 +232,7 @@ public class Game {
 
 	//	System.out.println(hand.countTotal() + " " + hand.isSoft() );
 		while((hand.countTotal() < 17) || (hand.isSoft())) {
-			Hit(hand);
+			Hit(hand, deck);
 
 			if(CheckBust() == true)break;
 			
@@ -296,52 +299,20 @@ public class Game {
 	}
 
 	
-	private static void Hit(Hand hand) {
+	private static Card Hit(Hand hand, Deck deck) {
 		// TODO Auto-generated method stub
-		hand.addCard(deck.drawCard());
+		Card tempCard; 
+		hand.addCard(tempCard = deck.drawCard());
+		return tempCard; 
 
 	}
 //code inspired from https://www.caveofprogramming.com/java/java-file-reading-and-writing-files-in-java.html
 	public static void FileInput() {
-		System.out.println("FileInput");
-		//System.out.println("Enter the filename: ");
-		//Scanner console = new Scanner(System.in); 
-		//String fileName = console.nextLine();
-		String line = null; 
-		BufferedReader reader = null; 
-		String[] parseCommands = new String[deckSize]; 
-		String delims = "[ ]+";
-		String filename = "File1.txt"; 
-	
-
-		try {
-			FileReader fileReader =  new FileReader(filename); 
-		    BufferedReader bufferedReader = new BufferedReader(fileReader); 
-		    
-			while((line = bufferedReader.readLine()) != null)
-			{
-				parseCommands = line.split(delims); 
-			    System.out.println(line);
-
-			}
-			bufferedReader.close();
-		//	console.close();
-
-		}
-	        catch(FileNotFoundException ex) {
-	            System.out.println(
-	                "Unable to open file '" + 
-	                filename + "'");                
-	        }
-	        catch(IOException ex) {
-	            System.out.println(
-	                "Error reading file '" 
-	                + filename + "'");                  
-	        }		
-		for (int i = 0; i < parseCommands.length; i++)
-		    System.out.println(parseCommands[i]);
 		
-		/////////////////////////////////
+		String[] parseCommands = new String[deckSize]; 
+		parseCommands  = readFile(); 
+		System.out.println("FileInput");
+		
 		Deck fileInputDeck = new Deck(); 
 		boolean dealCards1 = true; 
 
@@ -358,15 +329,18 @@ public class Game {
 					fileInputDeck.addCard(fileInputCards.get(k));	
 				}
 				fileInputDeck.reverseDeck();
-				playerHand.addCard(tempCard = fileInputDeck.drawCard()); 
+				
+				tempCard = Hit(playerHand, fileInputDeck); 
 				System.out.println("Player Receives " + tempCard.getName());
-				playerHand.addCard(tempCard = fileInputDeck.drawCard()); 
+				tempCard = Hit(playerHand, fileInputDeck); 
+
 				System.out.println("Player Receives " + tempCard.getName());
 
-				dealerHand.addCard(tempCard = fileInputDeck.drawCard()); 
+				tempCard = Hit(dealerHand, fileInputDeck); 
+
 				System.out.println("Dealer Receives " + tempCard.getName());
+				tempCard = Hit(dealerHand, fileInputDeck); 
 
-				dealerHand.addCard(tempCard = fileInputDeck.drawCard()); 
 				System.out.println("Dealer Receives " + tempCard.getName());
 
 				playerHand.showHand();
@@ -393,21 +367,16 @@ public class Game {
 						splitPlayer.addCard(playerHand.split());
 
 						i++;
-						fileInputCards.add(new Card(parseCommands[i]));
-
-						fileInputDeck.addCard(fileInputCards.get(fileInputCards.size()-1));
-
-						playerHand.addCard(tempCard = fileInputDeck.drawCard()); 
-						System.out.println("Player Receives " + tempCard.getName());
 						
+						fileInputCards.add(new Card(parseCommands[i]));
+						fileInputDeck.addCard(fileInputCards.get(fileInputCards.size()-1));
+						tempCard = Hit(playerHand, fileInputDeck); 
+						System.out.println("Player Receives " + tempCard.getName());
 						
 						i++;
 						fileInputCards.add(new Card(parseCommands[i]));
-
 						fileInputDeck.addCard(fileInputCards.get(fileInputCards.size()-1));
-
-						
-						splitPlayer.addCard(tempCard = fileInputDeck.drawCard()); 
+						tempCard = Hit(splitPlayer, fileInputDeck); 
 						System.out.println("Player Split Receives " + tempCard.getName());
 						
 						playerHand.showHand();
@@ -416,15 +385,13 @@ public class Game {
 					}
 				}
 					
-
 					while(playerIsWinner == false & dealerIsWinner == false) {	
 						if(parseCommands[i].equals("H") && playerHand.turn) {
 							i++;
+							
 							fileInputCards.add(new Card(parseCommands[i]));
-	
 							fileInputDeck.addCard(fileInputCards.get(fileInputCards.size()-1));
-	
-							playerHand.addCard(tempCard = fileInputDeck.drawCard()); 
+							tempCard = Hit(playerHand, fileInputDeck); 
 							System.out.println("Player Receives " + tempCard.getName());
 
 							playerHand.showHand();
@@ -434,11 +401,10 @@ public class Game {
 						else if(parseCommands[i].equals("H") && splitPlayer.turn) {
 							if(splitting) {
 							i++;
+							
 							fileInputCards.add(new Card(parseCommands[i]));
-	
 							fileInputDeck.addCard(fileInputCards.get(fileInputCards.size()-1));
-	
-							splitPlayer.addCard(tempCard = fileInputDeck.drawCard()); 
+							tempCard = Hit(splitPlayer, fileInputDeck); 
 							System.out.println("Player Split Receives " + tempCard.getName());
 
 							splitPlayer.showHand();
@@ -468,16 +434,13 @@ public class Game {
 								
 								while((dealerHand.countTotal() < 17) || (dealerHand.isSoft())) {
 									i++;
+									
 									fileInputCards.add(new Card(parseCommands[i]));
-								
-		
 									fileInputDeck.addCard(fileInputCards.get(fileInputCards.size()-1));	
-		
-									dealerHand.addCard(tempCard = fileInputDeck.drawCard()); 
+									tempCard = Hit(dealerHand, fileInputDeck); 
 									System.out.println("Dealer Receives " + tempCard.getName());
 
 									dealerHand.showHand();
-
 
 									if(CheckBust() == true) break;	
 								}
@@ -487,28 +450,24 @@ public class Game {
 									dealerHand.turn = false;
 									splitDealer.turn = true; 
 
-
 									while((splitDealer.countTotal() < 17) || (splitDealer.isSoft())) {
 										i++;
-
-									fileInputCards.add(new Card(parseCommands[i]));
-								
-									fileInputDeck.addCard(fileInputCards.get(fileInputCards.size()-1));	
-		
-									splitDealer.addCard(tempCard = fileInputDeck.drawCard()); 
-									System.out.println("Dealer Split Receives " + tempCard.getName());
-
-									splitDealer.showHand();
-
-									if(CheckBust() == true) break;	
-								}
+	
+										fileInputCards.add(new Card(parseCommands[i]));
+										fileInputDeck.addCard(fileInputCards.get(fileInputCards.size()-1));
+										tempCard = Hit(splitDealer, fileInputDeck); 
+										System.out.println("Dealer Split Receives " + tempCard.getName());
+	
+										splitDealer.showHand();
+	
+										if(CheckBust() == true) break;	
+									}
 
 								}
 								CheckWinner(); 
 
 								break;
-
-								}
+							}
 						}
 							
 		
@@ -518,11 +477,10 @@ public class Game {
 							System.out.println(dealerHand.countTotal() + " " + dealerHand.isSoft() );
 							while((dealerHand.countTotal() < 17) || (dealerHand.isSoft())) {
 								i++;
-								fileInputCards.add(new Card(parseCommands[i]));
-							
+								
+								fileInputCards.add(new Card(parseCommands[i]));						
 								fileInputDeck.addCard(fileInputCards.get(fileInputCards.size()-1));	
-	
-								dealerHand.addCard(tempCard = fileInputDeck.drawCard()); 
+								tempCard = Hit(dealerHand, fileInputDeck); 
 								System.out.println("Dealer Receives " + tempCard.getName());
 
 								dealerHand.showHand();
@@ -538,10 +496,51 @@ public class Game {
 		}
 	}
 	
+	private static String[] readFile() {
+	// TODO Auto-generated method stub
+		//System.out.println("Enter the filename: ");
+				//Scanner console = new Scanner(System.in); 
+				//String fileName = console.nextLine();
+				String line = null; 
+				BufferedReader reader = null; 
+				String[] parseCommands = new String[deckSize]; 
+				String delims = "[ ]+";
+				String filename = "File5.txt"; 
+			
+
+				try {
+					FileReader fileReader =  new FileReader(filename); 
+				    BufferedReader bufferedReader = new BufferedReader(fileReader); 
+				    
+					while((line = bufferedReader.readLine()) != null)
+					{
+						parseCommands = line.split(delims); 
+					    System.out.println(line);
+
+					}
+					bufferedReader.close();
+				//	console.close();
+
+				}
+			        catch(FileNotFoundException ex) {
+			            System.out.println(
+			                "Unable to open file '" + 
+			                filename + "'");                
+			        }
+			        catch(IOException ex) {
+			            System.out.println(
+			                "Error reading file '" 
+			                + filename + "'");                  
+			        }		
+				for (int i = 0; i < parseCommands.length; i++)
+				    System.out.println(parseCommands[i]);
+				
+				return parseCommands;
+}
+
+
 	public static boolean CheckWinner() {
 		boolean winner =  false; 
-		String printPlayersHand = "";
-		String printDealersHand = ""; 
 		
 		Hand betterHand = betterHand(playerHand, splitPlayer);  
 		Hand betterDealerHand = betterHand(dealerHand, splitDealer); 
