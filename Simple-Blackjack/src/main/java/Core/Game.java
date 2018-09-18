@@ -15,7 +15,7 @@ public class Game {
 	static int deckSize = 27; 
 
 
-	private static Card[] card = new Card[deckSize];
+	//private static Card[] card = new Card[deckSize];
 	
 	private static Deck deck = new Deck(); 
 	
@@ -68,8 +68,7 @@ public class Game {
 	public static void ConsoleInput() {
 		System.out.println("ConsoleInput");
 		
-	//	CreateCards(input);
-		//DefaultDeck(deck);
+
 		deck.createDefaultDeck(input);
 		deck.shuffleDeck();
 		
@@ -89,27 +88,8 @@ public class Game {
 		dealerHand.showHand();
 		dealerHand.getCard(1).SetVisibility(true);
 
-		
-			if(playerHand.IsBlackJack() && dealerHand.IsBlackJack()) {
-				playerIsWinner  = true; 
-				dealerIsWinner = true;
-				System.out.println("Dealer is the winner (both had blackjack)"); 
-				System.out.println("Player Score: "+playerHand.countTotal()+" Dealer Score: "+dealerHand.countTotal());
-			}
-	
-			else if(playerHand.IsBlackJack()) {
-				playerIsWinner  = true; 
-				System.out.println("Player is the winner (blackjack)");
-				System.out.println("Player Score: "+playerHand.countTotal()+" Dealer Score: "+dealerHand.countTotal());
-	
-			}
-	
-			else if(dealerHand.IsBlackJack()) {
-				dealerIsWinner = true; 
-				System.out.println("Dealer is the winner(blackjack)");
-				System.out.println("Player Score: "+playerHand.countTotal()+" Dealer Score: "+dealerHand.countTotal());
-	
-			}
+		checkBlackjack(playerHand, dealerHand);
+
 			
 			if(playerHand.isSplit()) {
 				
@@ -217,6 +197,32 @@ public class Game {
 
 	}*/
 	
+	private static void checkBlackjack(Hand playerHand, Hand dealerHand) {
+		// TODO Auto-generated method stub
+		if(playerHand.IsBlackJack() && dealerHand.IsBlackJack()) {
+			playerIsWinner  = true; 
+			dealerIsWinner = true;
+			System.out.println("Dealer is the winner (both had blackjack)"); 
+			System.out.println("Player Score: "+playerHand.countTotal()+" Dealer Score: "+dealerHand.countTotal());
+		}
+
+		else if(playerHand.IsBlackJack()) {
+			playerIsWinner  = true; 
+			System.out.println("Player is the winner (blackjack)");
+			System.out.println("Player Score: "+playerHand.countTotal()+" Dealer Score: "+dealerHand.countTotal());
+
+		}
+
+		else if(dealerHand.IsBlackJack()) {
+			dealerIsWinner = true; 
+			System.out.println("Dealer is the winner(blackjack)");
+			System.out.println("Player Score: "+playerHand.countTotal()+" Dealer Score: "+dealerHand.countTotal());
+
+		}
+		
+	}
+
+
 	private static void HitOrStand(Hand hand) {
 		// TODO Auto-generated method stub
 
@@ -305,7 +311,7 @@ public class Game {
 		BufferedReader reader = null; 
 		String[] parseCommands = new String[deckSize]; 
 		String delims = "[ ]+";
-		String filename = "File4.txt"; 
+		String filename = "File1.txt"; 
 	
 
 		try {
@@ -369,27 +375,10 @@ public class Game {
 				dealerHand.showHand();
 				dealerHand.getCard(0).SetVisibility(true);
 
-
 				dealCards1=false;
 				
-				if(playerHand.IsBlackJack() && dealerHand.IsBlackJack()) {
-					playerIsWinner  = true; 
-					dealerIsWinner = true;
-					System.out.println("Dealer is the winner (both had blackjack)"); 
-					System.out.println("Player Score: "+playerHand.countTotal()+" Dealer Score: "+dealerHand.countTotal());
-				}
-
-				else if(playerHand.IsBlackJack()) {
-					playerIsWinner  = true; 
-					System.out.println("Player is the winner (blackjack)");
-					System.out.println("Player Score: "+playerHand.countTotal()+" Dealer Score: "+dealerHand.countTotal());
-				}
-
-				else if(dealerHand.IsBlackJack()) {
-					dealerIsWinner = true; 
-					System.out.println("Dealer is the winner(blackjack) -- Score: "+dealerHand.countTotal());
-					System.out.println("Player Score: "+playerHand.countTotal()+" Dealer Score: "+dealerHand.countTotal());
-				}
+				checkBlackjack(playerHand, dealerHand); 
+				
 			}
 		
 
@@ -638,18 +627,5 @@ public class Game {
 		}
 		return hand;
 	}
-
-	/*public static void CreateCards (String[] input) {
-		for(int i = 0; i < card.length; i++) {
-			card[i] = new Card (input[i]);
-		}
-	}
-	
-	public static void DefaultDeck(Deck deckToMake) {
-		for(int i = 0;i < deckSize; i++) {
-			deckToMake.addCard(card[i]);
-		}
-	}*/
-
 
 }
