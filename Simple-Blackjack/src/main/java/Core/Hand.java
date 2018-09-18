@@ -11,23 +11,28 @@ public class Hand {
     private boolean isSoft; 
     public int numAces = 0; 
     public boolean turn; 
+    private String printHand = ""; 
+    private String name; 
     
-    public void AddCard(Card cardToAdd)
+    public Hand(String name) {
+    	this.name = name; 
+    }
+    public void addCard(Card cardToAdd)
     {
         hand.add((cardToAdd)); //we are going to add each card with a loop, in another class 
     }
     
-    public Card GetCard(int index) {
+    public Card getCard(int index) {
     	return hand.get(index); 
     }
 
-    public int GetSize() {
+    public int getSize() {
     	return hand.size(); 
     }
     
     
     
-    public int CountTotal() {
+    public int countTotal() {
     	int total  = 0; 
     	for(int i = 0; i < hand.size(); i++) {
     		
@@ -37,12 +42,12 @@ public class Hand {
     	return total; 
     }
     
-    public boolean Empty() //return 1 if empty = true , 0 if it has cards = false 
+    public boolean empty() //return 1 if empty = true , 0 if it has cards = false 
     {
             return hand.isEmpty(); 
     }
     
-    public int CountAces () {
+    public int countAces () {
     	int numAces = 0; 
     	for(int i = 0; i < hand.size(); i++) {
     		if(this.hand.get(i).getValue() == 11)
@@ -55,8 +60,8 @@ public class Hand {
 		int numAces ; 
 		int numPoints; 
 		
-		numAces = CountAces(); 
-		numPoints = CountTotal();
+		numAces = countAces(); 
+		numPoints = countTotal();
 		int temp = 0; 
 		
 		if(numPoints > 21)
@@ -69,7 +74,7 @@ public class Hand {
 			    		//System.out.println("Ace is now: " + temp);
 		    		}
 		    	}
-				numPoints = CountTotal();
+				numPoints = countTotal();
 				System.out.println(numPoints +" recount");
 
 			}
@@ -80,7 +85,7 @@ public class Hand {
 		return false;
     }
     public boolean isSplit() {
-    	if(this.GetCard(0).getValue() == this.GetCard(1).getValue())
+    	if(this.getCard(0).getValue() == this.getCard(1).getValue())
     		return true;
     	
     	return false;
@@ -95,7 +100,7 @@ public class Hand {
 		int numPoints; 
 		
 	//	numAces = CountAces(); 
-		numPoints = CountTotal();
+		numPoints = countTotal();
 		
 		//System.out.println(CountTotal() +" ctotal");
 		if(numPoints == 21)
@@ -107,14 +112,24 @@ public class Hand {
 
 	public boolean isSoft() {
 		// TODO Auto-generated method stub
-		int numPoints = CountTotal();
-		int numAces = CountAces(); 
+		int numPoints = countTotal();
+		int numAces = countAces(); 
 		
 		if(numPoints == 17 & numAces > 0)
 		{
 			return true; 
 		}
 		return false; 
+	}
+	
+	public void showHand() {
+		for(int i = 0; i < getSize(); i++) {
+			if(getCard(i).getVisibility())
+				printHand += getCard(i).getInput() + " "; 
+	}
+	System.out.println(name + " Hand: "+ printHand);
+	printHand = ""; 
+		
 	}
     
     /*public boolean isSoft() {

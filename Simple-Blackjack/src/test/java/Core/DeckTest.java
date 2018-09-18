@@ -14,7 +14,7 @@ public class DeckTest extends TestCase{
 	boolean aceIsSoft = false; 
 
 	
-	public void testAddCard() {
+	public void testaddCard() {
 	    // List<Card> deck = new ArrayList<Card>();
 	     Deck deck = new Deck(); 
 
@@ -23,19 +23,19 @@ public class DeckTest extends TestCase{
 	     Card card_3 = new Card("S2"); 
 	     Card card_4 = new Card("S2"); 
 	     
-	     deck.AddCard(card_1); 
-	     deck.AddCard(card_2); 
-	     deck.AddCard(card_3); 
-	     deck.AddCard(card_4); 
+	     deck.addCard(card_1); 
+	     deck.addCard(card_2); 
+	     deck.addCard(card_3); 
+	     deck.addCard(card_4); 
 	     
-	     assertFalse(deck.Empty()); 
+	     assertFalse(deck.empty()); 
 	     
 
 	     assertEquals(2,deck.getCard(1).getValue()); 
 
 	}
 	
-	public void testAddCards() {
+	public void testaddCards() {
 	     //List<Card> deck = new ArrayList<Card>();
 	     List <Card> cardsToAdd = new ArrayList<Card>();
 	     Deck deck = new Deck(); 
@@ -50,15 +50,15 @@ public class DeckTest extends TestCase{
 	     cardsToAdd.add(card_3); 
 	     cardsToAdd.add(card_4); 
 	     
-	     deck.AddCards(cardsToAdd); 
+	     deck.addCards(cardsToAdd); 
 	     
-	     assertFalse(deck.Empty()); 
+	     assertFalse(deck.empty()); 
 
 	     assertEquals(2,deck.getCard(1).getValue()); 
 
 	}
 	
-	public void testDrawCard() {
+	public void testdrawCard() {
 	     //List<Card> deck = new ArrayList<Card>();
 	     
 	     Deck deck = new Deck(); 
@@ -79,16 +79,16 @@ public class DeckTest extends TestCase{
 	     cardsToAdd.add(card_3); 
 	     cardsToAdd.add(card_4); 
 	     
-	     deck.AddCards(cardsToAdd); 
+	     deck.addCards(cardsToAdd); 
 	     
 	     Card cardToRemove = deck.getCard(deckSize-1);  
 	     
-	     deckSizeBefore = deck.SizeOfDeck(); 
+	     deckSizeBefore = deck.sizeOfDeck(); 
 	     
-	     deck.DrawCard(); 
+	     deck.drawCard(); 
 	     removedCard = true;
 	     
-	     deckSizeAfter = deck.SizeOfDeck(); 
+	     deckSizeAfter = deck.sizeOfDeck(); 
 	     
 	     assertEquals((deckSizeBefore - 1), deckSizeAfter);
 	     

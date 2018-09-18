@@ -13,7 +13,7 @@ public class Card {
 	public Card(String input) {
 		this.input = input; 
 		this.value = SetValue(input); 
-		this.cardIsVisible = false;
+		this.cardIsVisible = true;
 	}
 	
 	public int getValue() {

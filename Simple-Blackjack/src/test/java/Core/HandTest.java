@@ -8,97 +8,91 @@ import junit.framework.TestCase;
 
 public class HandTest extends TestCase{
 	
-	public void testAddCard() {
+	public void testaddCard() {
 		Deck deck = new Deck(); 
-		Hand hand = new Hand(); 
+		Hand hand = new Hand("Hand"); 
 		
 	    Card card_1 = new Card("S2"); 
 	    Card card_2 = new Card("S2"); 
 	    Card card_3 = new Card("S2"); 
 	    Card card_4 = new Card("S2"); 
 	    
-	    deck.AddCard(card_1);
-	    deck.AddCard(card_2);
-	    deck.AddCard(card_3);
-	    deck.AddCard(card_4);
+	    deck.addCard(card_1);
+	    deck.addCard(card_2);
+	    deck.addCard(card_3);
+	    deck.addCard(card_4);
 	    
-	    assertTrue(hand.Empty());
+	    assertTrue(hand.empty());
 	    
-		Card cardToAdd1 = deck.DrawCard(); 
-		hand.AddCard(cardToAdd1); 
-	    assertFalse(hand.Empty());
+		Card cardToaddCard1 = deck.drawCard(); 
+		hand.addCard(cardToaddCard1); 
+	    assertFalse(hand.empty());
 
-		assertEquals(2, hand.GetCard(0).getValue()); 
+		assertEquals(2, hand.getCard(0).getValue()); 
 		
-		Card cardToAdd2 = deck.DrawCard(); 
-		hand.AddCard(cardToAdd2); 
-		assertEquals(2, hand.GetCard(1).getValue()); 
+		Card cardToaddCard2 = deck.drawCard(); 
+		hand.addCard(cardToaddCard2); 
+		assertEquals(2, hand.getCard(1).getValue()); 
 		
 	}
 	
-	/*public void testGetCard() {
-		
-	}*/
-	/*public void testAddCards() {
-		
-	}*/
+
 	
 	public void testSplit() {
 		Deck deck = new Deck(); 
-		Hand playerHand = new Hand(); 
+		Hand playerHand = new Hand("Player"); 
 		
 	    Card card_1 = new Card("SA"); 
 	    Card card_2 = new Card("SA"); 
-	    /*Card card_3 = new Card("S2"); 
-	    Card card_4 = new Card("S2"); */
+
 	    
-	    deck.AddCard(card_1);
-	    deck.AddCard(card_2);
-	    /*deck.AddCard(card_3);
-	    deck.AddCard(card_4);*/
+	    deck.addCard(card_1);
+	    deck.addCard(card_2);
+	    /*deck.addCardCard(card_3);
+	    deck.addCardCard(card_4);*/
 	    
-	   assertTrue(playerHand.Empty());
+	   assertTrue(playerHand.empty());
 	   //assertTrue(playerHand.get(1).Empty());
 
-		Card cardToAdd1 = deck.DrawCard(); 
-		Card cardToAdd2 = deck.DrawCard(); 
+		Card cardToaddCard1 = deck.drawCard(); 
+		Card cardToaddCard2 = deck.drawCard(); 
 		
-		playerHand.AddCard(cardToAdd1); 
-		playerHand.AddCard(cardToAdd2); 
+		playerHand.addCard(cardToaddCard1); 
+		playerHand.addCard(cardToaddCard2); 
 		
 		assertTrue(playerHand.isSplit()); 
 		
-		Hand splitPlayer = new Hand();
+		Hand splitPlayer = new Hand("Split Player");
 		
-		splitPlayer.AddCard(playerHand.split());
+		splitPlayer.addCard(playerHand.split());
 		
-		assertEquals(cardToAdd1.getValue(), playerHand.GetCard(0).getValue());
+		assertEquals(cardToaddCard1.getValue(), playerHand.getCard(0).getValue());
 		
-		assertEquals(cardToAdd2.getValue(), splitPlayer.GetCard(0).getValue());
+		assertEquals(cardToaddCard2.getValue(), splitPlayer.getCard(0).getValue());
 
 	}
 	
 	public void testCountPoints() {
 		Deck deck = new Deck(); 
-		Hand hand = new Hand(); 
+		Hand hand = new Hand("Hand"); 
 		
 	    Card card_1 = new Card("S2"); 
 	    Card card_2 = new Card("S2"); 
 	    Card card_3 = new Card("S2"); 
 	    Card card_4 = new Card("S2"); 
 	    
-	    deck.AddCard(card_1);
-	    deck.AddCard(card_2);
-	    deck.AddCard(card_3);
-	    deck.AddCard(card_4);
+	    deck.addCard(card_1);
+	    deck.addCard(card_2);
+	    deck.addCard(card_3);
+	    deck.addCard(card_4);
 
-		Card cardToAdd1 = deck.DrawCard(); 
-		hand.AddCard(cardToAdd1); 
+		Card cardToaddCard1 = deck.drawCard(); 
+		hand.addCard(cardToaddCard1); 
 		
-		Card cardToAdd2 = deck.DrawCard(); 
-		hand.AddCard(cardToAdd2); 
+		Card cardToaddCard2 = deck.drawCard(); 
+		hand.addCard(cardToaddCard2); 
 		
-		assertEquals(4, hand.CountTotal()); 
+		assertEquals(4, hand.countTotal()); 
 	}
 	
 	/*public void testIsSoft() {
@@ -125,23 +119,23 @@ public class HandTest extends TestCase{
 	    Card card_9 = new Card("S6"); 
 
 
-		hand1.AddCard(card_1); 
-		hand1.AddCard(card_9); 
+		hand1.addCard(card_1); 
+		hand1.addCard(card_9); 
 		
 		assertTrue(hand.IsSoft())
 		
-		hand2.AddCard(card_1); 
-		hand2.AddCard(card_2); 
-		hand2.AddCard(card_3); 
+		hand2.addCard(card_1); 
+		hand2.addCard(card_2); 
+		hand2.addCard(card_3); 
 		
-		hand3.AddCard(card_1); 
-		hand3.AddCard(card_4); 
-		hand3.AddCard(card_5); 
+		hand3.addCard(card_1); 
+		hand3.addCard(card_4); 
+		hand3.addCard(card_5); 
 		
-		hand4.AddCard(card_1); 
-		hand4.AddCard(card_6); 
-		hand4.AddCard(card_7); 
-		hand4.AddCard(card_8); 
+		hand4.addCard(card_1); 
+		hand4.addCard(card_6); 
+		hand4.addCard(card_7); 
+		hand4.addCard(card_8); 
 
 		assertEquals(4, hand.CountTotal()); 
 	}*/

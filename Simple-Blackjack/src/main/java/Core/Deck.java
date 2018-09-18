@@ -13,18 +13,18 @@ public class Deck {
 	
 	static int deckSize = 52; 
     
-    public void AddCard(Card cardToAdd)
+    public void addCard(Card cardToAdd)
     {
         deck.add((cardToAdd)); //we are going to add each card with a loop, in another class 
     }
 
-    public void AddCards(List<Card> cardsToAdd) //adds a list of cards to the deck i.e, game setup, 8 weapons cards
+    public void addCards(List<Card> cardsToAdd) //adds a list of cards to the deck i.e, game setup, 8 weapons cards
     {
         deck.addAll((cardsToAdd)); 
         //for (int i = 0; i < cardsToAdd.Count; i++) ;
     }
     
-    public Card DrawCard() //removes the card from the story deck, and returns the top of the deck (last card in the list)
+    public Card drawCard() //removes the card from the story deck, and returns the top of the deck (last card in the list)
     {
         Card playCard = deck.get(deck.size()-1);
         this.deck.remove(deck.get(deck.size()-1)); //removes by 1st occurence of obejct 
@@ -33,12 +33,12 @@ public class Deck {
     }
 
 
-    public int SizeOfDeck() //for testing purposes only
+    public int sizeOfDeck() //for testing purposes only
     {
         return this.deck.size();
     }
 
-    public boolean Empty() //return 1 if empty = true , 0 if it has cards = false 
+    public boolean empty() //return 1 if empty = true , 0 if it has cards = false 
     {
             return deck.isEmpty(); 
     }
@@ -56,7 +56,7 @@ public class Deck {
 			AddCard(input[i]);
     }*/
     
-    public void ShuffleDeck() {
+    public void shuffleDeck() {
     	Collections.shuffle(deck);
     }
 }
