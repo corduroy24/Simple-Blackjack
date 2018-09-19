@@ -57,4 +57,15 @@ public class CardTest extends TestCase{
 		CA.ChangeValue(false); 
 		assertEquals(11, CA.getValue()); 
 	}
+	
+	public void testJQKAsTen() {
+		Card card_1 = new Card("CJ"); 
+		Card card_2 = new Card("DQ"); 
+		Card card_3 = new Card("HK"); 
+
+		assertEquals(10, card_1.getValue()); 
+		assertEquals(10, card_2.getValue()); 
+		assertEquals(10, card_3.getValue()); 
+
+	}
 }
