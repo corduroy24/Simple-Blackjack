@@ -25,7 +25,7 @@ public class GameMasterTest extends TestCase {
 		
 	}*/
 	
-	public void testPlayerBustDealerWin() {
+	public void testPlayerBustDealerWins() {
 		GameMaster game = new GameMaster();
 		
 		Card card1 = new Card("S10"); 
@@ -43,5 +43,32 @@ public class GameMasterTest extends TestCase {
 		game.checkBust(); 
 		
 		assertTrue(game.dealerIsWinner); 
+	}
+	
+	public void testDealerBustPlayerWins() {
+		GameMaster game = new GameMaster();
+		
+		Card card1 = new Card("S3"); 
+		Card card2 = new Card("D5"); 
+		Card card3 = new Card("S6"); 
+		Card card4 = new Card("S6"); 
+		Card card5 = new Card("S10"); 
+		Card card6 = new Card("DJ"); 
+
+
+		game.player.getHand().addCard(card1);
+		game.player.getHand().addCard(card2);
+		game.dealer.getHand().addCard(card3);
+		game.dealer.getHand().addCard(card4);
+		
+		game.deck.addCard(card5);
+		game.deck.addCard(card6);
+
+		game.dealer.hitOrStand(game.dealer.getHand(), game.deck);
+		//game.dealer.getHand().addCard(card5);
+		
+		game.checkBust(); 
+		
+		assertTrue(game.playerIsWinner); 
 	}
 }
