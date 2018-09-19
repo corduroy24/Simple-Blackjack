@@ -97,7 +97,7 @@ public class GameMaster {
 				winner = true; 
 				dealerIsWinner = true;
 				
-				betterDealer.showHand();
+				//betterDealer.showHand();
 				
 				System.out.println("Dealer wins! (Tied score)");
 				if (splitting && dealerSplitting)
@@ -115,7 +115,7 @@ public class GameMaster {
 				winner  = true; 
 				playerIsWinner = true; 
 
-				betterHand.showHand();
+				//betterHand.showHand();
 
 				System.out.println("Player wins! (Higher score) ");
 				if (splitting && dealerSplitting)
@@ -133,7 +133,7 @@ public class GameMaster {
 				winner = true; 
 				dealerIsWinner = true; 
 
-				betterDealer.showHand();
+				//betterDealer.showHand();
 	
 				System.out.println("Dealer wins! (Higher score)");
 				if (splitting && dealerSplitting)
@@ -154,13 +154,15 @@ public class GameMaster {
 		if(splitting || dealerSplitting) {
 			if((hand.countTotal() < 22) & (splitHand.countTotal() < 22)) {
 				if(hand.countTotal() == splitHand.countTotal()) {
+					hand.showHand();
 					return hand; 
 				}
 				else if(hand.countTotal() > splitHand.countTotal()) {
-					
+					hand.showHand();
 					return hand; 
 				}
 				else if(hand.countTotal() < splitHand.countTotal()) {
+					splitHand.showHand();
 					return splitHand; 
 				}
 			}
