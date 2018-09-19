@@ -179,8 +179,26 @@ public class HandTest extends TestCase{
 		assertFalse(tempCard2.getVisibility()); 
 		
 	}
-	
 	public void testTwoAcesInHand() {
+		Deck deck = new Deck(); 
+		Hand hand = new Hand("Hand"); 
+		
+	    Card card_1 = new Card("SA"); 
+	    Card card_2 = new Card("SA"); 
+	    Card card_3 = new Card("SA"); 
+	    Card card_4 = new Card("SA"); 
+	    
+	    card_2.ChangeValue(true); 
+	    
+	    hand.addCard(card_1);
+	    hand.addCard(card_2);
+	    
+	    assertEquals(11, hand.getCard(0).getValue()); 
+	    assertEquals(1, hand.getCard(1).getValue()); 
+	    
+	}
+	
+	public void testAceAsElevenThenOne() {
 		Deck deck = new Deck(); 
 		Hand hand = new Hand("Hand"); 
 		
