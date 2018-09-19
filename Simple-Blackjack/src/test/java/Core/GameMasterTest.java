@@ -331,7 +331,6 @@ public class GameMasterTest extends TestCase {
 
 		Hand betterHand = game.betterHand(game.player.getHand(), game.player.getSplitHand());
 		assertEquals(game.player.getSplitHand().getName(), betterHand.getName()); 
-
 		
 	}
 	
@@ -367,6 +366,44 @@ public class GameMasterTest extends TestCase {
 
 		Hand betterHand = game.betterHand(game.dealer.getHand(), game.dealer.getSplitHand());
 		assertEquals(game.dealer.getSplitHand().getName(), betterHand.getName()); 
+		
+	}
+	
+	public void testSplittingAndChoosenWinner() {
+		GameMaster game = new GameMaster();
+		
+	    Card card_1 = new Card("S3"); 
+	    Card card_2 = new Card("S3");
+	    
+	    Card card_3 = new Card("S4"); 
+	    Card card_4 = new Card("S5"); 
+	    Card card_5 = new Card("S6"); 
+	    
+	    Card card_6 = new Card("S7"); 
+	    Card card_7 = new Card("S5"); 
+	    Card card_8 = new Card("S4"); 
+
+	    game.deck.addCard(card_3);
+	    game.deck.addCard(card_4);
+	    game.deck.addCard(card_5);
+	    game.deck.addCard(card_6);
+	    game.deck.addCard(card_7);
+	    game.deck.addCard(card_8);
+
+	    game.deck.reverseDeck();
+	    game.player.getHand().addCard(card_1);
+	    game.player.getHand().addCard(card_2);
+	    
+	    game.dealer.getHand().addCard(card_2);
+	    game.dealer.getHand().addCard(card_3);
+		game.playerSplit();
+		
+		game.player.hit(game.player.getHand(), game.deck); 
+		game.player.hit(game.player.getSplitHand(), game.deck); 
+		game.dealer.hitOrStand(game.dealer.getHand(), game.deck); 
+
+		assertTrue(game.checkWinner());
+		assertTrue(game.dealerIsWinner); 
 		
 	}
 }
