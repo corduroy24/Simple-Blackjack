@@ -201,7 +201,6 @@ public class GameMasterTest extends TestCase {
 	    Card card_1 = new Card("S7"); 
 	    Card card_2 = new Card("S7"); 
 
-	    
 	    game.dealer.getHand().addCard(card_1);
 	    game.dealer.getHand().addCard(card_2);
 	    
@@ -213,4 +212,91 @@ public class GameMasterTest extends TestCase {
 		assertTrue(game.dealerSplitting);
 	}
 	
+	public void testHitOnSplitPlayerDecks() {
+		GameMaster game = new GameMaster();
+		
+	    Card card_1 = new Card("S3"); 
+	    Card card_2 = new Card("S3"); 
+	    Card card_3 = new Card("S4"); 
+	    Card card_4 = new Card("S5"); 
+	    Card card_5 = new Card("S6"); 
+	    Card card_6 = new Card("S7"); 
+
+	    
+	    game.deck.addCard(card_3);
+	    game.deck.addCard(card_4);
+	    game.deck.addCard(card_5);
+	    game.deck.addCard(card_6);
+	    
+	    game.deck.reverseDeck();
+
+
+	    game.player.getHand().addCard(card_1);
+	    game.player.getHand().addCard(card_2);
+	    
+		game.playerSplit();
+		
+		game.player.hit(game.player.getHand(), game.deck); 
+		assertEquals(card_3.getValue(), game.player.getHand().getCard(1).getValue()); 
+		assertEquals(7, game.player.getHand().countTotal()); 
+		
+		game.player.hit(game.player.getHand(), game.deck); 
+		assertEquals(card_4.getValue(), game.player.getHand().getCard(2).getValue()); 
+		assertEquals(12, game.player.getHand().countTotal()); 
+		
+		game.player.hit(game.player.getSplitHand(), game.deck); 
+		assertEquals(card_5.getValue(), game.player.getSplitHand().getCard(1).getValue()); 
+		assertEquals(9, game.player.getSplitHand().countTotal()); 
+		
+		game.player.hit(game.player.getSplitHand(), game.deck); 
+		assertEquals(card_6.getValue(), game.player.getSplitHand().getCard(2).getValue()); 
+		assertEquals(16, game.player.getSplitHand().countTotal()); 
+
+	}
+	
+	public void testHitOnSplitDealerDecks() {
+		GameMaster game = new GameMaster();
+		
+	    Card card_1 = new Card("S3"); 
+	    Card card_2 = new Card("S3");
+	    
+	    Card card_3 = new Card("S4"); 
+	    Card card_4 = new Card("S5"); 
+	    Card card_5 = new Card("S6"); 
+	    
+	    Card card_6 = new Card("S7"); 
+	    Card card_7 = new Card("S5"); 
+	    Card card_8 = new Card("S4"); 
+
+
+	    
+	    game.deck.addCard(card_3);
+	    game.deck.addCard(card_4);
+	    game.deck.addCard(card_5);
+	    game.deck.addCard(card_6);
+	    game.deck.addCard(card_7);
+	    game.deck.addCard(card_8);
+
+	    
+	    game.deck.reverseDeck();
+
+
+	    game.dealer.getHand().addCard(card_1);
+	    game.dealer.getHand().addCard(card_2);
+	    
+		game.dealerSplit();
+		
+		game.dealer.hitOrStand(game.dealer.getHand(), game.deck); 
+		assertEquals(card_3.getValue(), game.dealer.getHand().getCard(1).getValue()); 
+		assertEquals(card_4.getValue(), game.dealer.getHand().getCard(2).getValue()); 
+		assertEquals(card_5.getValue(), game.dealer.getHand().getCard(3).getValue()); 
+		assertEquals(18, game.dealer.getHand().countTotal()); 
+		
+		game.dealer.hitOrStand(game.dealer.getSplitHand(), game.deck); 
+		assertEquals(card_6.getValue(), game.dealer.getSplitHand().getCard(1).getValue()); 
+		assertEquals(card_7.getValue(), game.dealer.getSplitHand().getCard(2).getValue()); 
+		assertEquals(card_8.getValue(), game.dealer.getSplitHand().getCard(3).getValue()); 
+		assertEquals(19, game.dealer.getSplitHand().countTotal()); 
+
+	}
 }
