@@ -59,7 +59,7 @@ public class Hand {
     	return numAces; 
     }
     
-    public boolean IsBust() {
+    public boolean isBust() {
 		int numAces ; 
 		int numPoints; 
 		
@@ -74,6 +74,8 @@ public class Hand {
 		    	for(int i = 0; i < hand.size(); i++) {
 		    		if(this.hand.get(i).getValue() == 11) {
 		    			temp = hand.get(i).ChangeValue(true);
+		    			numPoints = countTotal();
+		    			if(numPoints < 21)break;
 			    		//System.out.println("Ace is now: " + temp);
 		    		}
 		    	}
@@ -98,7 +100,7 @@ public class Hand {
     	return hand.remove(1);
     }
     
-    public boolean IsBlackJack() {
+    public boolean isBlackJack() {
 //		int numAces ; 
 		int numPoints; 
 		
