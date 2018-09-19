@@ -17,4 +17,5 @@ public class Player {
 		hand.addCard(tempCard = deck.drawCard());
 		return tempCard; 
 	}
+	
 }

@@ -55,19 +55,7 @@ public class Dealer {
 			
 		}
 		return index; 
-		/*while((dealer.getHand().countTotal() < 17) || (dealer.getHand().isSoft())) {
-		i++;
-		
-		fileInputCards.add(new Card(parseCommands[i]));						
-		fileInputDeck.addCard(fileInputCards.get(fileInputCards.size()-1));	
-		tempCard = Hit(dealer.getHand(), fileInputDeck); 
-		System.out.println("Dealer Receives " + tempCard.getName());
 
-		dealer.getHand().showHand();
-
-		if(CheckBust() == true) break;								
-	}*/
-		//return true; 
 	}
 
 }

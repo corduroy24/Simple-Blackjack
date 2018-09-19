@@ -12,7 +12,7 @@ public class Hand {
     public int numAces = 0; 
     public boolean turn; 
     private String printHand = ""; 
-    private String name; 
+    public String name; 
     
     public Hand(String name) {
     	this.name = name; 
