@@ -17,21 +17,21 @@ public class GameMaster {
 
 	public void checkBlackjack(Hand playerHand, Hand dealerHand) {
 		// TODO Auto-generated method stub
-		if(player.getHand().IsBlackJack() && dealer.getHand().IsBlackJack()) {
+		if(player.getHand().isBlackJack() && dealer.getHand().isBlackJack()) {
 			playerIsWinner  = true; 
 			dealerIsWinner = true;
 			System.out.println("Dealer is the winner (both had blackjack)"); 
 			System.out.println("Player Score: "+player.getHand().countTotal()+" Dealer Score: "+dealer.getHand().countTotal());
 		}
 
-		else if(player.getHand().IsBlackJack()) {
+		else if(player.getHand().isBlackJack()) {
 			playerIsWinner  = true; 
 			System.out.println("Player is the winner (blackjack)");
 			System.out.println("Player Score: "+player.getHand().countTotal()+" Dealer Score: "+dealer.getHand().countTotal());
 
 		}
 
-		else if(dealer.getHand().IsBlackJack()) {
+		else if(dealer.getHand().isBlackJack()) {
 			dealerIsWinner = true; 
 			System.out.println("Dealer is the winner(blackjack)");
 			System.out.println("Player Score: "+player.getHand().countTotal()+" Dealer Score: "+dealer.getHand().countTotal());
@@ -42,7 +42,7 @@ public class GameMaster {
 	
 	public  boolean checkBust() {
 		// TODO Auto-generated method stub
-		if(player.getHand().IsBust()) {
+		if(player.getHand().isBust()) {
 			dealerIsWinner = true; 
 			System.out.println("Dealer is the winner (player is bust) ");
 			if (splitting && dealerSplitting)
@@ -55,7 +55,7 @@ public class GameMaster {
 				System.out.println("Player Score: "+player.getHand().countTotal()+" Dealer Score: "+dealer.getHand().countTotal());
 		}
 		else if(splitting) {
-			if(player.getSplitHand().IsBust()) {
+			if(player.getSplitHand().isBust()) {
 				dealerIsWinner = true; 
 				System.out.println("Dealer is the winner (player is bust)");
 				System.out.println("Player Score: "+player.getHand().countTotal()+ " Player Split Score: " + player.getSplitHand().countTotal() + " Dealer Score: "+dealer.getHand().countTotal());
@@ -63,14 +63,14 @@ public class GameMaster {
 			}
 		}
 		else if(dealerSplitting) {
-			if(dealer.getSplitHand().IsBust()) {
+			if(dealer.getSplitHand().isBust()) {
 				playerIsWinner = true; 
 				System.out.println("Player is the winner (dealer is bust)");
 				System.out.println("Player Score: "+player.getHand().countTotal()+ " Player Split Score: " + player.getSplitHand().countTotal() + " Dealer Score: "+dealer.getHand().countTotal());
 				dealerSplitting = false; 
 			}
 		}
-		else if(dealer.getHand().IsBust()) {
+		else if(dealer.getHand().isBust()) {
 			playerIsWinner = true; 
 			System.out.println("Player is the winner (dealer is bust)");
 			if (splitting && dealerSplitting)

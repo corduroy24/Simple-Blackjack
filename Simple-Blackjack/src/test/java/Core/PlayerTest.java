@@ -50,6 +50,29 @@ public class PlayerTest extends TestCase {
 		}
 	}
 	
+	public void testPlayerInititialBlackjack() {
+		Player player = new Player();
+		Dealer dealer = new Dealer(); 
+		
+		Deck deck = new Deck(); 
+		Hand hand = new Hand("Hand"); 
+		
+	    Card card_1 = new Card("SJ"); 
+	    Card card_2 = new Card("SA"); 
+	    Card card_3 = new Card("S3"); 
+	    Card card_4 = new Card("S5"); 
+	    
+	    player.getHand().addCard(card_1);
+	    player.getHand().addCard(card_2);
+	    dealer.getHand().addCard(card_3);
+	    dealer.getHand().addCard(card_4);
+	    
+	    assertTrue(player.getHand().isBlackJack()); 
+	    	    
+	    assertEquals(21, player.getHand().countTotal()); 
+		
+	}
+	
 	/*public void testStand() {
 		
 	}*/

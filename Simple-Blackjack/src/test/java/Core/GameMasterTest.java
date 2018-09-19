@@ -71,4 +71,26 @@ public class GameMasterTest extends TestCase {
 		
 		assertTrue(game.playerIsWinner); 
 	}
+	
+	public void testPlayerInititialBlackjack() {
+		GameMaster game  = new GameMaster();
+
+		
+	    Card card_1 = new Card("SJ"); 
+	    Card card_2 = new Card("SA"); 
+	    Card card_3 = new Card("S3"); 
+	    Card card_4 = new Card("S5"); 
+	    
+	    game.player.getHand().addCard(card_1);
+	    game.player.getHand().addCard(card_2);
+	    game.dealer.getHand().addCard(card_3);
+	    game.dealer.getHand().addCard(card_4);
+	    
+	    assertTrue(game.player.getHand().isBlackJack()); 
+	    	    
+	    assertEquals(21, game.player.getHand().countTotal()); 
+	    
+	    game.checkBlackjack(game.player.getHand(), game.dealer.getHand()); 
+		
+	}
 }

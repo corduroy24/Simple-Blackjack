@@ -242,4 +242,6 @@ public class HandTest extends TestCase{
 	    assertEquals(1, hand.getCard(3).getValue()); 
 		
 	}
+	
+
 }
