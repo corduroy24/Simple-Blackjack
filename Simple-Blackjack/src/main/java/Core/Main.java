@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
+//replace "player with there actually hand names that were given....dealer.getHand().getName();
+//look in node4js
+//GUI
 public class Main {
 
 	//static int game.deckSize = 52; 
@@ -95,11 +97,8 @@ public class Main {
 			if(inputD == 'D') {
 				game.playerSplit();
 				
-				game.player.getHand().addCard(tempCard = game.deck.drawCard());
-				System.out.println("player Receives " + tempCard.getName());
+
 						
-				game.player.getSplitHand().addCard(tempCard = game.deck.drawCard()); 
-				System.out.println("player Split Receives " + tempCard.getName());
 					
 				game.player.getHand().showHand();
 				game.player.getSplitHand().showHand();
@@ -110,10 +109,14 @@ public class Main {
 
 		game.player.getHand().turn = true; 
 		char input; 
+		game.player.getHand().addCard(tempCard = game.deck.drawCard());
+		System.out.println("player Receives " + tempCard.getName());
+		
 		while(game.playerIsWinner == false & game.dealerIsWinner == false) {
 			System.out.println("Hit (H) or Stand (S) ?");
 			Scanner console = new Scanner(System.in); 
 			input = console.next().charAt(0);
+
 			game.bettingSequence(input); 
 		}
 
@@ -170,7 +173,7 @@ public class Main {
 		BufferedReader reader = null; 
 		String[] parseCommands = new String[deckSize]; 
 		String delims = "[ ]+";
-		String filename = "File4.txt"; 
+		String filename = "File1.txt"; 
 			
 
 		try {

@@ -92,7 +92,7 @@ public class Card {
 
 		}
 		else if(input == 'C') {
-			this.suit = "Clovers";
+			this.suit = "Clubs";
 
 		}
 		else if(input == 'D') {

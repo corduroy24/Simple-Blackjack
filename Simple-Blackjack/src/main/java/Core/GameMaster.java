@@ -90,6 +90,7 @@ public class GameMaster {
 		
 		Hand betterHand = betterHand(player.getHand(), player.getSplitHand());  
 		Hand betterDealer = betterHand(dealer.getHand(), dealer.getSplitHand()); 
+		System.out.println(" ");
 
 		if((betterHand.countTotal() < 22) & (betterDealer.countTotal() < 22)) {
 
@@ -151,8 +152,14 @@ public class GameMaster {
 	
 	public Hand betterHand(Hand hand, Hand splitHand) {
 		// TODO Auto-generated method stub
+		
 		if(splitting || dealerSplitting) {
 			if((hand.countTotal() < 22) & (splitHand.countTotal() < 22)) {
+				System.out.println(" ");
+
+				System.out.println("--------BETTER HANDS---------");
+
+
 				if(hand.countTotal() == splitHand.countTotal()) {
 					hand.showHand();
 					return hand; 
@@ -175,12 +182,14 @@ public class GameMaster {
 
 	public void bettingSequence(char input) {
 		// TODO Auto-generated method stub
+		Card tempCard; 
 
-				
 				//keep asking until its the correct input
 				//lower case vs upper case 
 			if(input == 'H' && player.getHand().turn == true) {
-				player.hit(player.getHand(), deck);
+				tempCard = player.hit(player.getHand(), deck);
+				System.out.println("player Receives " + tempCard.getName());
+
 
 				checkBust();
 			}
@@ -189,7 +198,8 @@ public class GameMaster {
 				if(splitting) {				
 					System.out.println("splitting");
 
-					player.hit(player.getSplitHand(), deck);
+					tempCard = player.hit(player.getSplitHand(), deck);
+					System.out.println("player Split Receives " + tempCard.getName());
 
 					checkBust();
 				}
@@ -199,20 +209,27 @@ public class GameMaster {
 				player.getHand().turn= false; 
 				player.getHand().showHand();
 
-				player.getSplitHand().turn= true; 
-				if(splitting  == false)
-					player.getSplitHand().turn = false; 
+				
+				//player.getSplitHand().turn= true; 
+				if(splitting) {
+					player.getSplitHand().turn = true; 
+					tempCard = player.hit(player.getSplitHand(), deck);
+					System.out.println("player Split Receives " + tempCard.getName());
+				}
 					
 				if((input == 'S' && player.getSplitHand().turn == false)) {
 					player.getSplitHand().turn = false; 
 					player.getHand().turn= false; 
 					dealer.getHand().turn = true;
-					dealer.hitOrStand(dealer.getHand(), deck); 
-					if(splitting) {
+					tempCard = dealer.hitOrStand(dealer.getHand(), deck);
+					System.out.println("dealer Receives " + tempCard.getName());
+
+					if(dealerSplitting) {
 
 						dealer.getHand().turn = false;
 						dealer.getSplitHand().turn = true; 
-						dealer.hitOrStand(dealer.getSplitHand(), deck); 
+						tempCard = dealer.hitOrStand(dealer.getSplitHand(), deck); 
+						System.out.println("dealer Split Receives " + tempCard.getName());
 					}
 					checkWinner();
 				}
@@ -224,11 +241,15 @@ public class GameMaster {
 
 				player.getHand().turn= false; 
 				dealer.getHand().turn = true;
-				dealer.hitOrStand(dealer.getHand(), deck); 
-				if(splitting) {
+				tempCard = dealer.hitOrStand(dealer.getHand(), deck); 
+				System.out.println("dealer Receives " + tempCard.getName());
+
+				if(dealerSplitting) {
 					dealer.getHand().turn = false;
 					dealer.getSplitHand().turn = true; 
-					dealer.hitOrStand(dealer.getSplitHand(), deck); 
+					tempCard = dealer.hitOrStand(dealer.getSplitHand(), deck); 
+					System.out.println("dealer Split Receives " + tempCard.getName());
+
 				}
 				checkWinner();
 			}
@@ -251,15 +272,10 @@ public class GameMaster {
 			tempCard = player.hit(player.getHand(), deck); 
 			System.out.println("player Receives " + tempCard.getName());
 			
-			i++;
-			fileInputCards = new Card(parseCommands[i]);
-			deck.addCard(fileInputCards);
-			tempCard = player.hit(player.getSplitHand(), deck); 
-			System.out.println("player Split Receives " + tempCard.getName());
 			
 			player.getHand().showHand();
 			
-			player.getSplitHand().showHand();
+			//player.getSplitHand().showHand();
 	}
 		
 		while(playerIsWinner == false & dealerIsWinner == false) {	
@@ -290,9 +306,17 @@ public class GameMaster {
 			else if(parseCommands[i].equals("S") && player.getHand().turn == true) {
 					player.getHand().showHand();
 					player.getHand().turn= false; 
-					player.getSplitHand().turn = true; 	
-				if(splitting == false)
-					player.getSplitHand().turn = false ;
+					
+					
+					//player.getSplitHand().turn = true; 	
+				if(splitting) {
+					i++;
+					fileInputCards = new Card(parseCommands[i]);
+					deck.addCard(fileInputCards);
+					tempCard = player.hit(player.getSplitHand(), deck); 
+					System.out.println("player Split Receives " + tempCard.getName());
+					player.getSplitHand().turn = true ;
+				}
 					
 				if((parseCommands[i].equals("S") && player.getSplitHand().turn == false)) {
 					player.getSplitHand().turn = false;

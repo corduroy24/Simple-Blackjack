@@ -21,18 +21,19 @@ public class Dealer {
 		return tempCard; 
 	}
 	
-	public boolean hitOrStand(Hand hand, Deck deck) {
+	public Card hitOrStand(Hand hand, Deck deck) {
+		Card tempCard = null; 
 		while((hand.countTotal() < 17) || (hand.isSoft())) {
-			hit(hand, deck);
+			tempCard = hit(hand, deck);
 
-			if(hand.isBust() == true)return false; 
+			if(hand.isBust() == true)break; 
 			
-			}
+		}
 		if(hand.turn) {
 			hand.showHand();
 			
 		}
-		return true; 
+		return tempCard; 
 	}
 	
 	public int hitOrStand(Hand hand, Deck deck, String[] input, int index) {

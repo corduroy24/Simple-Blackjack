@@ -16,8 +16,6 @@ public class GameMasterTest extends TestCase {
 		Card card6 = new Card("S3"); 
 
 		
-		
-
 		game.player.getHand().addCard(card1);
 		game.player.getHand().addCard(card2);
 		
