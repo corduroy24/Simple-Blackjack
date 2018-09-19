@@ -131,6 +131,11 @@ public class Hand {
 	printHand = ""; 
 		
 	}
+	public void oneOfTwoIsVisible() {
+		if(getSize() == 2)
+			getCard(1).SetVisibility(false); 
+		
+	}
     
     /*public boolean isSoft() {
     	if ((CountTotal() + 10) == 17)

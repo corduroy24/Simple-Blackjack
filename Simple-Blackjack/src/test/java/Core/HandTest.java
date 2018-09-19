@@ -155,7 +155,6 @@ public class HandTest extends TestCase{
 		playerHand.addCard(tempCard1= shuffleDeck.drawCard());
 		playerHand.addCard(tempCard2= shuffleDeck.drawCard());
 		
-		playerHand.inititalHand();
 		assertTrue(tempCard1.getVisibility()); 
 		assertTrue(tempCard2.getVisibility()); 
 		
@@ -175,9 +174,9 @@ public class HandTest extends TestCase{
 		dealerHand.addCard(tempCard1= shuffleDeck.drawCard());
 		dealerHand.addCard(tempCard2= shuffleDeck.drawCard());
 		
-		dealerHand.inititalHand();
+		dealerHand.oneOfTwoIsVisible();
 		assertTrue(tempCard1.getVisibility()); 
-		assertTrue(tempCard2.getVisibility()); 
+		assertFalse(tempCard2.getVisibility()); 
 		
 	}
 }
