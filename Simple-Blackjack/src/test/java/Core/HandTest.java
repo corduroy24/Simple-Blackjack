@@ -219,4 +219,27 @@ public class HandTest extends TestCase{
 	    assertEquals(11, hand.getCard(1).getValue()); 
 		
 	}
+	
+	public void testHandCountsTwoAcesAsOneEach() {
+		Deck deck = new Deck(); 
+		Hand hand = new Hand("Hand"); 
+		
+	    Card card_1 = new Card("SJ"); 
+	    Card card_2 = new Card("S7"); 
+	    Card card_3 = new Card("SA"); 
+	    Card card_4 = new Card("SA"); 
+	    
+	    hand.addCard(card_1);
+	    hand.addCard(card_2);
+	    hand.addCard(card_3);
+	    hand.addCard(card_4);
+	    
+
+	    
+	    assertFalse(hand.isBust()); 
+	    
+	    assertEquals(1, hand.getCard(2).getValue()); 
+	    assertEquals(1, hand.getCard(3).getValue()); 
+		
+	}
 }

@@ -25,7 +25,7 @@ public class Dealer {
 		while((hand.countTotal() < 17) || (hand.isSoft())) {
 			hit(hand, deck);
 
-			if(hand.IsBust() == true)return false; 
+			if(hand.isBust() == true)return false; 
 			
 			if(hand.turn) {
 				hand.showHand();
@@ -47,7 +47,7 @@ public class Dealer {
 
 			tempCard = hit(hand, deck); 
 			System.out.println("Dealer Receives " + tempCard.getName());
-			if(hand.IsBust() == true)break; 
+			if(hand.isBust() == true)break; 
 			
 			if(hand.turn) {
 				hand.showHand();
