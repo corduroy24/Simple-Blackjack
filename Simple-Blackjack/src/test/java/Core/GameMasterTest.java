@@ -72,7 +72,7 @@ public class GameMasterTest extends TestCase {
 		assertTrue(game.playerIsWinner); 
 	}
 	
-	public void testPlayerInititialBlackjack() {
+	public void testPlayerHasBlacjackNotDealer() {
 		GameMaster game  = new GameMaster();
 
 		
@@ -91,14 +91,16 @@ public class GameMasterTest extends TestCase {
 	    assertEquals(21, game.player.getHand().countTotal()); 
 	    
 	    game.checkBlackjack(game.player.getHand(), game.dealer.getHand()); 
-		
+	    
+	    assertTrue(game.playerIsWinner); 
+
 	}
 	
-	public void testDealerInititialBlackjack() {
+	public void testDealerHasBlackjack() {
 		GameMaster game  = new GameMaster();
 
-	    Card card_1 = new Card("S3"); 
-	    Card card_2 = new Card("S5"); 
+	    Card card_1 = new Card("SQ"); 
+	    Card card_2 = new Card("SA"); 
 	    Card card_3 = new Card("SJ"); 
 	    Card card_4 = new Card("SA"); 
 	    
@@ -108,10 +110,72 @@ public class GameMasterTest extends TestCase {
 	    game.dealer.getHand().addCard(card_4);
 	    
 	    assertTrue(game.dealer.getHand().isBlackJack()); 
+	    assertTrue(game.player.getHand().isBlackJack()); 
+
 	    	    
 	    assertEquals(21, game.dealer.getHand().countTotal()); 
 	    
 	    game.checkBlackjack(game.player.getHand(), game.dealer.getHand()); 
+	    
+	    assertTrue(game.dealerIsWinner); 
 		
 	}
+	
+	public void testNoBusts() {
+		GameMaster game1  = new GameMaster();
+		GameMaster game2 = new GameMaster();
+
+
+	    Card card_1 = new Card("S7"); 
+	    Card card_2 = new Card("S4"); 
+	    Card card_3 = new Card("S6"); 
+
+	    Card card_4 = new Card("SJ"); 
+	    Card card_5 = new Card("S8"); 
+	    
+	    game1.player.getHand().addCard(card_1);
+	    game1.player.getHand().addCard(card_2);
+	    game1.player.getHand().addCard(card_3);
+
+	    game1.dealer.getHand().addCard(card_4);
+	    game1.dealer.getHand().addCard(card_5);
+	    
+	    assertFalse(game1.dealer.getHand().isBlackJack()); 
+	    assertFalse(game1.player.getHand().isBlackJack()); 
+	    
+	    game1.checkBlackjack(game1.player.getHand(), game1.dealer.getHand()); 
+	    
+	    assertFalse(game1.checkBust()); 
+	    
+	    assertTrue(game1.checkWinner()); 
+
+	    assertTrue(game1.dealerIsWinner); 
+	    
+	    Card card_6 = new Card("S7"); 
+	    Card card_7 = new Card("S4"); 
+	    Card card_8 = new Card("S9"); 
+
+	    Card card_9 = new Card("SJ"); 
+	    Card card_10 = new Card("S8"); 
+	    
+	    game2.player.getHand().addCard(card_6);
+	    game2.player.getHand().addCard(card_7);
+	    game2.player.getHand().addCard(card_8);
+
+	    game2.dealer.getHand().addCard(card_9);
+	    game2.dealer.getHand().addCard(card_10);
+	    
+	    assertFalse(game2.dealer.getHand().isBlackJack()); 
+	    assertFalse(game2.player.getHand().isBlackJack()); 
+	    
+	    game2.checkBlackjack(game2.player.getHand(), game2.dealer.getHand()); 
+    
+	    assertFalse(game2.checkBust()); 
+	    
+	    assertTrue(game2.checkWinner()); 
+	    assertTrue(game2.playerIsWinner); 
+		
+	}
+	
+	
 }
