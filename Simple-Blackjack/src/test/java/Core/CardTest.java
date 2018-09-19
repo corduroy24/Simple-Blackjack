@@ -43,9 +43,18 @@ public class CardTest extends TestCase{
 		
 	}
 	
+	public void testAceAsOne() {
+		Card CA = new Card("CA"); 
+		Card DA = new Card("DA"); 
+		CA.ChangeValue(true); 
+		assertEquals(1, CA.getValue()); 
 
+	}
 	
-		public void testCardVisibility () {
-			
-		}
+	public void testAceAsEleven() {
+		Card CA = new Card("CA"); 
+		Card DA = new Card("DA"); 
+		CA.ChangeValue(false); 
+		assertEquals(11, CA.getValue()); 
+	}
 }
