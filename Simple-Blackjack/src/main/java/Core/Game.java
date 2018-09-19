@@ -180,7 +180,7 @@ public class Game {
 		}
 	}
 	
-	private static void dealCards(Deck deck) {
+	public static void dealCards(Deck deck) {
 		//implement similar to hit in player and dealer class 
 		// TODO Auto-generated method stub
 		Card tempCard; 
@@ -238,34 +238,12 @@ public class Game {
 	}
 
 
-	/*private static void HitOrStand(Hand hand) {
-		// TODO Auto-generated method stub
 
 
-	//	System.out.println(hand.countTotal() + " " + hand.isSoft() );
-		while((hand.countTotal() < 17) || (hand.isSoft())) {
-			dealer.hit(hand, deck);
-
-			if(CheckBust() == true)break;
-			
-			if(dealer.getHand().turn) {
-				dealer.getHand().showHand();
-			}
-			
-			else if(dealerSplitting && dealer.getSplitHand().turn == true) {
-				dealer.getSplitHand().showHand();
-			}
-		}
-		return;
-	}
-*/
-
-	private static boolean CheckBust() {
+	public static boolean CheckBust() {
 		// TODO Auto-generated method stub
 		if(player.getHand().IsBust()) {
 			dealerIsWinner = true; 
-			//winner = true; 
-			//System.out.println(player.getHand().IsBust() +"check player is bust"); 
 			System.out.println("Dealer is the winner (player is bust) ");
 			if (splitting && dealerSplitting)
 				System.out.println("Player Score: "+player.getHand().countTotal()+ " Player Split Score: " + player.getSplitHand().countTotal() + " Dealer Score: "+dealer.getHand().countTotal() + " Dealer Split Score: "+dealer.getSplitHand().countTotal());
@@ -294,9 +272,6 @@ public class Game {
 		}
 		else if(dealer.getHand().IsBust()) {
 			playerIsWinner = true; 
-			//winner = true; 
-			//System.out.println(dealer.getHand().IsBust()+ "check dealer is bust"); 
-
 			System.out.println("Player is the winner (dealer is bust)");
 			if (splitting && dealerSplitting)
 				System.out.println("Player Score: "+player.getHand().countTotal()+ " Player Split Score: " + player.getSplitHand().countTotal() + " Dealer Score: "+dealer.getHand().countTotal() + " Dealer Split Score: "+dealer.getSplitHand().countTotal());
@@ -311,14 +286,6 @@ public class Game {
 	}
 
 	
-	/*private static Card Hit(Hand hand, Deck deck) {
-		// TODO Auto-generated method stub
-		Card tempCard; 
-		hand.addCard(tempCard = deck.drawCard());
-		return tempCard; 
-
-	}*/
-//code inspired from https://www.caveofprogramming.com/java/java-file-reading-and-writing-files-in-java.html
 	public static void FileInput() {
 		
 		String[] parseCommands = new String[deckSize]; 
@@ -342,24 +309,6 @@ public class Game {
 				}
 				fileInputDeck.reverseDeck();
 				dealCards(fileInputDeck);
-			/*	tempCard = player.hit(player.getHand(), fileInputDeck); 
-				System.out.println("Player Receives " + tempCard.getName());
-				tempCard = player.hit(player.getHand(), fileInputDeck); 
-
-				System.out.println("Player Receives " + tempCard.getName());
-
-				tempCard = Hit(dealer.getHand(), fileInputDeck); 
-
-				System.out.println("Dealer Receives " + tempCard.getName());
-				tempCard = Hit(dealer.getHand(), fileInputDeck); 
-
-				System.out.println("Dealer Receives " + tempCard.getName());
-
-				player.getHand().showHand();
-				
-				dealer.getHand().getCard(1).SetVisibility(false);
-				dealer.getHand().showHand();
-				dealer.getHand().getCard(0).SetVisibility(true);*/
 
 				dealCards1=false;
 				
@@ -452,18 +401,6 @@ public class Game {
 									dealer.getSplitHand().turn = true; 
 									i = dealer.hitOrStand(dealer.getSplitHand(), fileInputDeck, parseCommands, i);
 									CheckBust(); 
-									/*while((dealer.getSplitHand().countTotal() < 17) || (dealer.getSplitHand().isSoft())) {
-										i++;
-	
-										fileInputCards.add(new Card(parseCommands[i]));
-										fileInputDeck.addCard(fileInputCards.get(fileInputCards.size()-1));
-										tempCard = dealer.hit(dealer.getSplitHand(), fileInputDeck); 
-										System.out.println("Dealer Split Receives " + tempCard.getName());
-	
-										dealer.getSplitHand().showHand();
-	
-										if(CheckBust() == true) break;	
-									}*/
 
 								}
 								CheckWinner(); 
@@ -479,18 +416,7 @@ public class Game {
 							System.out.println(dealer.getHand().countTotal() + " " + dealer.getHand().isSoft() );
 							i = dealer.hitOrStand(dealer.getHand(), fileInputDeck, parseCommands, i);
 							CheckBust();
-							/*while((dealer.getHand().countTotal() < 17) || (dealer.getHand().isSoft())) {
-								i++;
-								
-								fileInputCards.add(new Card(parseCommands[i]));						
-								fileInputDeck.addCard(fileInputCards.get(fileInputCards.size()-1));	
-								tempCard = Hit(dealer.getHand(), fileInputDeck); 
-								System.out.println("Dealer Receives " + tempCard.getName());
 
-								dealer.getHand().showHand();
-
-								if(CheckBust() == true) break;								
-							}*/
 							CheckWinner(); 
 						}
 						
