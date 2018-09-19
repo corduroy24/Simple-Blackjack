@@ -12,7 +12,7 @@ public class Hand {
     public int numAces = 0; 
     public boolean turn; 
     private String printHand = ""; 
-    public String name; 
+    private String name; 
     
     public Hand(String name) {
     	this.name = name; 
@@ -20,6 +20,9 @@ public class Hand {
     public void addCard(Card cardToAdd)
     {
         hand.add((cardToAdd)); //we are going to add each card with a loop, in another class 
+    }
+    public String getName() {
+    	return this.name; 
     }
     
     public Card getCard(int index) {
@@ -131,7 +134,7 @@ public class Hand {
 	printHand = ""; 
 		
 	}
-	public void oneOfTwoIsVisible() {
+	public void showFirstCard() {
 		if(getSize() == 2)
 			getCard(1).SetVisibility(false); 
 		

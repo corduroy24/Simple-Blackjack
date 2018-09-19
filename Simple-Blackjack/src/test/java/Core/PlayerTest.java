@@ -21,7 +21,7 @@ public class PlayerTest extends TestCase {
 		tempCard1= player.hit(player.getHand(), shuffleDeck); 
 		
 		assertNotNull(tempCard1);
-		assertEquals(tempCard1)
+		assertEquals(tempCard1.getValue(),player.getHand().getCard(2).getValue());
 		
 	}
 }
