@@ -26,4 +26,26 @@ public class DealerTest extends TestCase {
 		assertEquals(20, dealer.getHand().countTotal());
 
 	}
+	
+	public void testSoft17Hits() {
+		Dealer dealer = new Dealer(); 
+		Card card1 = new Card("SA"); 
+		Card card2 = new Card("D6"); 
+		Card card3 = new Card("S5"); 
+		Card card4 = new Card("H5"); 
+		Card card5 = new Card("S5"); 
+		
+		Deck deck = new Deck(); 
+
+		deck.addCard(card3);
+		deck.addCard(card4);
+		deck.addCard(card5);
+
+		dealer.getHand().addCard(card1);
+		dealer.getHand().addCard(card2);
+		
+		dealer.hitOrStand(dealer.getHand(), deck);
+		assertEquals(17, dealer.getHand().countTotal());
+
+	}
 }
