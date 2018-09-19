@@ -184,11 +184,9 @@ public class GameMaster {
 		// TODO Auto-generated method stub
 		Card tempCard; 
 
-				//keep asking until its the correct input
-				//lower case vs upper case 
 			if(input == 'H' && player.getHand().turn == true) {
 				tempCard = player.hit(player.getHand(), deck);
-				System.out.println("player Receives " + tempCard.getName());
+				System.out.println(player.getHand().getName() +" Receives " + tempCard.getName());
 
 
 				checkBust();
@@ -199,7 +197,7 @@ public class GameMaster {
 					System.out.println("splitting");
 
 					tempCard = player.hit(player.getSplitHand(), deck);
-					System.out.println("player Split Receives " + tempCard.getName());
+					System.out.println(player.getSplitHand().getName() +" Receives " + tempCard.getName());
 
 					checkBust();
 				}
@@ -210,11 +208,10 @@ public class GameMaster {
 				player.getHand().showHand();
 
 				
-				//player.getSplitHand().turn= true; 
 				if(splitting) {
 					player.getSplitHand().turn = true; 
 					tempCard = player.hit(player.getSplitHand(), deck);
-					System.out.println("player Split Receives " + tempCard.getName());
+					System.out.println(player.getSplitHand().getName() +" Receives " + tempCard.getName());
 				}
 					
 				if((input == 'S' && player.getSplitHand().turn == false)) {
@@ -222,14 +219,14 @@ public class GameMaster {
 					player.getHand().turn= false; 
 					dealer.getHand().turn = true;
 					tempCard = dealer.hitOrStand(dealer.getHand(), deck);
-					System.out.println("dealer Receives " + tempCard.getName());
+					System.out.println(dealer.getHand().getName() + " Receives " + tempCard.getName());
 
 					if(dealerSplitting) {
 
 						dealer.getHand().turn = false;
 						dealer.getSplitHand().turn = true; 
 						tempCard = dealer.hitOrStand(dealer.getSplitHand(), deck); 
-						System.out.println("dealer Split Receives " + tempCard.getName());
+						System.out.println(dealer.getSplitHand().getName() + " Receives " + tempCard.getName());
 					}
 					checkWinner();
 				}
@@ -242,13 +239,13 @@ public class GameMaster {
 				player.getHand().turn= false; 
 				dealer.getHand().turn = true;
 				tempCard = dealer.hitOrStand(dealer.getHand(), deck); 
-				System.out.println("dealer Receives " + tempCard.getName());
+				System.out.println(dealer.getHand().getName() + " Receives " + tempCard.getName());
 
 				if(dealerSplitting) {
 					dealer.getHand().turn = false;
 					dealer.getSplitHand().turn = true; 
 					tempCard = dealer.hitOrStand(dealer.getSplitHand(), deck); 
-					System.out.println("dealer Split Receives " + tempCard.getName());
+					System.out.println(dealer.getSplitHand().getName() + " Receives " + tempCard.getName());
 
 				}
 				checkWinner();
@@ -270,13 +267,11 @@ public class GameMaster {
 			fileInputCards = new Card(parseCommands[i]);
 			deck.addCard(fileInputCards);
 			tempCard = player.hit(player.getHand(), deck); 
-			System.out.println("player Receives " + tempCard.getName());
+			System.out.println(player.getHand().getName() +" Receives " + tempCard.getName());
 			
 			
 			player.getHand().showHand();
-			
-			//player.getSplitHand().showHand();
-	}
+		}
 		
 		while(playerIsWinner == false & dealerIsWinner == false) {	
 			if(parseCommands[i].equals("H") && player.getHand().turn) {
@@ -285,7 +280,7 @@ public class GameMaster {
 				fileInputCards = new Card(parseCommands[i]);
 				fileInputDeck.addCard(fileInputCards);
 				tempCard = player.hit(player.getHand(), fileInputDeck); 
-				System.out.println("player Receives " + tempCard.getName());
+				System.out.println(player.getHand().getName() +" Receives " + tempCard.getName());
 
 				if(checkBust() == true) break;
 			}
@@ -296,7 +291,7 @@ public class GameMaster {
 				fileInputCards = new Card(parseCommands[i]);
 				fileInputDeck.addCard(fileInputCards);
 				tempCard = player.hit(player.getSplitHand(), fileInputDeck); 
-				System.out.println("player Split Receives " + tempCard.getName());
+				System.out.println(player.getSplitHand().getName() +" Receives " + tempCard.getName());
 
 				if(checkBust() == true) break;
 				}
@@ -314,7 +309,7 @@ public class GameMaster {
 					fileInputCards = new Card(parseCommands[i]);
 					deck.addCard(fileInputCards);
 					tempCard = player.hit(player.getSplitHand(), deck); 
-					System.out.println("player Split Receives " + tempCard.getName());
+					System.out.println(player.getSplitHand().getName() +" Receives " + tempCard.getName());
 					player.getSplitHand().turn = true ;
 				}
 					
@@ -363,16 +358,16 @@ public class GameMaster {
 		// TODO Auto-generated method stub
 		Card tempCard; 
 		tempCard = player.hit(player.getHand(), deck);
-		System.out.println("player Receives " + tempCard.getName());
+		System.out.println(player.getHand().getName() +" Receives " + tempCard.getName());
 
 		tempCard = player.hit(player.getHand(), deck);
-		System.out.println("player Receives " + tempCard.getName());
+		System.out.println(player.getHand().getName() +" Receives " + tempCard.getName());
 
 		tempCard = dealer.hit(dealer.getHand(), deck);
-		System.out.println("dealer Receives " + tempCard.getName());
+		System.out.println(dealer.getHand().getName() +" Receives " + tempCard.getName());
 
 		tempCard = dealer.hit(dealer.getHand(), deck);
-		System.out.println("dealer Receives " + tempCard.getName());
+		System.out.println(dealer.getHand().getName() +" Receives " + tempCard.getName());
 
 		
 		dealer.getHand().getCard(1).SetVisibility(false);
@@ -421,19 +416,5 @@ public class GameMaster {
 					
 		}
 	}
-	
-	/*public int dealerSplit(Deck deck, String[] input, int index) {
-		// TODO Auto-generated method stub
-		if(dealer.getHand().isSplit()) {
-			System.out.println("(splitting)");
-
-			dealerSplitting = true; 
-			dealer.getSplitHand().addCard(dealer.getHand().split());
-
-		}
-		return index; 
-	}*/
-	
-	
-
+		
 }

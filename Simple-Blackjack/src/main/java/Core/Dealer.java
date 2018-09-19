@@ -47,7 +47,7 @@ public class Dealer {
 			//hit(hand, deck);
 
 			tempCard = hit(hand, deck); 
-			System.out.println("Dealer Receives " + tempCard.getName());
+			System.out.println(hand.getName() +" Receives " + tempCard.getName());
 			if(hand.isBust() == true)break; 
 			
 		}

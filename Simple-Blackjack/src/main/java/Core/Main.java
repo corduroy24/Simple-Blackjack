@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.Scanner;
 //replace "player with there actually hand names that were given....dealer.getHand().getName();
 //look in node4js
+//handle incorrect input
 //GUI
+// change deck size back to 52 ad ordiginal deck
 public class Main {
 
 	//static int game.deckSize = 52; 
@@ -110,7 +112,7 @@ public class Main {
 		game.player.getHand().turn = true; 
 		char input; 
 		game.player.getHand().addCard(tempCard = game.deck.drawCard());
-		System.out.println("player Receives " + tempCard.getName());
+		System.out.println(game.player.getHand().getName() + " Receives " + tempCard.getName());
 		
 		while(game.playerIsWinner == false & game.dealerIsWinner == false) {
 			System.out.println("Hit (H) or Stand (S) ?");
@@ -173,7 +175,7 @@ public class Main {
 		BufferedReader reader = null; 
 		String[] parseCommands = new String[deckSize]; 
 		String delims = "[ ]+";
-		String filename = "File1.txt"; 
+		String filename = "File5.txt"; 
 			
 
 		try {
