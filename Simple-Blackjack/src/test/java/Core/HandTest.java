@@ -95,6 +95,11 @@ public class HandTest extends TestCase{
 		assertEquals(4, hand.countTotal()); 
 	}
 	
+	public void testInitialHand() {
+		
+		
+	}
+	
 	/*public void testIsSoft() {
 		Deck deck = new Deck(); 
 		Hand hand1 = new Hand(); 

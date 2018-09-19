@@ -33,10 +33,9 @@ public class Game {
 	"C3","C3", "C3", "C3", "C3", "C3", "C3", "C3",
 	"C3","C3", "C3", "C3", "C3", "C3"}; 
 	
-	private static Hand playerHand = new Hand("Player");
-	private static Hand dealerHand = new Hand("Dealer");
-	private static Hand splitPlayer = new Hand("PlayerSplit"); 
-	private static Hand splitDealer = new Hand("DealerSplit"); 
+	
+	private static Dealer dealer = new Dealer(); 
+	private static Player player = new Player(); 
 	
 	private static boolean splitting=false; 
 	private static boolean dealerSplitting=false; 
@@ -67,245 +66,258 @@ public class Game {
 	public static void ConsoleInput() {
 		System.out.println("ConsoleInput");
 		
-
 		deck.createDefaultDeck(input);
 		deck.shuffleDeck();
 		
 		Card tempCard;
-		
-		//turn into function = deal cards 
-		Hit(playerHand, deck); 
-		Hit(playerHand, deck);
-		Hit(dealerHand, deck); 
-		Hit(dealerHand, deck);
-		/*playerHand.addCard(deck.drawCard());
-		playerHand.addCard(deck.drawCard());
+		dealCards(deck); 
 
-		
-		dealerHand.addCard(deck.drawCard());
-		dealerHand.addCard(deck.drawCard());*/
-		dealerHand.getCard(1).SetVisibility(false);
-		
 
-		playerHand.showHand();
-		dealerHand.showHand();
-		dealerHand.getCard(1).SetVisibility(true);
-
-		checkBlackjack(playerHand, dealerHand);
+		checkBlackjack(player.getHand(), dealer.getHand());
 
 			
-			if(playerHand.isSplit()) {
+		if(player.getHand().isSplit()) {
 				
-				System.out.println("Do you wanna split (D)?");
-				Scanner console = new Scanner(System.in); 
-				char inputD = console.next().charAt(0);
-				if(inputD == 'D') {
-					splitting = true; 
-					System.out.println("isSplit == true");
-					splitPlayer.addCard(playerHand.split());
+			System.out.println("Do you wanna split (D)?");
+			Scanner console = new Scanner(System.in); 
+			char inputD = console.next().charAt(0);
+			if(inputD == 'D') {
+				splitting = true; 
+				System.out.println("isSplit == true");
+				player.getSplitHand().addCard(player.getHand().split());
 					
-					/*playerHand.addCard(tempCard = deck.drawCard());
-					System.out.println("Player Receives " + tempCard.getName());
+				/*player.getHand().addCard(tempCard = deck.drawCard());
+				System.out.println("Player Receives " + tempCard.getName());
 						
-					splitPlayer.addCard(tempCard = deck.drawCard()); 
-					System.out.println("Player Split Receives " + tempCard.getName());*/
+				player.getSplitHand().addCard(tempCard = deck.drawCard()); 
+				System.out.println("Player Split Receives " + tempCard.getName());*/
 					
-					playerHand.showHand();
-					splitPlayer.showHand();
+				player.getHand().showHand();
+				player.getSplitHand().showHand();
 
-				}
 			}
+		}
 			
-			if(dealerHand.isSplit() && (dealerHand.countTotal() <= 17)) {
+		if(dealer.getHand().isSplit() && (dealer.getHand().countTotal() <= 17)) {
 				
-					dealerSplitting = true; 
-					System.out.println("isSplitDealer == true");
-					splitDealer.addCard(dealerHand.split());
+			dealerSplitting = true; 
+			System.out.println("isdealer.getSplitHand() == true");
+			dealer.getSplitHand().addCard(dealer.getHand().split());
 					
-					/*dealerHand.addCard(tempCard = deck.drawCard());
-					System.out.println("Dealer Receives " + tempCard.getName());
+			/*dealer.getHand().addCard(tempCard = deck.drawCard());
+			System.out.println("Dealer Receives " + tempCard.getName());
 					
-					splitDealer.addCard(tempCard = deck.drawCard()); 
-					System.out.println("Dealer Split Receives " + tempCard.getName());*/
+			dealer.getSplitHand().addCard(tempCard = deck.drawCard()); 
+			System.out.println("Dealer Split Receives " + tempCard.getName());*/
 					
-					dealerHand.showHand();
-					splitDealer.showHand();
+			dealer.getHand().showHand();
+			dealer.getSplitHand().showHand();
 					
-			}
+		}
 
-			playerHand.turn = true; 
+		player.getHand().turn = true; 
 
-			while(playerIsWinner == false & dealerIsWinner == false) {
-				System.out.println("Hit (H) or Stand (S) ?");
-				Scanner console = new Scanner(System.in); 
-				char input = console.next().charAt(0);
+		while(playerIsWinner == false & dealerIsWinner == false) {
+			System.out.println("Hit (H) or Stand (S) ?");
+			Scanner console = new Scanner(System.in); 
+			char input = console.next().charAt(0);
 				
 				//keep asking until its the correct input
 				//lower case vs upper case 
-				if(input == 'H' && playerHand.turn == true) {
-					Hit(playerHand, deck);
-					playerHand.showHand();
+			if(input == 'H' && player.getHand().turn == true) {
+				player.hit(player.getHand(), deck);
+				player.getHand().showHand();
+
+				if(CheckBust() ==true)break;
+			}
+			
+			else if(input == 'H' && player.getSplitHand().turn == true) {
+				if(splitting) {				
+					System.out.println("splitting");
+
+					player.hit(player.getSplitHand(), deck);
+					player.getSplitHand().showHand();
 
 					if(CheckBust() ==true)break;
 				}
-				else if(input == 'H' && splitPlayer.turn == true) {
-					if(splitting) {				
-						System.out.println("splitting");
-
-						Hit(splitPlayer, deck);
-						splitPlayer.showHand();
-
-						if(CheckBust() ==true)break;
-					}
-				}
-				else if(input == 'S' && playerHand.turn == true) {
-					playerHand.turn= false; 
-					splitPlayer.turn= true; 
-					if(splitting  == false)
-						splitPlayer.turn = false; 
+			}
+			
+			else if(input == 'S' && player.getHand().turn == true) {
+				player.getHand().turn= false; 
+				player.getSplitHand().turn= true; 
+				if(splitting  == false)
+					player.getSplitHand().turn = false; 
 					
-					if((input == 'S' && splitPlayer.turn == false)) {
-						splitPlayer.turn = false; 
-						playerHand.turn= false; 
-						dealerHand.turn = true;
-						HitOrStand(dealerHand); 
-						if(dealerSplitting) {
-
-							dealerHand.turn = false;
-							splitDealer.turn = true; 
-							HitOrStand(splitDealer); 
-						}
-						CheckWinner();
-						break; 
-				}
-				}
-				
-				else if(input == 'S' && splitPlayer.turn ==true) {
-					splitPlayer.turn = false; 
-					playerHand.turn= false; 
-					dealerHand.turn = true;
-					HitOrStand(dealerHand); 
+				if((input == 'S' && player.getSplitHand().turn == false)) {
+					player.getSplitHand().turn = false; 
+					player.getHand().turn= false; 
+					dealer.getHand().turn = true;
+					dealer.hitOrStand(dealer.getHand(), deck); 
 					if(dealerSplitting) {
-						dealerHand.turn = false;
-						splitDealer.turn = true; 
-						HitOrStand(splitDealer); 
+
+						dealer.getHand().turn = false;
+						dealer.getSplitHand().turn = true; 
+						dealer.hitOrStand(dealer.getSplitHand(), deck); 
 					}
 					CheckWinner();
 					break; 
 				}
 			}
+				
+			else if(input == 'S' && player.getSplitHand().turn ==true) {
+				player.getSplitHand().turn = false; 
+				player.getHand().turn= false; 
+				dealer.getHand().turn = true;
+				dealer.hitOrStand(dealer.getHand(), deck); 
+				if(dealerSplitting) {
+					dealer.getHand().turn = false;
+					dealer.getSplitHand().turn = true; 
+					dealer.hitOrStand(dealer.getSplitHand(), deck); 
+				}
+				CheckWinner();
+				break; 
+			}
+		}
 	}
 	
+	private static void dealCards(Deck deck) {
+		//implement similar to hit in player and dealer class 
+		// TODO Auto-generated method stub
+		Card tempCard; 
+		tempCard = player.hit(player.getHand(), deck);
+		System.out.println("Player Receives " + tempCard.getName());
+
+		tempCard = player.hit(player.getHand(), deck);
+		System.out.println("Player Receives " + tempCard.getName());
+
+		tempCard = dealer.hit(dealer.getHand(), deck);
+		System.out.println("Dealer Receives " + tempCard.getName());
+
+		tempCard = dealer.hit(dealer.getHand(), deck);
+		System.out.println("Dealer Receives " + tempCard.getName());
+
+		
+		dealer.getHand().getCard(1).SetVisibility(false);
+		
+		player.getHand().showHand();
+		dealer.getHand().showHand();
+		
+		dealer.getHand().getCard(1).SetVisibility(true);
+		
+		
+	}
+
+
 	/*private static void splitSequence() {
 
 	}*/
 	
 	private static void checkBlackjack(Hand playerHand, Hand dealerHand) {
 		// TODO Auto-generated method stub
-		if(playerHand.IsBlackJack() && dealerHand.IsBlackJack()) {
+		if(player.getHand().IsBlackJack() && dealer.getHand().IsBlackJack()) {
 			playerIsWinner  = true; 
 			dealerIsWinner = true;
 			System.out.println("Dealer is the winner (both had blackjack)"); 
-			System.out.println("Player Score: "+playerHand.countTotal()+" Dealer Score: "+dealerHand.countTotal());
+			System.out.println("Player Score: "+player.getHand().countTotal()+" Dealer Score: "+dealer.getHand().countTotal());
 		}
 
-		else if(playerHand.IsBlackJack()) {
+		else if(player.getHand().IsBlackJack()) {
 			playerIsWinner  = true; 
 			System.out.println("Player is the winner (blackjack)");
-			System.out.println("Player Score: "+playerHand.countTotal()+" Dealer Score: "+dealerHand.countTotal());
+			System.out.println("Player Score: "+player.getHand().countTotal()+" Dealer Score: "+dealer.getHand().countTotal());
 
 		}
 
-		else if(dealerHand.IsBlackJack()) {
+		else if(dealer.getHand().IsBlackJack()) {
 			dealerIsWinner = true; 
 			System.out.println("Dealer is the winner(blackjack)");
-			System.out.println("Player Score: "+playerHand.countTotal()+" Dealer Score: "+dealerHand.countTotal());
+			System.out.println("Player Score: "+player.getHand().countTotal()+" Dealer Score: "+dealer.getHand().countTotal());
 
 		}
 		
 	}
 
 
-	private static void HitOrStand(Hand hand) {
+	/*private static void HitOrStand(Hand hand) {
 		// TODO Auto-generated method stub
 
 
 	//	System.out.println(hand.countTotal() + " " + hand.isSoft() );
 		while((hand.countTotal() < 17) || (hand.isSoft())) {
-			Hit(hand, deck);
+			dealer.hit(hand, deck);
 
 			if(CheckBust() == true)break;
 			
-			if(dealerHand.turn) {
-				dealerHand.showHand();
+			if(dealer.getHand().turn) {
+				dealer.getHand().showHand();
 			}
 			
-			else if(dealerSplitting && splitDealer.turn == true) {
-				splitDealer.showHand();
+			else if(dealerSplitting && dealer.getSplitHand().turn == true) {
+				dealer.getSplitHand().showHand();
 			}
 		}
 		return;
 	}
-
+*/
 
 	private static boolean CheckBust() {
 		// TODO Auto-generated method stub
-		if(playerHand.IsBust()) {
+		if(player.getHand().IsBust()) {
 			dealerIsWinner = true; 
 			//winner = true; 
-			//System.out.println(playerHand.IsBust() +"check player is bust"); 
+			//System.out.println(player.getHand().IsBust() +"check player is bust"); 
 			System.out.println("Dealer is the winner (player is bust) ");
 			if (splitting && dealerSplitting)
-				System.out.println("Player Score: "+playerHand.countTotal()+ " Player Split Score: " + splitPlayer.countTotal() + " Dealer Score: "+dealerHand.countTotal() + " Dealer Split Score: "+splitDealer.countTotal());
+				System.out.println("Player Score: "+player.getHand().countTotal()+ " Player Split Score: " + player.getSplitHand().countTotal() + " Dealer Score: "+dealer.getHand().countTotal() + " Dealer Split Score: "+dealer.getSplitHand().countTotal());
 			else if(splitting)
-				System.out.println("Player Score: "+playerHand.countTotal()+ " Player Split Score: " + splitPlayer.countTotal() + " Dealer Score: "+dealerHand.countTotal());
+				System.out.println("Player Score: "+player.getHand().countTotal()+ " Player Split Score: " + player.getSplitHand().countTotal() + " Dealer Score: "+dealer.getHand().countTotal());
 			else if(dealerSplitting)
-				System.out.println("Player Score: "+playerHand.countTotal()+ " Dealer Score: "+dealerHand.countTotal() + " Dealer Split Score: "+splitDealer.countTotal());
+				System.out.println("Player Score: "+player.getHand().countTotal()+ " Dealer Score: "+dealer.getHand().countTotal() + " Dealer Split Score: "+dealer.getSplitHand().countTotal());
 			else
-				System.out.println("Player Score: "+playerHand.countTotal()+" Dealer Score: "+dealerHand.countTotal());
+				System.out.println("Player Score: "+player.getHand().countTotal()+" Dealer Score: "+dealer.getHand().countTotal());
 		}
 		else if(splitting) {
-			if(splitPlayer.IsBust()) {
+			if(player.getSplitHand().IsBust()) {
 				dealerIsWinner = true; 
 				System.out.println("Dealer is the winner (player is bust)");
-				System.out.println("Player Score: "+playerHand.countTotal()+ " Player Split Score: " + splitPlayer.countTotal() + " Dealer Score: "+dealerHand.countTotal());
+				System.out.println("Player Score: "+player.getHand().countTotal()+ " Player Split Score: " + player.getSplitHand().countTotal() + " Dealer Score: "+dealer.getHand().countTotal());
 				splitting = false; 
 			}
 		}
 		else if(dealerSplitting) {
-			if(splitDealer.IsBust()) {
+			if(dealer.getSplitHand().IsBust()) {
 				playerIsWinner = true; 
 				System.out.println("Player is the winner (dealer is bust)");
-				System.out.println("Player Score: "+playerHand.countTotal()+ " Player Split Score: " + splitPlayer.countTotal() + " Dealer Score: "+dealerHand.countTotal());
+				System.out.println("Player Score: "+player.getHand().countTotal()+ " Player Split Score: " + player.getSplitHand().countTotal() + " Dealer Score: "+dealer.getHand().countTotal());
 				dealerSplitting = false; 
 			}
 		}
-		else if(dealerHand.IsBust()) {
+		else if(dealer.getHand().IsBust()) {
 			playerIsWinner = true; 
 			//winner = true; 
-			//System.out.println(dealerHand.IsBust()+ "check dealer is bust"); 
+			//System.out.println(dealer.getHand().IsBust()+ "check dealer is bust"); 
 
 			System.out.println("Player is the winner (dealer is bust)");
 			if (splitting && dealerSplitting)
-				System.out.println("Player Score: "+playerHand.countTotal()+ " Player Split Score: " + splitPlayer.countTotal() + " Dealer Score: "+dealerHand.countTotal() + " Dealer Split Score: "+splitDealer.countTotal());
+				System.out.println("Player Score: "+player.getHand().countTotal()+ " Player Split Score: " + player.getSplitHand().countTotal() + " Dealer Score: "+dealer.getHand().countTotal() + " Dealer Split Score: "+dealer.getSplitHand().countTotal());
 			else if(splitting)
-				System.out.println("Player Score: "+playerHand.countTotal()+ " Player Split Score: " + splitPlayer.countTotal() + " Dealer Score: "+dealerHand.countTotal());
+				System.out.println("Player Score: "+player.getHand().countTotal()+ " Player Split Score: " + player.getSplitHand().countTotal() + " Dealer Score: "+dealer.getHand().countTotal());
 			else if(dealerSplitting)
-				System.out.println("Player Score: "+playerHand.countTotal()+ " Dealer Score: "+dealerHand.countTotal() + " Dealer Split Score: "+splitDealer.countTotal());
+				System.out.println("Player Score: "+player.getHand().countTotal()+ " Dealer Score: "+dealer.getHand().countTotal() + " Dealer Split Score: "+dealer.getSplitHand().countTotal());
 			else
-				System.out.println("Player Score: "+playerHand.countTotal()+" Dealer Score: "+dealerHand.countTotal());
+				System.out.println("Player Score: "+player.getHand().countTotal()+" Dealer Score: "+dealer.getHand().countTotal());
 		}
 		return false;
 	}
 
 	
-	private static Card Hit(Hand hand, Deck deck) {
+	/*private static Card Hit(Hand hand, Deck deck) {
 		// TODO Auto-generated method stub
 		Card tempCard; 
 		hand.addCard(tempCard = deck.drawCard());
 		return tempCard; 
 
-	}
+	}*/
 //code inspired from https://www.caveofprogramming.com/java/java-file-reading-and-writing-files-in-java.html
 	public static void FileInput() {
 		
@@ -318,7 +330,7 @@ public class Game {
 
 		List<Card> fileInputCards = new ArrayList<Card>(); 
 		Card tempCard; 
-		playerHand.turn = true; 
+		player.getHand().turn = true; 
 		for(int i = 0; i < parseCommands.length; i++) {
 			if(dealCards1) {
 
@@ -329,29 +341,29 @@ public class Game {
 					fileInputDeck.addCard(fileInputCards.get(k));	
 				}
 				fileInputDeck.reverseDeck();
-				
-				tempCard = Hit(playerHand, fileInputDeck); 
+				dealCards(fileInputDeck);
+			/*	tempCard = player.hit(player.getHand(), fileInputDeck); 
 				System.out.println("Player Receives " + tempCard.getName());
-				tempCard = Hit(playerHand, fileInputDeck); 
+				tempCard = player.hit(player.getHand(), fileInputDeck); 
 
 				System.out.println("Player Receives " + tempCard.getName());
 
-				tempCard = Hit(dealerHand, fileInputDeck); 
+				tempCard = Hit(dealer.getHand(), fileInputDeck); 
 
 				System.out.println("Dealer Receives " + tempCard.getName());
-				tempCard = Hit(dealerHand, fileInputDeck); 
+				tempCard = Hit(dealer.getHand(), fileInputDeck); 
 
 				System.out.println("Dealer Receives " + tempCard.getName());
 
-				playerHand.showHand();
+				player.getHand().showHand();
 				
-				dealerHand.getCard(1).SetVisibility(false);
-				dealerHand.showHand();
-				dealerHand.getCard(0).SetVisibility(true);
+				dealer.getHand().getCard(1).SetVisibility(false);
+				dealer.getHand().showHand();
+				dealer.getHand().getCard(0).SetVisibility(true);*/
 
 				dealCards1=false;
 				
-				checkBlackjack(playerHand, dealerHand); 
+				checkBlackjack(player.getHand(), dealer.getHand()); 
 				
 			}
 		
@@ -360,54 +372,54 @@ public class Game {
 					if(parseCommands[i].equals("D")) {
 						System.out.println("Command D");
 
-						if(playerHand.isSplit()) {
+						if(player.getHand().isSplit()) {
 							System.out.println("(splitting)");
 
 						splitting = true; 
-						splitPlayer.addCard(playerHand.split());
+						player.getSplitHand().addCard(player.getHand().split());
 
 						i++;
 						
 						fileInputCards.add(new Card(parseCommands[i]));
 						fileInputDeck.addCard(fileInputCards.get(fileInputCards.size()-1));
-						tempCard = Hit(playerHand, fileInputDeck); 
+						tempCard = player.hit(player.getHand(), fileInputDeck); 
 						System.out.println("Player Receives " + tempCard.getName());
 						
 						i++;
 						fileInputCards.add(new Card(parseCommands[i]));
 						fileInputDeck.addCard(fileInputCards.get(fileInputCards.size()-1));
-						tempCard = Hit(splitPlayer, fileInputDeck); 
+						tempCard = player.hit(player.getSplitHand(), fileInputDeck); 
 						System.out.println("Player Split Receives " + tempCard.getName());
 						
-						playerHand.showHand();
+						player.getHand().showHand();
 						
-						splitPlayer.showHand();
+						player.getSplitHand().showHand();
 					}
 				}
 					
 					while(playerIsWinner == false & dealerIsWinner == false) {	
-						if(parseCommands[i].equals("H") && playerHand.turn) {
+						if(parseCommands[i].equals("H") && player.getHand().turn) {
 							i++;
 							
 							fileInputCards.add(new Card(parseCommands[i]));
 							fileInputDeck.addCard(fileInputCards.get(fileInputCards.size()-1));
-							tempCard = Hit(playerHand, fileInputDeck); 
+							tempCard = player.hit(player.getHand(), fileInputDeck); 
 							System.out.println("Player Receives " + tempCard.getName());
 
-							playerHand.showHand();
+							player.getHand().showHand();
 	
 							if(CheckBust() == true) break;
 						}
-						else if(parseCommands[i].equals("H") && splitPlayer.turn) {
+						else if(parseCommands[i].equals("H") && player.getSplitHand().turn) {
 							if(splitting) {
 							i++;
 							
 							fileInputCards.add(new Card(parseCommands[i]));
 							fileInputDeck.addCard(fileInputCards.get(fileInputCards.size()-1));
-							tempCard = Hit(splitPlayer, fileInputDeck); 
+							tempCard = player.hit(player.getSplitHand(), fileInputDeck); 
 							System.out.println("Player Split Receives " + tempCard.getName());
 
-							splitPlayer.showHand();
+							player.getSplitHand().showHand();
 
 							if(CheckBust() == true) break;
 							}
@@ -415,53 +427,43 @@ public class Game {
 						
 
 						
-						else if(parseCommands[i].equals("S") && playerHand.turn == true) {
-							playerHand.turn= false; 
-							splitPlayer.turn = true; 	
+						else if(parseCommands[i].equals("S") && player.getHand().turn == true) {
+							player.getHand().turn= false; 
+							player.getSplitHand().turn = true; 	
 							if(splitting == false)
-								splitPlayer.turn = false ;
+								player.getSplitHand().turn = false ;
 								
-							if((parseCommands[i].equals("S") && splitPlayer.turn == false)) {
-								splitPlayer.turn = false; 
-								playerHand.turn= false; 
-								dealerHand.turn = true;
-								if(dealerHand.isSplit() && (dealerHand.countTotal() <= 17)) {
+							if((parseCommands[i].equals("S") && player.getSplitHand().turn == false)) {
+								player.getSplitHand().turn = false; 
+								player.getHand().turn= false; 
+								dealer.getHand().turn = true;
+								if(dealer.getHand().isSplit() && (dealer.getHand().countTotal() <= 17)) {
 									
 									dealerSplitting = true; 
-									System.out.println("isSplitDealer == true");
-									splitDealer.addCard(dealerHand.split());
+									System.out.println("isdealer.getSplitHand() == true");
+									dealer.getSplitHand().addCard(dealer.getHand().split());
 							}
-								
-								while((dealerHand.countTotal() < 17) || (dealerHand.isSoft())) {
-									i++;
-									
-									fileInputCards.add(new Card(parseCommands[i]));
-									fileInputDeck.addCard(fileInputCards.get(fileInputCards.size()-1));	
-									tempCard = Hit(dealerHand, fileInputDeck); 
-									System.out.println("Dealer Receives " + tempCard.getName());
-
-									dealerHand.showHand();
-
-									if(CheckBust() == true) break;	
-								}
+								i = dealer.hitOrStand(dealer.getHand(), fileInputDeck, parseCommands, i);
+								CheckBust();
 
 								if(dealerSplitting) {
 
-									dealerHand.turn = false;
-									splitDealer.turn = true; 
-
-									while((splitDealer.countTotal() < 17) || (splitDealer.isSoft())) {
+									dealer.getHand().turn = false;
+									dealer.getSplitHand().turn = true; 
+									i = dealer.hitOrStand(dealer.getSplitHand(), fileInputDeck, parseCommands, i);
+									CheckBust(); 
+									/*while((dealer.getSplitHand().countTotal() < 17) || (dealer.getSplitHand().isSoft())) {
 										i++;
 	
 										fileInputCards.add(new Card(parseCommands[i]));
 										fileInputDeck.addCard(fileInputCards.get(fileInputCards.size()-1));
-										tempCard = Hit(splitDealer, fileInputDeck); 
+										tempCard = dealer.hit(dealer.getSplitHand(), fileInputDeck); 
 										System.out.println("Dealer Split Receives " + tempCard.getName());
 	
-										splitDealer.showHand();
+										dealer.getSplitHand().showHand();
 	
 										if(CheckBust() == true) break;	
-									}
+									}*/
 
 								}
 								CheckWinner(); 
@@ -471,22 +473,24 @@ public class Game {
 						}
 							
 		
-						else if(parseCommands[i].equals("S") && splitPlayer.turn == true) {
-							splitPlayer.turn = false; 
-							dealerHand.turn = true; 							
-							System.out.println(dealerHand.countTotal() + " " + dealerHand.isSoft() );
-							while((dealerHand.countTotal() < 17) || (dealerHand.isSoft())) {
+						else if(parseCommands[i].equals("S") && player.getSplitHand().turn == true) {
+							player.getSplitHand().turn = false; 
+							dealer.getHand().turn = true; 							
+							System.out.println(dealer.getHand().countTotal() + " " + dealer.getHand().isSoft() );
+							i = dealer.hitOrStand(dealer.getHand(), fileInputDeck, parseCommands, i);
+							CheckBust();
+							/*while((dealer.getHand().countTotal() < 17) || (dealer.getHand().isSoft())) {
 								i++;
 								
 								fileInputCards.add(new Card(parseCommands[i]));						
 								fileInputDeck.addCard(fileInputCards.get(fileInputCards.size()-1));	
-								tempCard = Hit(dealerHand, fileInputDeck); 
+								tempCard = Hit(dealer.getHand(), fileInputDeck); 
 								System.out.println("Dealer Receives " + tempCard.getName());
 
-								dealerHand.showHand();
+								dealer.getHand().showHand();
 
 								if(CheckBust() == true) break;								
-							}
+							}*/
 							CheckWinner(); 
 						}
 						
@@ -505,7 +509,7 @@ public class Game {
 				BufferedReader reader = null; 
 				String[] parseCommands = new String[deckSize]; 
 				String delims = "[ ]+";
-				String filename = "File5.txt"; 
+				String filename = "File2.txt"; 
 			
 
 				try {
@@ -542,29 +546,29 @@ public class Game {
 	public static boolean CheckWinner() {
 		boolean winner =  false; 
 		
-		Hand betterHand = betterHand(playerHand, splitPlayer);  
-		Hand betterDealerHand = betterHand(dealerHand, splitDealer); 
+		Hand betterHand = betterHand(player.getHand(), player.getSplitHand());  
+		Hand betterdealer = betterHand(dealer.getHand(), dealer.getSplitHand()); 
 
-		if((betterHand.countTotal() < 22) & (betterDealerHand.countTotal() < 22)) {
+		if((betterHand.countTotal() < 22) & (betterdealer.countTotal() < 22)) {
 
-			if(betterHand.countTotal() == betterDealerHand.countTotal()) {
+			if(betterHand.countTotal() == betterdealer.countTotal()) {
 				winner = true; 
 				dealerIsWinner = true;
 				
-				betterDealerHand.showHand();
+				betterdealer.showHand();
 				
 				System.out.println("Dealer wins! (Tied score)");
 				if (splitting && dealerSplitting)
-					System.out.println("Player Score: "+playerHand.countTotal()+ " Player Split Score: " + splitPlayer.countTotal() + " Dealer Score: "+dealerHand.countTotal() + " Dealer Split Score: "+splitDealer.countTotal());
+					System.out.println("Player Score: "+player.getHand().countTotal()+ " Player Split Score: " + player.getSplitHand().countTotal() + " Dealer Score: "+dealer.getHand().countTotal() + " Dealer Split Score: "+dealer.getSplitHand().countTotal());
 				else if(splitting)
-					System.out.println("Player Score: "+playerHand.countTotal()+ " Player Split Score: " + splitPlayer.countTotal() + " Dealer Score: "+dealerHand.countTotal());
+					System.out.println("Player Score: "+player.getHand().countTotal()+ " Player Split Score: " + player.getSplitHand().countTotal() + " Dealer Score: "+dealer.getHand().countTotal());
 				else if(dealerSplitting)
-					System.out.println("Player Score: "+playerHand.countTotal()+ " Dealer Score: "+dealerHand.countTotal() + " Dealer Split Score: "+splitDealer.countTotal());
+					System.out.println("Player Score: "+player.getHand().countTotal()+ " Dealer Score: "+dealer.getHand().countTotal() + " Dealer Split Score: "+dealer.getSplitHand().countTotal());
 				else
-					System.out.println("Player Score: "+playerHand.countTotal()+" Dealer Score: "+dealerHand.countTotal());
+					System.out.println("Player Score: "+player.getHand().countTotal()+" Dealer Score: "+dealer.getHand().countTotal());
 			}
 
-			else if(betterHand.countTotal() > betterDealerHand.countTotal()) {
+			else if(betterHand.countTotal() > betterdealer.countTotal()) {
 
 				winner  = true; 
 				playerIsWinner = true; 
@@ -573,32 +577,32 @@ public class Game {
 				
 				System.out.println("Player wins! (Higher score) ");
 				if (splitting && dealerSplitting)
-					System.out.println("Player Score: "+playerHand.countTotal()+ " Player Split Score: " + splitPlayer.countTotal() + " Dealer Score: "+dealerHand.countTotal() + " Dealer Split Score: "+splitDealer.countTotal());
+					System.out.println("Player Score: "+player.getHand().countTotal()+ " Player Split Score: " + player.getSplitHand().countTotal() + " Dealer Score: "+dealer.getHand().countTotal() + " Dealer Split Score: "+dealer.getSplitHand().countTotal());
 				else if(splitting)
-					System.out.println("Player Score: "+playerHand.countTotal()+ " Player Split Score: " + splitPlayer.countTotal() + " Dealer Score: "+dealerHand.countTotal());
+					System.out.println("Player Score: "+player.getHand().countTotal()+ " Player Split Score: " + player.getSplitHand().countTotal() + " Dealer Score: "+dealer.getHand().countTotal());
 				else if(dealerSplitting)
-					System.out.println("Player Score: "+playerHand.countTotal()+ " Dealer Score: "+dealerHand.countTotal() + " Dealer Split Score: "+splitDealer.countTotal());
+					System.out.println("Player Score: "+player.getHand().countTotal()+ " Dealer Score: "+dealer.getHand().countTotal() + " Dealer Split Score: "+dealer.getSplitHand().countTotal());
 				else
-					System.out.println("Player Score: "+playerHand.countTotal()+" Dealer Score: "+dealerHand.countTotal());
+					System.out.println("Player Score: "+player.getHand().countTotal()+" Dealer Score: "+dealer.getHand().countTotal());
 			}
 
-			else if(betterHand.countTotal() < betterDealerHand.countTotal()) {
+			else if(betterHand.countTotal() < betterdealer.countTotal()) {
 
 				winner = true; 
 				dealerIsWinner = true; 
 
-				betterDealerHand.showHand();
+				betterdealer.showHand();
 
 				
 				System.out.println("Dealer wins! (Higher score)");
 				if (splitting && dealerSplitting)
-					System.out.println("Player Score: "+playerHand.countTotal()+ " Player Split Score: " + splitPlayer.countTotal() + " Dealer Score: "+dealerHand.countTotal() + " Dealer Split Score: "+splitDealer.countTotal());
+					System.out.println("Player Score: "+player.getHand().countTotal()+ " Player Split Score: " + player.getSplitHand().countTotal() + " Dealer Score: "+dealer.getHand().countTotal() + " Dealer Split Score: "+dealer.getSplitHand().countTotal());
 				else if(splitting)
-					System.out.println("Player Score: "+playerHand.countTotal()+ " Player Split Score: " + splitPlayer.countTotal() + " Dealer Score: "+dealerHand.countTotal());
+					System.out.println("Player Score: "+player.getHand().countTotal()+ " Player Split Score: " + player.getSplitHand().countTotal() + " Dealer Score: "+dealer.getHand().countTotal());
 				else if(dealerSplitting)
-					System.out.println("Player Score: "+playerHand.countTotal()+ " Dealer Score: "+dealerHand.countTotal() + " Dealer Split Score: "+splitDealer.countTotal());
+					System.out.println("Player Score: "+player.getHand().countTotal()+ " Dealer Score: "+dealer.getHand().countTotal() + " Dealer Split Score: "+dealer.getSplitHand().countTotal());
 				else
-					System.out.println("Player Score: "+playerHand.countTotal()+" Dealer Score: "+dealerHand.countTotal());
+					System.out.println("Player Score: "+player.getHand().countTotal()+" Dealer Score: "+dealer.getHand().countTotal());
 			}
 		}
 		return winner; 
