@@ -48,10 +48,31 @@ public class Main {
 		char input = console.next().charAt(0);
 		
 		//keeping asking until its the correct input
+		
 		if(input == 'c') 
 			ConsoleInput(); 
 		else if (input == 'f')
 			FileInput();
+		else {
+			System.out.println("Please enter a valid input method!");
+		
+			while(input!='c' | input !='f') {
+				System.out.println("Which input method are you using? (File = f or Console = c)");
+				console = new Scanner(System.in); 
+				input = console.next().charAt(0);
+				if(input == 'c') {
+					ConsoleInput();
+					break;
+				}
+				else if (input == 'f') {
+					FileInput();
+					break;
+				}
+				else
+					System.out.println("Please enter a valid input method!");
+			}
+		}
+			
 		console.close();
 	}
 	
@@ -69,43 +90,17 @@ public class Main {
 
 			
 		if(game.player.getHand().isSplit()) {
-				
-			System.out.println("Do you wanna split (D)?");
+			//char empty = ' '; 
+			System.out.println("Do you wanna split (D)? Press any other letter to skip");
 			Scanner console = new Scanner(System.in); 
 			char inputD = console.next().charAt(0);
 			if(inputD == 'D') {
-				game.splitting = true; 
-				System.out.println("isSplit == true");
-				game.player.getSplitHand().addCard(game.player.getHand().split());
-					
-				/*game.player.getHand().addCard(tempCard = game.deck.drawCard());
-				System.out.println("game.player Receives " + tempCard.getName());
-						
-				game.player.getSplitHand().addCard(tempCard = game.deck.drawCard()); 
-				System.out.println("game.player Split Receives " + tempCard.getName());*/
-					
-				game.player.getHand().showHand();
-				game.player.getSplitHand().showHand();
-
+				game.playerSplit();
 			}
 		}
 			
-		if(game.dealer.getHand().isSplit() && (game.dealer.getHand().countTotal() <= 17)) {
-				
-			game.splitting = true; 
-			System.out.println("isgame.dealer.getSplitHand() == true");
-			game.dealer.getSplitHand().addCard(game.dealer.getHand().split());
-					
-			/*game.dealer.getHand().addCard(tempCard = game.deck.drawCard());
-			System.out.println("game.dealer Receives " + tempCard.getName());
-					
-			game.dealer.getSplitHand().addCard(tempCard = game.deck.drawCard()); 
-			System.out.println("game.dealer Split Receives " + tempCard.getName());*/
-					
-			game.dealer.getHand().showHand();
-			game.dealer.getSplitHand().showHand();
-					
-		}
+		game.dealerSplit(); 
+
 		game.player.getHand().turn = true; 
 		char input; 
 		while(game.playerIsWinner == false & game.dealerIsWinner == false) {
@@ -132,6 +127,7 @@ public class Main {
 		List<Card> fileInputCards = new ArrayList<Card>(); 
 		Card tempCard; 
 		game.player.getHand().turn = true; 
+		
 		for(int i = 0; i < parseCommands.length; i++) {
 			if(dealCards1) {
 
@@ -152,32 +148,11 @@ public class Main {
 		
 
 				else {
-					if(parseCommands[i].equals("D")) {
+					i = game.bettingSequence(fileInputDeck, parseCommands, i); 
+/*					if(parseCommands[i].equals("D")) {
 						System.out.println("Command D");
 
-						if(game.player.getHand().isSplit()) {
-							System.out.println("(game.splitting)");
-
-						game.splitting = true; 
-						game.player.getSplitHand().addCard(game.player.getHand().split());
-
-						i++;
-						
-						fileInputCards.add(new Card(parseCommands[i]));
-						fileInputDeck.addCard(fileInputCards.get(fileInputCards.size()-1));
-						tempCard = game.player.hit(game.player.getHand(), fileInputDeck); 
-						System.out.println("game.player Receives " + tempCard.getName());
-						
-						i++;
-						fileInputCards.add(new Card(parseCommands[i]));
-						fileInputDeck.addCard(fileInputCards.get(fileInputCards.size()-1));
-						tempCard = game.player.hit(game.player.getSplitHand(), fileInputDeck); 
-						System.out.println("game.player Split Receives " + tempCard.getName());
-						
-						game.player.getHand().showHand();
-						
-						game.player.getSplitHand().showHand();
-					}
+						i = game.playerSplit(fileInputDeck, parseCommands, i);
 				}
 					
 					while(game.playerIsWinner == false & game.dealerIsWinner == false) {	
@@ -188,8 +163,6 @@ public class Main {
 							fileInputDeck.addCard(fileInputCards.get(fileInputCards.size()-1));
 							tempCard = game.player.hit(game.player.getHand(), fileInputDeck); 
 							System.out.println("game.player Receives " + tempCard.getName());
-
-							game.player.getHand().showHand();
 	
 							if(game.checkBust() == true) break;
 						}
@@ -202,30 +175,24 @@ public class Main {
 							tempCard = game.player.hit(game.player.getSplitHand(), fileInputDeck); 
 							System.out.println("game.player Split Receives " + tempCard.getName());
 
-							game.player.getSplitHand().showHand();
-
 							if(game.checkBust() == true) break;
 							}
 						}
 						
 
-						
 						else if(parseCommands[i].equals("S") && game.player.getHand().turn == true) {
-							game.player.getHand().turn= false; 
-							game.player.getSplitHand().turn = true; 	
+								game.player.getHand().showHand();
+								game.player.getHand().turn= false; 
+								game.player.getSplitHand().turn = true; 	
 							if(game.splitting == false)
 								game.player.getSplitHand().turn = false ;
 								
 							if((parseCommands[i].equals("S") && game.player.getSplitHand().turn == false)) {
-								game.player.getSplitHand().turn = false; 
-								game.player.getHand().turn= false; 
+								game.player.getSplitHand().turn = false;
+
 								game.dealer.getHand().turn = true;
-								if(game.dealer.getHand().isSplit() && (game.dealer.getHand().countTotal() <= 17)) {
-									
-									game.dealerSplitting = true; 
-									System.out.println("isgame.dealer.getSplitHand() == true");
-									game.dealer.getSplitHand().addCard(game.dealer.getHand().split());
-							}
+								game.dealerSplit();
+
 								i = game.dealer.hitOrStand(game.dealer.getHand(), fileInputDeck, parseCommands, i);
 								game.checkBust();
 
@@ -237,7 +204,7 @@ public class Main {
 									game.checkBust(); 
 
 								}
-								game.checkWinner(); 
+								game.checkWinner();
 
 								break;
 							}
@@ -246,6 +213,7 @@ public class Main {
 		
 						else if(parseCommands[i].equals("S") && game.player.getSplitHand().turn == true) {
 							game.player.getSplitHand().turn = false; 
+							game.player.getSplitHand().showHand();
 							game.dealer.getHand().turn = true; 							
 							System.out.println(game.dealer.getHand().countTotal() + " " + game.dealer.getHand().isSoft() );
 							i = game.dealer.hitOrStand(game.dealer.getHand(), fileInputDeck, parseCommands, i);
@@ -255,11 +223,12 @@ public class Main {
 						}
 						
 						break; 
-					}
+					}*/
 				}
 		}
 	}
-	
+	//code inspired from:
+		//https://www.caveofprogramming.com/java/java-file-reading-and-writing-files-in-java.html
 	private static String[] readFile() {
 	// TODO Auto-generated method stub
 		//System.out.println("Enter the filename: ");

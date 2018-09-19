@@ -27,9 +27,9 @@ public class Dealer {
 
 			if(hand.isBust() == true)return false; 
 			
-			if(hand.turn) {
-				hand.showHand();
 			}
+		if(hand.turn) {
+			hand.showHand();
 			
 		}
 		return true; 
@@ -49,10 +49,9 @@ public class Dealer {
 			System.out.println("Dealer Receives " + tempCard.getName());
 			if(hand.isBust() == true)break; 
 			
-			if(hand.turn) {
-				hand.showHand();
-			}
-			
+		}
+		if(hand.turn) {
+			hand.showHand();
 		}
 		return index; 
 
