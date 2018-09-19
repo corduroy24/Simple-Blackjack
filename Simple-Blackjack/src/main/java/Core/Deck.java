@@ -56,6 +56,10 @@ public class Deck {
 			AddCard(input[i]);
     }*/
     
+    public boolean findCard(Card card) {
+    	return deck.contains(card); 
+    }
+    
     public void shuffleDeck() {
     	Collections.shuffle(deck);
     }

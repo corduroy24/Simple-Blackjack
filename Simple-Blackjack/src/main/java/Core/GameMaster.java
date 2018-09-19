@@ -1,5 +1,7 @@
 package Core;
 
+import java.util.Scanner;
+
 public class GameMaster {
 	
 	public  boolean playerIsWinner;
@@ -11,6 +13,8 @@ public class GameMaster {
 	public  Dealer dealer = new Dealer(); 
 	public  Player player = new Player(); 
 	
+	public  Deck deck = new Deck(); 
+
 	public void checkBlackjack(Hand playerHand, Hand dealerHand) {
 		// TODO Auto-generated method stub
 		if(player.getHand().IsBlackJack() && dealer.getHand().IsBlackJack()) {
@@ -36,7 +40,7 @@ public class GameMaster {
 		
 	}
 	
-	public  boolean CheckBust() {
+	public  boolean checkBust() {
 		// TODO Auto-generated method stub
 		if(player.getHand().IsBust()) {
 			dealerIsWinner = true; 
@@ -81,7 +85,7 @@ public class GameMaster {
 		return false;
 	}
 	
-	public boolean CheckWinner() {
+	public boolean checkWinner() {
 		boolean winner =  false; 
 		
 		Hand betterHand = betterHand(player.getHand(), player.getSplitHand());  
@@ -165,6 +169,93 @@ public class GameMaster {
 
 		}
 		return hand;
+	}
+
+	public void bettingSequence(char input) {
+		// TODO Auto-generated method stub
+
+				
+				//keep asking until its the correct input
+				//lower case vs upper case 
+			if(input == 'H' && player.getHand().turn == true) {
+				player.hit(player.getHand(), deck);
+				player.getHand().showHand();
+
+				checkBust();
+			}
+			
+			else if(input == 'H' && player.getSplitHand().turn == true) {
+				if(splitting) {				
+					System.out.println("splitting");
+
+					player.hit(player.getSplitHand(), deck);
+					player.getSplitHand().showHand();
+
+					checkBust();
+				}
+			}
+			
+			else if(input == 'S' && player.getHand().turn == true) {
+				player.getHand().turn= false; 
+				player.getSplitHand().turn= true; 
+				if(splitting  == false)
+					player.getSplitHand().turn = false; 
+					
+				if((input == 'S' && player.getSplitHand().turn == false)) {
+					player.getSplitHand().turn = false; 
+					player.getHand().turn= false; 
+					dealer.getHand().turn = true;
+					dealer.hitOrStand(dealer.getHand(), deck); 
+					if(splitting) {
+
+						dealer.getHand().turn = false;
+						dealer.getSplitHand().turn = true; 
+						dealer.hitOrStand(dealer.getSplitHand(), deck); 
+					}
+					checkWinner();
+				}
+			}
+				
+			else if(input == 'S' && player.getSplitHand().turn ==true) {
+				player.getSplitHand().turn = false; 
+				player.getHand().turn= false; 
+				dealer.getHand().turn = true;
+				dealer.hitOrStand(dealer.getHand(), deck); 
+				if(splitting) {
+					dealer.getHand().turn = false;
+					dealer.getSplitHand().turn = true; 
+					dealer.hitOrStand(dealer.getSplitHand(), deck); 
+				}
+				checkWinner();
+				//break; 
+			}
+	}
+	
+	public  void dealCards(Deck deck) {
+		//implement similar to hit in player and dealer class 
+		// TODO Auto-generated method stub
+		Card tempCard; 
+		tempCard = player.hit(player.getHand(), deck);
+		System.out.println("player Receives " + tempCard.getName());
+
+		tempCard = player.hit(player.getHand(), deck);
+		System.out.println("player Receives " + tempCard.getName());
+
+		tempCard = dealer.hit(dealer.getHand(), deck);
+		System.out.println("dealer Receives " + tempCard.getName());
+
+		tempCard = dealer.hit(dealer.getHand(), deck);
+		System.out.println("dealer Receives " + tempCard.getName());
+
+		
+		dealer.getHand().getCard(1).SetVisibility(false);
+		
+		player.getHand().showHand();
+		dealer.getHand().showHand();
+		
+		dealer.getHand().getCard(1).SetVisibility(true);
+		
+		
 	}
 
 }
