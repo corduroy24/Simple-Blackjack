@@ -177,5 +177,40 @@ public class GameMasterTest extends TestCase {
 		
 	}
 	
+	public void testPlayerSplitting() {
+		GameMaster game = new GameMaster();
+		
+	    Card card_1 = new Card("S7"); 
+	    Card card_2 = new Card("S7"); 
+
+	    
+	    game.player.getHand().addCard(card_1);
+	    game.player.getHand().addCard(card_2);
+	    
+		game.playerSplit();
+		
+		assertNotNull(game.player.getSplitHand()); 
+		assertEquals(game.player.getHand().getCard(0).getValue(), game.player.getSplitHand().getCard(0).getValue());
+		
+		assertTrue(game.splitting);
+	}
+	
+	public void testDealerSplitting() {
+		GameMaster game = new GameMaster();
+		
+	    Card card_1 = new Card("S7"); 
+	    Card card_2 = new Card("S7"); 
+
+	    
+	    game.dealer.getHand().addCard(card_1);
+	    game.dealer.getHand().addCard(card_2);
+	    
+		game.dealerSplit();
+		
+		assertNotNull(game.dealer.getSplitHand()); 
+		assertEquals(game.dealer.getHand().getCard(0).getValue(), game.dealer.getSplitHand().getCard(0).getValue());
+		
+		assertTrue(game.dealerSplitting);
+	}
 	
 }

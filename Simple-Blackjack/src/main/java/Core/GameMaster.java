@@ -240,7 +240,24 @@ public class GameMaster {
 		if(parseCommands[i].equals("D")) {
 			System.out.println("Command D");
 
-			i = playerSplit(fileInputDeck, parseCommands, i);
+			playerSplit();
+			
+			i++;
+			
+			fileInputCards = new Card(parseCommands[i]);
+			deck.addCard(fileInputCards);
+			tempCard = player.hit(player.getHand(), deck); 
+			System.out.println("player Receives " + tempCard.getName());
+			
+			i++;
+			fileInputCards = new Card(parseCommands[i]);
+			deck.addCard(fileInputCards);
+			tempCard = player.hit(player.getSplitHand(), deck); 
+			System.out.println("player Split Receives " + tempCard.getName());
+			
+			player.getHand().showHand();
+			
+			player.getSplitHand().showHand();
 	}
 		
 		while(playerIsWinner == false & dealerIsWinner == false) {	
@@ -348,18 +365,9 @@ public class GameMaster {
 		splitting = true; 
 		System.out.println("isSplit == true");
 		player.getSplitHand().addCard(player.getHand().split());
-			
-		player.getHand().addCard(tempCard = deck.drawCard());
-		System.out.println("player Receives " + tempCard.getName());
-				
-		player.getSplitHand().addCard(tempCard = deck.drawCard()); 
-		System.out.println("player Split Receives " + tempCard.getName());
-			
-		player.getHand().showHand();
-		player.getSplitHand().showHand();
 	}
 	
-	public int playerSplit(Deck deck, String[] input, int index) {
+	/*public int playerSplit(Deck deck, String[] input, int index) {
 		// TODO Auto-generated method stub
 		Card fileInputCards; 
 		Card tempCard; 
@@ -369,25 +377,9 @@ public class GameMaster {
 			splitting = true; 
 			player.getSplitHand().addCard(player.getHand().split());
 
-			index++;
-			
-			fileInputCards = new Card(input[index]);
-			deck.addCard(fileInputCards);
-			tempCard = player.hit(player.getHand(), deck); 
-			System.out.println("player Receives " + tempCard.getName());
-			
-			index++;
-			fileInputCards = new Card(input[index]);
-			deck.addCard(fileInputCards);
-			tempCard = player.hit(player.getSplitHand(), deck); 
-			System.out.println("player Split Receives " + tempCard.getName());
-			
-			player.getHand().showHand();
-			
-			player.getSplitHand().showHand();
 		}
 		return index; 
-	}
+	}*/
 
 	public void dealerSplit() {
 		// TODO Auto-generated method stub

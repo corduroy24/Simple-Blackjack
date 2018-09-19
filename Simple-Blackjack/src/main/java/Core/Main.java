@@ -46,9 +46,7 @@ public class Main {
 		System.out.println("Which input method are you using? (File = f or Console = c)");
 		Scanner console = new Scanner(System.in); 
 		char input = console.next().charAt(0);
-		
-		//keeping asking until its the correct input
-		
+				
 		if(input == 'c') 
 			ConsoleInput(); 
 		else if (input == 'f')
@@ -96,6 +94,15 @@ public class Main {
 			char inputD = console.next().charAt(0);
 			if(inputD == 'D') {
 				game.playerSplit();
+				
+				game.player.getHand().addCard(tempCard = game.deck.drawCard());
+				System.out.println("player Receives " + tempCard.getName());
+						
+				game.player.getSplitHand().addCard(tempCard = game.deck.drawCard()); 
+				System.out.println("player Split Receives " + tempCard.getName());
+					
+				game.player.getHand().showHand();
+				game.player.getSplitHand().showHand();
 			}
 		}
 			
@@ -132,12 +139,8 @@ public class Main {
 		for(int i = 0; i < parseCommands.length; i++) {
 			if(dealCards1) {
 
-				/*for(int k = 0; k < 4; k++) {
-					fileInputCards.add(new Card(parseCommands[k]));
-				}*/
 				for(int k = 0; k < 4; k++) {
 					fileInputCards = new Card(parseCommands[k]);
-					//fileInputDeck.addCard(fileInputCards.get(k));	
 					fileInputDeck.addCard(fileInputCards);	
 
 				}
@@ -167,7 +170,7 @@ public class Main {
 		BufferedReader reader = null; 
 		String[] parseCommands = new String[deckSize]; 
 		String delims = "[ ]+";
-		String filename = "File5.txt"; 
+		String filename = "File4.txt"; 
 			
 
 		try {
