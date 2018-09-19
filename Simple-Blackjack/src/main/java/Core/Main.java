@@ -124,18 +124,22 @@ public class Main {
 		Deck fileInputDeck = new Deck(); 
 		boolean dealCards1 = true; 
 
-		List<Card> fileInputCards = new ArrayList<Card>(); 
+		//List<Card> fileInputCards = new ArrayList<Card>(); 
+		Card fileInputCards; 
 		Card tempCard; 
 		game.player.getHand().turn = true; 
 		
 		for(int i = 0; i < parseCommands.length; i++) {
 			if(dealCards1) {
 
-				for(int k = 0; k < 4; k++) {
+				/*for(int k = 0; k < 4; k++) {
 					fileInputCards.add(new Card(parseCommands[k]));
-				}
+				}*/
 				for(int k = 0; k < 4; k++) {
-					fileInputDeck.addCard(fileInputCards.get(k));	
+					fileInputCards = new Card(parseCommands[k]);
+					//fileInputDeck.addCard(fileInputCards.get(k));	
+					fileInputDeck.addCard(fileInputCards);	
+
 				}
 				fileInputDeck.reverseDeck();
 				game.dealCards(fileInputDeck);
@@ -146,84 +150,9 @@ public class Main {
 				
 			}
 		
-
 				else {
 					i = game.bettingSequence(fileInputDeck, parseCommands, i); 
-/*					if(parseCommands[i].equals("D")) {
-						System.out.println("Command D");
 
-						i = game.playerSplit(fileInputDeck, parseCommands, i);
-				}
-					
-					while(game.playerIsWinner == false & game.dealerIsWinner == false) {	
-						if(parseCommands[i].equals("H") && game.player.getHand().turn) {
-							i++;
-							
-							fileInputCards.add(new Card(parseCommands[i]));
-							fileInputDeck.addCard(fileInputCards.get(fileInputCards.size()-1));
-							tempCard = game.player.hit(game.player.getHand(), fileInputDeck); 
-							System.out.println("game.player Receives " + tempCard.getName());
-	
-							if(game.checkBust() == true) break;
-						}
-						else if(parseCommands[i].equals("H") && game.player.getSplitHand().turn) {
-							if(game.splitting) {
-							i++;
-							
-							fileInputCards.add(new Card(parseCommands[i]));
-							fileInputDeck.addCard(fileInputCards.get(fileInputCards.size()-1));
-							tempCard = game.player.hit(game.player.getSplitHand(), fileInputDeck); 
-							System.out.println("game.player Split Receives " + tempCard.getName());
-
-							if(game.checkBust() == true) break;
-							}
-						}
-						
-
-						else if(parseCommands[i].equals("S") && game.player.getHand().turn == true) {
-								game.player.getHand().showHand();
-								game.player.getHand().turn= false; 
-								game.player.getSplitHand().turn = true; 	
-							if(game.splitting == false)
-								game.player.getSplitHand().turn = false ;
-								
-							if((parseCommands[i].equals("S") && game.player.getSplitHand().turn == false)) {
-								game.player.getSplitHand().turn = false;
-
-								game.dealer.getHand().turn = true;
-								game.dealerSplit();
-
-								i = game.dealer.hitOrStand(game.dealer.getHand(), fileInputDeck, parseCommands, i);
-								game.checkBust();
-
-								if(game.dealerSplitting) {
-
-									game.dealer.getHand().turn = false;
-									game.dealer.getSplitHand().turn = true; 
-									i = game.dealer.hitOrStand(game.dealer.getSplitHand(), fileInputDeck, parseCommands, i);
-									game.checkBust(); 
-
-								}
-								game.checkWinner();
-
-								break;
-							}
-						}
-							
-		
-						else if(parseCommands[i].equals("S") && game.player.getSplitHand().turn == true) {
-							game.player.getSplitHand().turn = false; 
-							game.player.getSplitHand().showHand();
-							game.dealer.getHand().turn = true; 							
-							System.out.println(game.dealer.getHand().countTotal() + " " + game.dealer.getHand().isSoft() );
-							i = game.dealer.hitOrStand(game.dealer.getHand(), fileInputDeck, parseCommands, i);
-							game.checkBust();
-
-							game.checkWinner(); 
-						}
-						
-						break; 
-					}*/
 				}
 		}
 	}
