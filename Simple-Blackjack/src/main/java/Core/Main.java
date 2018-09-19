@@ -191,7 +191,7 @@ public class Main {
 
 							game.player.getHand().showHand();
 	
-							if(game.CheckBust() == true) break;
+							if(game.checkBust() == true) break;
 						}
 						else if(parseCommands[i].equals("H") && game.player.getSplitHand().turn) {
 							if(game.splitting) {
@@ -204,7 +204,7 @@ public class Main {
 
 							game.player.getSplitHand().showHand();
 
-							if(game.CheckBust() == true) break;
+							if(game.checkBust() == true) break;
 							}
 						}
 						
@@ -227,17 +227,17 @@ public class Main {
 									game.dealer.getSplitHand().addCard(game.dealer.getHand().split());
 							}
 								i = game.dealer.hitOrStand(game.dealer.getHand(), fileInputDeck, parseCommands, i);
-								game.CheckBust();
+								game.checkBust();
 
 								if(game.dealerSplitting) {
 
 									game.dealer.getHand().turn = false;
 									game.dealer.getSplitHand().turn = true; 
 									i = game.dealer.hitOrStand(game.dealer.getSplitHand(), fileInputDeck, parseCommands, i);
-									game.CheckBust(); 
+									game.checkBust(); 
 
 								}
-								game.CheckWinner(); 
+								game.checkWinner(); 
 
 								break;
 							}
@@ -249,9 +249,9 @@ public class Main {
 							game.dealer.getHand().turn = true; 							
 							System.out.println(game.dealer.getHand().countTotal() + " " + game.dealer.getHand().isSoft() );
 							i = game.dealer.hitOrStand(game.dealer.getHand(), fileInputDeck, parseCommands, i);
-							game.CheckBust();
+							game.checkBust();
 
-							game.CheckWinner(); 
+							game.checkWinner(); 
 						}
 						
 						break; 
