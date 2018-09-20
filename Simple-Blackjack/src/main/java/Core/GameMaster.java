@@ -3,27 +3,27 @@ package Core;
 import java.util.Scanner;
 
 public class GameMaster {
-	//static int deckSize = 52; 
-	static int deckSize = 27; 
+	static int DECK_SIZE  = 52; 
+	//static int DECK_SIZE  = 27; 
 
 
 	//private static Card[] card = new Card[deckSize];
 	
 	//private static deck deck = new deck(); 
 	
-	/*public static final String [] input = {"CA", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "CJ", "CQ", "CK",
+	public static final String [] input = {"CA", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "CJ", "CQ", "CK",
 	"DA", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10", "DJ", "DQ", "DK",
 	"HA", "H2", "H3", "H4", "H5", "H6", "H7", "H8", "H9", "H10", "HJ", "HQ", "HK",
-	"SA", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10", "SJ", "SQ", "SK"};*/
+	"SA", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10", "SJ", "SQ", "SK"};
 	
 	/*public static final String [] input = {"CA", "C10", "CJ", "CQ", "CK",
 	"DA","D10", "DJ", "DQ", "DK",
 	"HA", "H10", "HJ", "HQ", "HK",
 	"SA", "S10", "SJ", "SQ", "SK"};*/
-	public static final String [] input = {"C3", "C3", "C3", "C4", "C4",
+	/*public static final String [] input = {"C3", "C3", "C3", "C4", "C4",
 	"C3","C3", "C3", "C3", "C3", "C3", "C4", "C4",
 	"C3","C3", "C3", "C3", "C3", "C3", "C3", "C3",
-	"C3","C3", "C3", "C3", "C3", "C3"}; 
+	"C3","C3", "C3", "C3", "C3", "C3"}; */
 	
 	public  boolean playerIsWinner;
 	public  boolean dealerIsWinner; 
@@ -399,9 +399,8 @@ public class GameMaster {
 
 	public void playerSplit() {
 		// TODO Auto-generated method stub
-		Card tempCard; 
 		splitting = true; 
-		System.out.println("isSplit == true");
+		System.out.println("Player Split Hand");
 		player.getSplitHand().addCard(player.getHand().split());
 	}
 	
@@ -412,7 +411,7 @@ public class GameMaster {
 		if(dealer.getHand().isSplit() && (dealer.getHand().countTotal() <= 17)) {
 			
 			dealerSplitting = true; 
-			System.out.println("getSplitHand() == true");
+			System.out.println("Dealer split Hand");
 			dealer.getSplitHand().addCard(dealer.getHand().split());
 					
 					

@@ -80,7 +80,7 @@ public class Hand {
 		    		}
 		    	}
 				numPoints = countTotal();
-				System.out.println(numPoints +" recount");
+				//System.out.println(numPoints +" recount");
 
 			}
 			

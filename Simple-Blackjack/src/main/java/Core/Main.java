@@ -10,16 +10,11 @@ import java.util.logging.Logger;
 import javafx.application.Application;
 
 
-//look in node4js
-//handle incorrect input
-//GUI
-// change deck size back to 52 ad ordiginal deck
-//remove/modify extra comments 
 public class Main {
 	
 	private static final Logger logger = Logger.getLogger("Main");
 
-	static int deckSize = 52; 
+	static int DECK_SIZE = 52; 
 
 	
 	
@@ -28,7 +23,7 @@ public class Main {
 	
 	public static void main(String[] arg) {
 		logger.info("Game is about to start");
-        Application.launch(BlackjackGUI.class, arg);
+        //Application.launch(BlackjackGUI.class, arg);
 
 		PromptUser();
 
@@ -81,7 +76,7 @@ public class Main {
 	
 	public static void FileInput() {
 		
-		String[] parseCommands = new String[deckSize]; 
+		String[] parseCommands = new String[DECK_SIZE ]; 
 		parseCommands  = readFile(); 
 		System.out.println("FileInput");
 		
@@ -91,18 +86,18 @@ public class Main {
 		//https://www.caveofprogramming.com/java/java-file-reading-and-writing-files-in-java.html
 	private static String[] readFile() {
 	// TODO Auto-generated method stub
-		//System.out.println("Enter the filename: ");
-				//Scanner console = new Scanner(System.in); 
-				//String fileName = console.nextLine();
+		System.out.println("Enter the filename: ");
+		Scanner console = new Scanner(System.in); 
+		String fileName = console.nextLine();
 		String line = null; 
 		BufferedReader reader = null; 
-		String[] parseCommands = new String[deckSize]; 
+		String[] parseCommands = new String[DECK_SIZE]; 
 		String delims = "[ ]+";
-		String filename = "File5.txt"; 
+		//String filename = "File5.txt"; 
 			
 
 		try {
-			FileReader fileReader =  new FileReader(filename); 
+			FileReader fileReader =  new FileReader(fileName); 
 		    BufferedReader bufferedReader = new BufferedReader(fileReader); 
 				    
 			while((line = bufferedReader.readLine()) != null){
@@ -111,14 +106,14 @@ public class Main {
 
 			}
 			bufferedReader.close();
-		//	console.close();
+		console.close();
 
 		}
 		catch(FileNotFoundException ex) {
-			System.out.println(  "Unable to open file '" +   filename + "'"); 
+			System.out.println(  "Unable to open file '" +   fileName + "'"); 
 		}
 		catch(IOException ex) {
-			System.out.println( "Error reading file '"  + filename + "'");                  
+			System.out.println( "Error reading file '"  + fileName + "'");                  
 		}		
 		for (int i = 0; i < parseCommands.length; i++)
 			System.out.println(parseCommands[i]);
