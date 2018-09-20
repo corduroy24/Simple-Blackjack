@@ -446,6 +446,8 @@ public class GameMaster {
 				
 				player.getHand().showHand();
 				player.getSplitHand().showHand();
+				player.getHand().addCard(tempCard = deck.drawCard());
+				System.out.println(player.getHand().getName() + " Receives " + tempCard.getName());
 			}
 		}
 			
@@ -453,8 +455,7 @@ public class GameMaster {
 
 		player.getHand().turn = true; 
 		char input; 
-		player.getHand().addCard(tempCard = deck.drawCard());
-		System.out.println(player.getHand().getName() + " Receives " + tempCard.getName());
+
 		
 		while(playerIsWinner == false & dealerIsWinner == false) {
 			System.out.println("Hit (H) or Stand (S) ?");

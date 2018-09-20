@@ -70,17 +70,13 @@ public class Deck {
     	//Card [] Card = new Card[deckSize];
     	Card card; 
     	for(int i = 0; i < input.length; i++) {
-			card = new Card (input[i], new Image(Card.getFileName(input[i])));
-			addCard(card);
+			//card = new Card (input[i], new Image(Card.getFileName(input[i])));
+			card = new Card (input[i]);
+    		addCard(card);
     	}
     }
     
-    /*public Card[] createCards(String[] input, Card[] cards) {
-		for(int i = 0; i < deckSize; i++) {
-			cards[i] = new Card (input[i]);
-		}
-		return cards;
-    }*/
+
     
     public Card createCard(String input, Card card) {
 			card = new Card (input);
