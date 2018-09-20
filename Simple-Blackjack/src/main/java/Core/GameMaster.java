@@ -3,6 +3,27 @@ package Core;
 import java.util.Scanner;
 
 public class GameMaster {
+	//static int deckSize = 52; 
+	static int deckSize = 27; 
+
+
+	//private static Card[] card = new Card[deckSize];
+	
+	//private static deck deck = new deck(); 
+	
+	/*public static final String [] input = {"CA", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "CJ", "CQ", "CK",
+	"DA", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10", "DJ", "DQ", "DK",
+	"HA", "H2", "H3", "H4", "H5", "H6", "H7", "H8", "H9", "H10", "HJ", "HQ", "HK",
+	"SA", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10", "SJ", "SQ", "SK"};*/
+	
+	/*public static final String [] input = {"CA", "C10", "CJ", "CQ", "CK",
+	"DA","D10", "DJ", "DQ", "DK",
+	"HA", "H10", "HJ", "HQ", "HK",
+	"SA", "S10", "SJ", "SQ", "SK"};*/
+	public static final String [] input = {"C3", "C3", "C3", "C4", "C4",
+	"C3","C3", "C3", "C3", "C3", "C3", "C4", "C4",
+	"C3","C3", "C3", "C3", "C3", "C3", "C3", "C3",
+	"C3","C3", "C3", "C3", "C3", "C3"}; 
 	
 	public  boolean playerIsWinner;
 	public  boolean dealerIsWinner; 
@@ -218,15 +239,15 @@ public class GameMaster {
 					player.getSplitHand().turn = false; 
 					player.getHand().turn= false; 
 					dealer.getHand().turn = true;
-					tempCard = dealer.hitOrStand(dealer.getHand(), deck);
-					System.out.println(dealer.getHand().getName() + " Receives " + tempCard.getName());
+					dealer.hitOrStand(dealer.getHand(), deck);
+					//System.out.println(dealer.getHand().getName() + " Receives " + tempCard.getName());
 
 					if(dealerSplitting) {
 
 						dealer.getHand().turn = false;
 						dealer.getSplitHand().turn = true; 
-						tempCard = dealer.hitOrStand(dealer.getSplitHand(), deck); 
-						System.out.println(dealer.getSplitHand().getName() + " Receives " + tempCard.getName());
+						dealer.hitOrStand(dealer.getSplitHand(), deck); 
+						//System.out.println(dealer.getSplitHand().getName() + " Receives " + tempCard.getName());
 					}
 					checkWinner();
 				}
@@ -238,14 +259,14 @@ public class GameMaster {
 
 				player.getHand().turn= false; 
 				dealer.getHand().turn = true;
-				tempCard = dealer.hitOrStand(dealer.getHand(), deck); 
-				System.out.println(dealer.getHand().getName() + " Receives " + tempCard.getName());
+				dealer.hitOrStand(dealer.getHand(), deck); 
+				//System.out.println(dealer.getHand().getName() + " Receives " + tempCard.getName());
 
 				if(dealerSplitting) {
 					dealer.getHand().turn = false;
 					dealer.getSplitHand().turn = true; 
-					tempCard = dealer.hitOrStand(dealer.getSplitHand(), deck); 
-					System.out.println(dealer.getSplitHand().getName() + " Receives " + tempCard.getName());
+					dealer.hitOrStand(dealer.getSplitHand(), deck); 
+					//System.out.println(dealer.getSplitHand().getName() + " Receives " + tempCard.getName());
 
 				}
 				checkWinner();
@@ -388,19 +409,7 @@ public class GameMaster {
 		player.getSplitHand().addCard(player.getHand().split());
 	}
 	
-	/*public int playerSplit(Deck deck, String[] input, int index) {
-		// TODO Auto-generated method stub
-		Card fileInputCards; 
-		Card tempCard; 
-		if(player.getHand().isSplit()) {
-			System.out.println("(splitting)");
 
-			splitting = true; 
-			player.getSplitHand().addCard(player.getHand().split());
-
-		}
-		return index; 
-	}*/
 
 	public void dealerSplit() {
 		// TODO Auto-generated method stub
@@ -416,5 +425,83 @@ public class GameMaster {
 					
 		}
 	}
+
+	public void consoleInput() {
+		// TODO Auto-generated method stub
+		deck.createDefaultDeck(input);
+		deck.shuffleDeck();
+		
+		Card tempCard;
+		dealCards(deck); 
+
+
+		checkBlackjack(player.getHand(), dealer.getHand());
+
+			
+		if(player.getHand().isSplit()) {
+			//char empty = ' '; 
+			System.out.println("Do you wanna split (D)? Press any other letter to skip");
+			Scanner console = new Scanner(System.in); 
+			char inputD = console.next().charAt(0);
+			if(inputD == 'D') {
+				playerSplit();		
+				
+				player.getHand().showHand();
+				player.getSplitHand().showHand();
+			}
+		}
+			
+		dealerSplit(); 
+
+		player.getHand().turn = true; 
+		char input; 
+		player.getHand().addCard(tempCard = deck.drawCard());
+		System.out.println(player.getHand().getName() + " Receives " + tempCard.getName());
+		
+		while(playerIsWinner == false & dealerIsWinner == false) {
+			System.out.println("Hit (H) or Stand (S) ?");
+			Scanner console = new Scanner(System.in); 
+			input = console.next().charAt(0);
+
+			bettingSequence(input); 
+		}
+	}
+
+	public void fileInput(String [] parseCommands) {
+		// TODO Auto-generated method stub
+		Deck fileInputDeck = new Deck(); 
+		boolean dealCards1 = true; 
+
+		//List<Card> fileInputCards = new ArrayList<Card>(); 
+		Card fileInputCards; 
+		Card tempCard; 
+		player.getHand().turn = true; 
+		
+		for(int i = 0; i < parseCommands.length; i++) {
+			if(dealCards1) {
+
+				for(int k = 0; k < 4; k++) {
+					fileInputCards = new Card(parseCommands[k]);
+					fileInputDeck.addCard(fileInputCards);	
+
+				}
+				fileInputDeck.reverseDeck();
+				dealCards(fileInputDeck);
+
+				dealCards1=false;
+				
+				checkBlackjack(player.getHand(), dealer.getHand()); 
+				
+			}
+		
+				else {
+					i = bettingSequence(fileInputDeck, parseCommands, i); 
+
+				}
+		}
+	}
+	
+	
+	
 		
 }

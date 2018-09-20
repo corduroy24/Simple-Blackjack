@@ -1,47 +1,29 @@
 package Core;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-//replace "player with there actually hand names that were given....dealer.getHand().getName();
+import java.util.logging.Logger;
+
 //look in node4js
 //handle incorrect input
 //GUI
 // change deck size back to 52 ad ordiginal deck
 public class Main {
-
-	//static int game.deckSize = 52; 
-	static int deckSize = 27; 
-
-
-	//private static Card[] card = new Card[game.deckSize];
 	
-	//private static game.deck game.deck = new game.deck(); 
-	
-	/*public static final String [] input = {"CA", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "CJ", "CQ", "CK",
-	"DA", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10", "DJ", "DQ", "DK",
-	"HA", "H2", "H3", "H4", "H5", "H6", "H7", "H8", "H9", "H10", "HJ", "HQ", "HK",
-	"SA", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10", "SJ", "SQ", "SK"};*/
-	
-	/*public static final String [] input = {"CA", "C10", "CJ", "CQ", "CK",
-	"DA","D10", "DJ", "DQ", "DK",
-	"HA", "H10", "HJ", "HQ", "HK",
-	"SA", "S10", "SJ", "SQ", "SK"};*/
-	public static final String [] input = {"C3", "C3", "C3", "C4", "C4",
-	"C3","C3", "C3", "C3", "C3", "C3", "C4", "C4",
-	"C3","C3", "C3", "C3", "C3", "C3", "C3", "C3",
-	"C3","C3", "C3", "C3", "C3", "C3"}; 
+	private static final Logger logger = Logger.getLogger("Main");
+
+	static int deckSize = 52; 
+
 	
 	
 	private static GameMaster game = new GameMaster(); 
 	
 	public static void main(String[] arg) {
 		//launch(arg);
+		logger.info("Game is about to start");
 		PromptUser();
 	}
 
@@ -81,46 +63,7 @@ public class Main {
 	public static void ConsoleInput() {
 		System.out.println("ConsoleInput");
 		
-		game.deck.createDefaultDeck(input);
-		game.deck.shuffleDeck();
-		
-		Card tempCard;
-		game.dealCards(game.deck); 
-
-
-		game.checkBlackjack(game.player.getHand(), game.dealer.getHand());
-
-			
-		if(game.player.getHand().isSplit()) {
-			//char empty = ' '; 
-			System.out.println("Do you wanna split (D)? Press any other letter to skip");
-			Scanner console = new Scanner(System.in); 
-			char inputD = console.next().charAt(0);
-			if(inputD == 'D') {
-				game.playerSplit();
-				
-
-						
-					
-				game.player.getHand().showHand();
-				game.player.getSplitHand().showHand();
-			}
-		}
-			
-		game.dealerSplit(); 
-
-		game.player.getHand().turn = true; 
-		char input; 
-		game.player.getHand().addCard(tempCard = game.deck.drawCard());
-		System.out.println(game.player.getHand().getName() + " Receives " + tempCard.getName());
-		
-		while(game.playerIsWinner == false & game.dealerIsWinner == false) {
-			System.out.println("Hit (H) or Stand (S) ?");
-			Scanner console = new Scanner(System.in); 
-			input = console.next().charAt(0);
-
-			game.bettingSequence(input); 
-		}
+		game.consoleInput(); 
 
 	}
 	
@@ -133,36 +76,7 @@ public class Main {
 		parseCommands  = readFile(); 
 		System.out.println("FileInput");
 		
-		Deck fileInputDeck = new Deck(); 
-		boolean dealCards1 = true; 
-
-		//List<Card> fileInputCards = new ArrayList<Card>(); 
-		Card fileInputCards; 
-		Card tempCard; 
-		game.player.getHand().turn = true; 
-		
-		for(int i = 0; i < parseCommands.length; i++) {
-			if(dealCards1) {
-
-				for(int k = 0; k < 4; k++) {
-					fileInputCards = new Card(parseCommands[k]);
-					fileInputDeck.addCard(fileInputCards);	
-
-				}
-				fileInputDeck.reverseDeck();
-				game.dealCards(fileInputDeck);
-
-				dealCards1=false;
-				
-				game.checkBlackjack(game.player.getHand(), game.dealer.getHand()); 
-				
-			}
-		
-				else {
-					i = game.bettingSequence(fileInputDeck, parseCommands, i); 
-
-				}
-		}
+		game.fileInput(parseCommands);
 	}
 	//code inspired from:
 		//https://www.caveofprogramming.com/java/java-file-reading-and-writing-files-in-java.html
