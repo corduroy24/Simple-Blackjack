@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 
 public class DealerTest extends TestCase {
 
+	//26
 	public void testLessThan16Hits() {
 		Dealer dealer = new Dealer(); 
 		Card card1 = new Card("S5"); 
@@ -27,6 +28,7 @@ public class DealerTest extends TestCase {
 
 	}
 	
+	//27, 28
 	public void testSoft17Hits() {
 		Dealer dealer = new Dealer(); 
 		Card card1 = new Card("SA"); 
@@ -49,6 +51,7 @@ public class DealerTest extends TestCase {
 
 	}
 	
+	//38, 42
 	public void testPlayerInititialBlackjack() {
 		Player player = new Player();
 		Dealer dealer = new Dealer(); 

@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 
 public class GameMasterTest extends TestCase {
 	
+	//19, 23, 24, 29
 	public void testEndOfTurn() {
 		GameMaster game = new GameMaster();
 
@@ -14,26 +15,50 @@ public class GameMasterTest extends TestCase {
 		Card card4 = new Card("SJ"); 
 		Card card5 = new Card("S7"); 
 		Card card6 = new Card("S3"); 
-
+		Card card7 = new Card("SJ"); 
+		Card card8 = new Card("S7"); 
+		Card card9 = new Card("S3"); 
+		Card card10 = new Card("SJ"); 
+		Card card11 = new Card("S7"); 
+		Card card12= new Card("S3"); 
 		
-		game.player.getHand().addCard(card1);
-		game.player.getHand().addCard(card2);
-		
-		game.dealer.getHand().addCard(card3);
-		game.dealer.getHand().addCard(card4);
-		
+		game.deck.addCard(card1);
+		game.deck.addCard(card2);
+		game.deck.addCard(card3);
+		game.deck.addCard(card4);
 		game.deck.addCard(card5);
 		game.deck.addCard(card6);
+		game.deck.addCard(card7);
+		game.deck.addCard(card8);
+		game.deck.addCard(card9);
+		game.deck.addCard(card10);
+		game.deck.addCard(card11);
+		game.deck.addCard(card12);
 		
+		game.dealCards(game.deck);
+		assertTrue(game.player.getHand().getCard(0).getVisibility()); 
+		assertTrue(game.player.getHand().getCard(1).getVisibility()); 
+		assertTrue(game.dealer.getHand().getCard(0).getVisibility()); 
+
+		assertFalse(game.dealer.getHand().getCard(1).getVisibility()); 
+		game.consoleInput();
 		game.player.getHand().turn = true; 
 		game.bettingSequence('H');
+		game.bettingSequence('H');
+
 		game.bettingSequence('S');
-		assertFalse(game.player.getHand().turn); 
 		
+		assertFalse(game.player.getHand().turn); 
+		assertTrue(game.dealer.getHand().turn); 
+		assertTrue(game.dealer.getHand().getCard(0).getVisibility()); 
+
+		assertTrue(game.dealer.getHand().getCard(1).getVisibility()); 
+
 		System.out.println("----------");
 
 	}
 	
+	//25
 	public void testPlayerBustDealerWins() {
 		GameMaster game = new GameMaster();
 		
@@ -54,6 +79,7 @@ public class GameMasterTest extends TestCase {
 		assertTrue(game.dealerIsWinner); 
 	}
 	
+	//30
 	public void testDealerBustPlayerWins() {
 		GameMaster game = new GameMaster();
 		
@@ -81,6 +107,7 @@ public class GameMasterTest extends TestCase {
 		assertTrue(game.playerIsWinner); 
 	}
 	
+	//39
 	public void testPlayerHasBlacjackNotDealer() {
 		GameMaster game  = new GameMaster();
 
@@ -105,6 +132,7 @@ public class GameMasterTest extends TestCase {
 
 	}
 	
+	//40
 	public void testDealerHasBlackjack() {
 		GameMaster game  = new GameMaster();
 
@@ -129,7 +157,7 @@ public class GameMasterTest extends TestCase {
 	    assertTrue(game.dealerIsWinner); 
 		
 	}
-	
+	//44, 45
 	public void testNoBusts() {
 		GameMaster game1  = new GameMaster();
 		GameMaster game2 = new GameMaster();
@@ -186,6 +214,7 @@ public class GameMasterTest extends TestCase {
 		
 	}
 	
+	//47
 	public void testPlayerSplitting() {
 		GameMaster game = new GameMaster();
 		
@@ -204,6 +233,7 @@ public class GameMasterTest extends TestCase {
 		assertTrue(game.splitting);
 	}
 	
+	//48
 	public void testDealerSplitting() {
 		GameMaster game = new GameMaster();
 		

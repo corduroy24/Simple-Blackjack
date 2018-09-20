@@ -37,12 +37,10 @@ public class CardTest extends TestCase{
 		
 		aceIsSoft = true; 
 		
-		//CA.ChangeValue(CA, aceIsSoft); 
-		
-		//assertEquals(11, CA.getValue()); 
 		
 	}
 	
+	//31
 	public void testAceAsOne() {
 		Card CA = new Card("CA"); 
 		Card DA = new Card("DA"); 
@@ -51,13 +49,14 @@ public class CardTest extends TestCase{
 
 	}
 	
+	//32
 	public void testAceAsEleven() {
 		Card CA = new Card("CA"); 
 		Card DA = new Card("DA"); 
 		CA.ChangeValue(false); 
 		assertEquals(11, CA.getValue()); 
 	}
-	
+	//36
 	public void testJQKAsTen() {
 		Card card_1 = new Card("CJ"); 
 		Card card_2 = new Card("DQ"); 

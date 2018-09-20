@@ -3,6 +3,7 @@ package Core;
 import junit.framework.TestCase;
 
 public class PlayerTest extends TestCase {
+	//21
 	public void testHit() {
 		String [] input = { "CA", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "CJ", "CQ", "CK",
 				"DA", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10", "DJ", "DQ", "DK",
@@ -26,6 +27,7 @@ public class PlayerTest extends TestCase {
 		assertFalse(shuffleDeck.findCard(tempCard1)); 	
 	}
 	
+	//22
 	public void testRepeatedlyHit() {
 		String [] input = { "CA", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "CJ", "CQ", "CK",
 				"DA", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10", "DJ", "DQ", "DK",
@@ -49,7 +51,7 @@ public class PlayerTest extends TestCase {
 			assertFalse(shuffleDeck.findCard(tempCard1)); 	
 		}
 	}
-	
+	//37, 41
 	public void testPlayerInititialBlackjack() {
 		Player player = new Player();
 		Dealer dealer = new Dealer(); 
@@ -73,7 +75,4 @@ public class PlayerTest extends TestCase {
 		
 	}
 	
-	/*public void testStand() {
-		
-	}*/
 }

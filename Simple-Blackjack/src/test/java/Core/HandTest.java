@@ -96,51 +96,7 @@ public class HandTest extends TestCase{
 	}
 	
 	
-	/*public void testIsSoft() {
-		Deck deck = new Deck(); 
-		Hand hand1 = new Hand(); 
-		Hand hand2 = new Hand(); 
-		Hand hand3 = new Hand(); 
-		Hand hand4 = new Hand(); 
-
-
-		
-	    Card card_1 = new Card("SA"); 
-	    
-	    Card card_2 = new Card("S3"); 
-	    Card card_3 = new Card("S3");
-	    
-	    Card card_4 = new Card("S4"); 	    
-	    Card card_5 = new Card("S2"); 
-	    
-	    Card card_6 = new Card("S2"); 
-	    Card card_7 = new Card("S2");
-	    Card card_8 = new Card("S2");
-
-	    Card card_9 = new Card("S6"); 
-
-
-		hand1.addCard(card_1); 
-		hand1.addCard(card_9); 
-		
-		assertTrue(hand.IsSoft())
-		
-		hand2.addCard(card_1); 
-		hand2.addCard(card_2); 
-		hand2.addCard(card_3); 
-		
-		hand3.addCard(card_1); 
-		hand3.addCard(card_4); 
-		hand3.addCard(card_5); 
-		
-		hand4.addCard(card_1); 
-		hand4.addCard(card_6); 
-		hand4.addCard(card_7); 
-		hand4.addCard(card_8); 
-
-		assertEquals(4, hand.CountTotal()); 
-	}*/
-	
+	//19
 	public void testInitialPlayerHand() {
 		String [] input = { "CA", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "CJ", "CQ", "CK",
 				"DA", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10", "DJ", "DQ", "DK",
@@ -160,6 +116,7 @@ public class HandTest extends TestCase{
 		
 	}
 	
+	//20
 	public void testInitialDealerHand() {
 		String [] input = { "CA", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "CJ", "CQ", "CK",
 				"DA", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10", "DJ", "DQ", "DK",
@@ -179,6 +136,7 @@ public class HandTest extends TestCase{
 		assertFalse(tempCard2.getVisibility()); 
 		
 	}
+	//33
 	public void testTwoAcesInHand() {
 		Deck deck = new Deck(); 
 		Hand hand = new Hand("Hand"); 
@@ -198,6 +156,7 @@ public class HandTest extends TestCase{
 	    
 	}
 	
+	//34
 	public void testAceAsElevenThenOne() {
 		Deck deck = new Deck(); 
 		Hand hand = new Hand("Hand"); 
@@ -220,6 +179,7 @@ public class HandTest extends TestCase{
 		
 	}
 	
+	//35
 	public void testHandCountsTwoAcesAsOneEach() {
 		Deck deck = new Deck(); 
 		Hand hand = new Hand("Hand"); 

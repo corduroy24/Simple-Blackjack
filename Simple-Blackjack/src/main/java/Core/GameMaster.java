@@ -388,16 +388,12 @@ public class GameMaster {
 		System.out.println(dealer.getHand().getName() +" Receives " + tempCard.getName());
 
 		tempCard = dealer.hit(dealer.getHand(), deck);
-		System.out.println(dealer.getHand().getName() +" Receives " + tempCard.getName());
-
+		System.out.println(dealer.getHand().getName() +" Receives " + tempCard.getName());	
 		
 		dealer.getHand().getCard(1).SetVisibility(false);
 		
 		player.getHand().showHand();
 		dealer.getHand().showHand();
-		
-		dealer.getHand().getCard(1).SetVisibility(true);
-		
 		
 	}
 
@@ -433,6 +429,9 @@ public class GameMaster {
 		
 		Card tempCard;
 		dealCards(deck); 
+		
+		
+		dealer.getHand().getCard(1).SetVisibility(true);
 
 
 		checkBlackjack(player.getHand(), dealer.getHand());
@@ -487,6 +486,8 @@ public class GameMaster {
 				}
 				fileInputDeck.reverseDeck();
 				dealCards(fileInputDeck);
+				
+				dealer.getHand().getCard(1).SetVisibility(true);
 
 				dealCards1=false;
 				
