@@ -1,4 +1,6 @@
 package Core;
+import javafx.scene.image.Image;
+
 
 public class Card {
 
@@ -9,11 +11,33 @@ public class Card {
 	private String name;
 	private String suit;
 	private String rank;
+	private Image cardImage; 
 	
 	public Card(String input) {
 		this.input = input; 
 		this.value = SetValue(input); 
+
 		this.cardIsVisible = true;
+	}
+	public Card(String input, Image cardImage) {
+		this.input = input; 
+		this.value = SetValue(input); 
+		this.cardImage = cardImage; 
+
+		this.cardIsVisible = true;
+	}
+	/*public Card(String suit, String rank, Image cardImage) {
+		this.suit = suit; 
+		this.rank = rank; 
+		this.cardImage = cardImage; 
+	}*/
+	
+	public static String getFileName(String input) {
+		return "file:src/main/resources/Core/cards/"+ input + ".jpg"; 
+	}
+	
+	public Image getCardImage() {
+		return cardImage; 
 	}
 	
 	public int getValue() {

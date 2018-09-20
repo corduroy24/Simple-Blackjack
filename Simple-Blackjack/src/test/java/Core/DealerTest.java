@@ -52,7 +52,7 @@ public class DealerTest extends TestCase {
 	}
 	
 	//38, 42
-	public void testPlayerInititialBlackjack() {
+	public void testDealerInititialBlackjack() {
 		Player player = new Player();
 		Dealer dealer = new Dealer(); 
 		

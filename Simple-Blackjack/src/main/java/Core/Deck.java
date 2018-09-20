@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 import java.util.Collections;
+import javafx.scene.image.Image;
 
 public class Deck {
 	
@@ -64,11 +65,12 @@ public class Deck {
     	Collections.shuffle(deck);
     }
     
-    public void createDefaultDeck(String[] input) {
+    @SuppressWarnings("restriction")
+	public void createDefaultDeck(String[] input) {
     	//Card [] Card = new Card[deckSize];
     	Card card; 
     	for(int i = 0; i < input.length; i++) {
-			card = new Card (input[i]);
+			card = new Card (input[i], new Image(Card.getFileName(input[i])));
 			addCard(card);
     	}
     }

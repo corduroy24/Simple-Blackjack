@@ -7,10 +7,14 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
+import javafx.application.Application;
+
+
 //look in node4js
 //handle incorrect input
 //GUI
 // change deck size back to 52 ad ordiginal deck
+//remove/modify extra comments 
 public class Main {
 	
 	private static final Logger logger = Logger.getLogger("Main");
@@ -20,14 +24,19 @@ public class Main {
 	
 	
 	private static GameMaster game = new GameMaster(); 
+	private static BlackjackGUI gui = new BlackjackGUI();
 	
 	public static void main(String[] arg) {
-		//launch(arg);
 		logger.info("Game is about to start");
+        Application.launch(BlackjackGUI.class, arg);
+
 		PromptUser();
+
 	}
 
 	
+
+
 	public static void PromptUser () {
 		System.out.println("Which input method are you using? (File = f or Console = c)");
 		Scanner console = new Scanner(System.in); 
